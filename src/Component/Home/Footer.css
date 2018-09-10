@@ -1,0 +1,145 @@
+
+.Footer{
+
+  width:100%;
+  background-color: rgb(36,51,58);
+}
+.list{
+  color: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width:12%;
+  padding:2%;
+  margin:1%;
+  text-align:start;
+  
+}
+.list h2{
+  color: aliceblue;
+}
+.list span{
+  margin:2%;
+  text-align:start;
+}
+.list:hover{
+  color:'#63b5f5'
+}
+.footop{
+  display: flex;
+  justify-content: flex-start
+}
+hr{
+  color: antiquewhite;
+  width: 100%;
+}
+.footop hr{
+  width:17%;
+  align-self: center;
+  margin: 0;
+  transform: rotate(-90deg)
+}
+.mail{
+  width:13%;
+  display: flex;
+  flex-direction: column;
+  color: antiquewhite;
+  margin:1%;
+  padding: 2%;
+  text-align: start;
+}
+.mail h2{
+  color: antiquewhite;
+}
+.address{
+  width:14%;
+  margin: 1%;
+  color: antiquewhite;
+  padding:2%;
+  text-align: start;
+}
+.address h2{
+  color: antiquewhite;
+} 
+.end{
+  width: 50%;
+  padding:3px;
+  display: flex;
+  justify-content: space-around;
+  color: antiquewhite;
+
+}
+@media screen and (max-width :600px){
+  .Footer{
+    width:100%;
+    background-color: rgb(36,51,58);
+  }
+  .list{
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width:100%;
+    padding:2%;
+    margin:1%;
+    text-align:start;
+    
+  }
+  .list h2{
+    color: aliceblue;
+    text-align: center;
+  }
+  .list span{
+    margin:2%;
+    text-align:center;
+  }
+  .list:hover{
+    color:'#63b5f5'
+  }
+  .footop{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  hr{
+    color: antiquewhite;
+    width: 100%;
+  }
+  .footop hr{
+    width:90%;
+    transform: rotate(180deg)
+
+  }
+  .mail{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    color: antiquewhite;
+    margin:1%;
+    padding: 2%;
+    text-align: center;
+  }
+  .mail h2{
+    color: antiquewhite;
+  }
+  .address{
+    width: 100%;
+    margin: 1%;
+    color: antiquewhite;
+    text-align: center;
+  }
+  .address h2{
+    color: antiquewhite;
+    text-align: center;
+  } 
+  .end{
+    width: 100%;
+    padding:3px;
+    display: flex;
+    justify-content: space-around;
+    color: antiquewhite;
+  
+  }
+  
+
+}

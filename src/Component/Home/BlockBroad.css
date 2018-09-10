@@ -1,0 +1,43 @@
+.element1{
+    border:solid 1px;
+    border-color: gray;
+    position: relative;
+    width: 100%;
+}
+.overlay2{
+    position: absolute;
+    height: 0px;
+    bottom:0;
+    left: 0;
+    right:0;
+    background-color:rgba(80, 90, 95, 0.5);
+    overflow: hidden;
+    transition: .5s ease;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+}
+.overlay2 h1,h6 {
+    color: #fff;
+    margin-bottom: 0px;
+}
+.overlay2 h2{
+    color: red;
+}
+.price1{
+    align-self:flex-end;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.detail1{
+    padding:10px;
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.element1:hover .overlay2{
+   height: 40%;
+}

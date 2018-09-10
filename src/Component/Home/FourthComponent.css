@@ -1,0 +1,138 @@
+.mainDivInF4{
+  width : 90% ;
+  height : 300px ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 2px 2px grey ;
+  margin: auto;
+}
+
+.fourth1{
+  width: 45% ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textIn4th1{
+  color: #64B5F6 ;
+  text-align: left;
+  font-weight: 900;
+  font-size: 40px ;
+  padding: 30px ;
+}
+
+.fourth2{
+  height: 100% ;
+  width: 45% ;
+  margin :auto;
+  background-color: #64B5F6 ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.div1Infourth2{
+  width: 100% ;
+  height: 30% ;
+  color: #ffffff ;
+  margin: auto;
+  font-size: 30px ;
+}
+
+.div2Infourth2{
+  width: 50% ;
+  height: 40% ;
+  display: flex;
+  margin: auto;
+  padding: auto ;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+
+.div3Infourth2{
+  width: 100% ;
+  height: 30% ;
+  color: #ffffff ;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+
+.buttonIn4th2{
+  width: 30%;
+  border:2px solid;
+  height: 30%;
+  margin: 2px;
+  padding: 1px;
+}
+
+.fourth3{
+  height: 100% ;
+  width: 10% ;
+  background-color: #42A5F5 ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.textIn4th3{
+  width: auto;
+  height: 10%;
+  font-size: 20px ;
+  letter-spacing: 2px;
+  transform: rotate(270deg);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  color: #ffffff ;
+}
+
+@media screen and (max-width : 836px){
+  .textIn4th3{
+    font-size: 15px ;
+  }
+  .buttonIn4th2{
+    font-size: 20px ;
+  }
+  .div1Infourth2{
+    font-size: 25px ;
+  }
+  .textIn4th1{
+    font-size: 30px ;
+  }
+}
+
+@media screen and (max-width : 600px){
+  .mainDivInF4{
+    height: auto;
+    flex-direction: column;
+  }
+  .fourth1{
+    height: auto ;
+    width: 100% ;
+  }
+  .fourth2{
+    height: 200px ;
+    width : 100% ;
+  }
+  .fourth3{
+    height: auto;
+    width: 100% ;
+  }
+  .textIn4th3{
+    transform: rotate(0deg);
+  }
+  .buttonIn4th2{
+    height: 60%;
+
+  }
+}

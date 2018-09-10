@@ -1,0 +1,20 @@
+.addproduct{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:100%
+
+
+}
+.productdetails{
+width:50%;
+padding:8px;
+height: 40vh;
+display: flex;
+justify-content: space-between;
+flex-direction: column;
+}
+.productpics{
+    width:50%;
+    padding: 8px;
+}

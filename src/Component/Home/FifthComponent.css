@@ -1,0 +1,108 @@
+.mainDivInF5{
+  width: 90% ;
+  height: 300px ;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 15px auto auto auto ;
+  box-shadow: 2px 2px 2px 2px grey ;
+}
+
+.fifth1{
+  display: flex;
+  width: 10% ;
+  height: 100% ;
+  align-items: center;
+  color : #ffffff ;
+  justify-content: center;
+  background-color: #E53935 ;
+}
+
+.textIn5th1{
+  font-size: 20px ;
+  border: 0;
+  margin: 0;
+  letter-spacing: 2px;
+  transform: rotate(270deg);
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+
+.fifth2{
+  width: 35% ;
+  height: 100% ;
+  display: flex;
+  color : #ffffff ;
+  align-items: center;
+  justify-content: center;
+  background-color: #EF5350 ;
+}
+
+.textIn5th2{
+  margin:0px;
+  font-size: 180%;
+  border: solid 2px;
+  padding:10px;
+}
+
+.fifth3{
+  width : 55% ;
+  height: 100% ;
+  background-color: #ffffff ;
+  display: flex;
+  flex-direction: row;
+}
+
+.imgIn5th3{
+  width: 40% ;
+   
+  margin: auto;
+}
+
+.textIn5th3{
+  width :40% ;
+ 
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #EF5350 ;
+  font-size: 200%;
+}
+
+@media screen and (max-width :600px){
+  .mainDivInF5{
+    height: 400px;
+    flex-direction: column;
+  }
+  .fifth1{
+    width : 100% ;
+    height: 10% ;
+  }
+  .textIn5th1{
+    transform: rotate(0deg);
+    align-self: center;
+  }
+  .fifth2{
+    width: 100% ;
+    height :50% ;
+  }
+  .fifth3{
+    width: 100% ;
+    font-size: 90%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .imgIn5th3{
+    width: 40% ;
+     
+    margin: auto;
+  }
+  
+}
+
+
