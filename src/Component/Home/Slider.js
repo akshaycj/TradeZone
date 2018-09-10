@@ -15,8 +15,8 @@ class Slider extends Component {
         <Carousel
           showThumbs={false}
           className="adjusti"
-          width="845px"
-          height="285px"
+          width="1050px"
+          height="315px"
         >
           <div>
             <img className="imagei" src={a} alt="mobile pic 1" />

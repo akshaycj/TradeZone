@@ -16,6 +16,8 @@ import "./Component/Home/Footer.css";
 import Product from "./Component/Product/Product";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Category from "./Component/Home/Category";
+import Recents from "./Component/Home/Recents";
+
 class Home extends Component {
   render() {
     return (
@@ -24,8 +26,15 @@ class Home extends Component {
           <div className="home-category">
             <Category />
           </div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between"
+            }}
+          >
             <Slider />
+            <Recents />
           </div>
         </div>
         <br /> <br />
