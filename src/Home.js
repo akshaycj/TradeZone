@@ -34,7 +34,12 @@ class Home extends Component {
             }}
           >
             <Slider />
-            <Recents />
+            <div>
+              <h3 style={{ textAlign: "left", fontStyle: "bold" }}>
+                Recent Products:
+              </h3>
+              <Recents />
+            </div>
           </div>
         </div>
         <br /> <br />
