@@ -1,34 +1,30 @@
-.sub{
+.sub {
   background-color: #fff;
-  width:90%;
+  width: 94%;
   margin: auto auto 20px;
-  padding: 7px;
+  padding: 28px;
 }
 .grid1 {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+.grid2 {
+  justify-content: center;
+  margin: auto;
+  display: flex;
+}
+@media only screen and (max-width: 600px) {
+  .grid1 {
     margin: auto;
     display: flex;
     justify-content: center;
-    
-    
-    
-}
-.grid2{
+    flex-wrap: wrap;
+  }
+  .grid2 {
     justify-content: center;
     margin: auto;
-   display: flex;
-
-}
-@media only screen and (max-width: 600px) {
-    .grid1{
-        margin: auto;
-        display: flex;
-        justify-content: center;
-        flex-wrap:wrap;
-    }
-    .grid2{
-        justify-content: center;
-        margin: auto;
-       display: flex;
-       flex-wrap: wrap;
-}
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

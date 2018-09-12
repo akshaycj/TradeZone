@@ -1,43 +1,46 @@
-.element{
-    border:solid 1px;
-    border-color: gray;
-    width:100%;
-    position: relative;
+.element {
+  width: 100%;
+  position: relative;
+  margin-right: 5px;
 }
-.overlay1{
-    position: absolute;
-    height: 0px;
-    bottom:0;
-    left: 0;
-    right:0;
-    background-color:rgba(80, 90, 95, 0.5);
-    overflow: hidden;
-    transition: .5s ease;
-    color: #fff;
-    display: flex;
-    justify-content: space-around;
+.element:hover {
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-.overlay1 h1,h6 {
-    color: #fff;
-    margin-bottom: 0px;
+.overlay1 {
+  position: absolute;
+  height: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(80, 90, 95, 0.5);
+  overflow: hidden;
+  transition: 0.5s ease;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
 }
-.overlay1 h2{
-    color: red;
+.overlay1 h1,
+h6 {
+  color: #fff;
+  margin-bottom: 0px;
 }
-.price{
-    align-self:flex-end;
-    height: 70%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.overlay1 h2 {
+  color: white;
 }
-.detail{
-    padding:10px;
-    width:50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.price {
+  align-self: flex-end;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
-.element:hover .overlay1{
-   height: 40%;
+.detail {
+  padding: 10px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.element:hover .overlay1 {
+  height: 40%;
 }

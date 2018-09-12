@@ -25,6 +25,10 @@ class Home extends Component {
         <div className="home-header">
           <div className="home-category">
             <Category />
+            <br />
+            <Category />
+            <br />
+            <Category />
           </div>
           <div
             style={{
