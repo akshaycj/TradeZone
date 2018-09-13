@@ -16,15 +16,17 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: false
+      showLogin: false ,
     };
   }
   handleChange() {}
+  
   getlogin() {
-    this.setState({ login: true });
+    this.setState({ showLogin: true });
   }
+  
   loginVal(data) {
-    this.setState({ login: data });
+    this.setState({ showLogin: data });
   }
   render() {
     const menu = (
@@ -91,7 +93,7 @@ class Header extends React.Component {
     );
     return (
       <div>
-        {this.state.login ? <Login value={this.loginVal.bind(this)} /> : null}
+        {this.state.showLogin ? <Login value={this.loginVal.bind(this)} /> : null}
 
         <div className="head1 app-primary-dark">
           <Dropdown overlay={menu} style={{ margin: "6px" }}>
