@@ -1,39 +1,42 @@
-.login{
-    width:25%;
-    border-radius: 20px;
-    margin:auto;
-    background-color:#e3e3e3;
-    height:80vh;
-    box-shadow: 0px 5px 0px 0px;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 10;
-    top:10%;
-    left:40%;
-    animation-name: example;
-    animation-duration: 1s;
-
+.login {
+  width: 90%;
+  max-width: 360px;
+  border-radius: 20px;
+  margin: auto;
+  background-color: #e3e3e3;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  z-index: 10;
+  top: 10%;
+  left: 40%;
+  animation-name: example;
+  animation-duration: 1s;
 }
-.backgroundlogin{
-    width:100%;
-    background-color: rgba(0,0,0,0.5);
-    height:100vh;
-    z-index: 1;
-    position: fixed;
+.backgroundlogin {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  z-index: 1;
+  position: fixed;
 }
-.outers{
-    width:90%;
-    margin: auto;
-    height: 95%;
-    background-color: #FFF;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border-radius: 20px;
+.outers {
+  width: 90%;
+  margin: auto;
+  height: 95%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 20px;
 }
 @keyframes example {
-    0%   { top:-500px;}
-   
-    100%{top:10%} 
+  0% {
+    top: -500px;
+  }
+
+  100% {
+    top: 10%;
+  }
 }
