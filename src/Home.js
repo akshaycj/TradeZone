@@ -54,7 +54,6 @@ class Home extends Component {
           <FourthComponent />
           <FifthComponent />
         </div>
-        <Footer />
       </div>
     );
   }
