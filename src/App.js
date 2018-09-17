@@ -20,10 +20,10 @@ class App extends Component {
         <Header />
         <Router>
           <Switch>
-            <Route path="/add" component={AddProduct} />
+            <Route path="/" exact component={AddProduct} />
             <Route path="/product" component={Product} />
             <Route path="/login" component={Login} />
-            <Route path="/" component={Home} />
+            <Route path="/add" component={Home} />
           </Switch>
         </Router>
         <Footer />
