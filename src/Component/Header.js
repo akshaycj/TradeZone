@@ -8,8 +8,6 @@ import l from "./pics/icon4.png";
 import m from "./pics/icon5.png";
 import { Menu, Dropdown, Icon, Select, Input, Button } from "antd";
 import Login from "./Login/Login.js";
-import SingUp from "./SignUp/SignUp";
-import SignUp from "./SignUp/SignUp";
 const Option = Select.Option;
 
 class Header extends React.Component {

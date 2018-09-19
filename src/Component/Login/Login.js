@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import "./Login.css";
 import a from "../pics/tradeZone.png";
 import { Input, Button, Icon } from "antd";
-import "../SignUp/SignUp.css";
 import { Auth, db } from "../../config.js";
-export default class Login extends Component {
+import { connect } from "react-redux";
+import LoginAction from "../Actions/Login";
+import SignUpAction from "../Actions/SignUp";
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +20,9 @@ export default class Login extends Component {
       name: ""
     };
   }
-
+  componentWillReceiveProps(props) {
+    console.log(props);
+  }
   onName = e => {
     this.setState({ name: e.target.value });
   };
@@ -36,33 +40,16 @@ export default class Login extends Component {
   };
 
   onSignUp = () => {
-    var that = this;
-    this.setState({ showSignUp: false });
-    Auth.createUserWithEmailAndPassword(
+    this.props.SignUpAction(
       this.state.email,
-      this.state.password
-    ).then(function(object) {
-      var d = {
-        name: that.state.name,
-        email: that.state.email,
-        phone: that.state.phone
-      };
-      db.ref("users")
-        .child(object.user.uid)
-        .set(d);
-    });
+      this.state.password,
+      this.state.name,
+      this.state.phone
+    );
   };
 
   onLogin = () => {
-    var that = this;
-    Auth.signInWithEmailAndPassword(this.state.email, this.state.password)
-      .catch(function(error) {})
-      .then(function(user) {
-        if (user) {
-          console.log("hi", user.user.uid);
-          that.setState({ login: true, showLogin: false });
-        }
-      });
+    this.props.LoginAction(this.state.email, this.state.password);
   };
 
   closeLogin() {
@@ -119,6 +106,7 @@ export default class Login extends Component {
                     onChange={this.onEmail}
                   />
                   <Input
+                    type="password"
                     placeholder="Password"
                     style={{ width: "90%", margin: "auto", borderRadius: 15 }}
                     onChange={this.onPassword}
@@ -192,6 +180,7 @@ export default class Login extends Component {
                   />
                   <Input
                     placeholder="Password"
+                    type="password"
                     style={{ width: "90%", margin: "auto", borderRadius: 15 }}
                     onChange={this.onPassword}
                   />
@@ -211,3 +200,17 @@ export default class Login extends Component {
     );
   }
 }
+const mapActionToProps = {
+  LoginAction: LoginAction,
+  SignUpAction: SignUpAction
+};
+const mapStateToProps = state => (
+  console.log(state),
+  {
+    authenticated: state.data
+  }
+);
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(Login);
