@@ -6,18 +6,20 @@ import j from "./pics/icon2.png";
 import k from "./pics/icon3.png";
 import l from "./pics/icon4.png";
 import m from "./pics/icon5.png";
+import { Link } from "react-router-dom";
 import { Menu, Dropdown, Icon, Select, Input, Button } from "antd";
 import Login from "./Login/Login.js";
+
 const Option = Select.Option;
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLogin: false
+      showLogin: false,
+      redirect: false
     };
   }
-  handleChange() {}
 
   getlogin() {
     this.setState({ showLogin: true });
@@ -25,6 +27,10 @@ class Header extends React.Component {
 
   loginVal(data) {
     this.setState({ showLogin: data });
+  }
+  onAddProduct() {
+    console.log(this.props);
+    this.setState({ redirect: true });
   }
   render() {
     const menu = (
@@ -216,6 +222,14 @@ class Header extends React.Component {
                   <Icon type="user" style={{ marginRight: 5 }} />
                   Be a Seller
                 </div>
+                <Link to="/add">
+                  <div
+                    className="common-button"
+                    onClick={this.onAddProduct.bind(this)}
+                  >
+                    AddProduct(Remove)
+                  </div>
+                </Link>
               </div>
             </div>
           </div>

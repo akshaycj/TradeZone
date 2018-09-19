@@ -19,7 +19,13 @@ class AddProduct extends Component {
       inputValue: ""
     };
   }
+  componentWillReceiveProps(props) {
+    console.log(props.urls);
+  }
 
+  componentDidMount() {
+    console.log(this.props.user.uid);
+  }
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     console.log(tags);
@@ -56,7 +62,11 @@ class AddProduct extends Component {
   }
 
   onSubmit() {
-    this.props.AddProductAction(this.state.dat, this.state.productName);
+    this.props.AddProductAction(
+      this.state.dat,
+      this.state.productName,
+      this.props.user.uid
+    );
   }
 
   render() {
@@ -163,7 +173,8 @@ const mapActionToProps = {
   AddProductAction: AddProductAction
 };
 const mapSateToProps = state => ({
-  urls: state.data
+  urls: state.data,
+  user: state.user
 });
 export default connect(
   mapSateToProps,

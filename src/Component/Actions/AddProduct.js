@@ -4,7 +4,12 @@ import { storage, db } from "../../config";
 const value = {
   urls: []
 };
-export default function AddProductAction(pics, productName) {
+
+export default function AddProductAction(pics, productName, uid) {
+  const path = db
+    .ref("users")
+    .child(uid)
+    .push().key;
   return dispatch => {
     pics.forEach(a => {
       storage
@@ -13,10 +18,27 @@ export default function AddProductAction(pics, productName) {
         .child(a.originFileObj.name)
         .put(a.originFileObj)
         .then(function(data) {
-          data.ref.getDownloadURL().then(function(downloadURL) {
-            console.log("ASdasd", downloadURL);
-            value.urls.push(downloadURL);
-          });
+          data.ref
+            .getDownloadURL()
+            .then(function(downloadURL) {
+              console.log("ASdasd", downloadURL);
+              value.urls.push(downloadURL);
+            })
+            .then(function(data) {
+              db.ref("users")
+                .child(uid)
+                .child(path)
+                .set({
+                  productName,
+                  urls: value.urls
+                });
+              db.ref("products")
+                .child(path)
+                .set({
+                  productName,
+                  urls: value.urls
+                });
+            });
         });
     });
     dispatch({

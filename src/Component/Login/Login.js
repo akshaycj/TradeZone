@@ -6,6 +6,7 @@ import { Auth, db } from "../../config.js";
 import { connect } from "react-redux";
 import LoginAction from "../Actions/Login";
 import SignUpAction from "../Actions/SignUp";
+import AuthStateAction from "../Actions/AuthSate";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,6 +23,13 @@ class Login extends Component {
   }
   componentWillReceiveProps(props) {
     console.log(props);
+    if (props.authenticated === true) {
+      this.props.AuthStateAction();
+      this.closeLogin();
+    }
+    if (props.signup === true) {
+      this.setState({ showLogin: true });
+    }
   }
   onName = e => {
     this.setState({ name: e.target.value });
@@ -50,6 +58,7 @@ class Login extends Component {
 
   onLogin = () => {
     this.props.LoginAction(this.state.email, this.state.password);
+    this.props.AuthStateAction();
   };
 
   closeLogin() {
@@ -202,12 +211,15 @@ class Login extends Component {
 }
 const mapActionToProps = {
   LoginAction: LoginAction,
-  SignUpAction: SignUpAction
+  SignUpAction: SignUpAction,
+  AuthStateAction: AuthStateAction
 };
 const mapStateToProps = state => (
   console.log(state),
   {
-    authenticated: state.data
+    authenticated: state.data,
+    signup: state.signup,
+    user: state.user
   }
 );
 export default connect(

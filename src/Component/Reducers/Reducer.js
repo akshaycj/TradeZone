@@ -1,4 +1,9 @@
-import { LOGIN, SIGNUP, ADDPRODUCT } from "../ActionCreators/ActionCreators";
+import {
+  LOGIN,
+  SIGNUP,
+  ADDPRODUCT,
+  AUTHSTATE
+} from "../ActionCreators/ActionCreators";
 
 const initialState = {};
 export default function Reducer(state = initialState, action) {
@@ -6,17 +11,22 @@ export default function Reducer(state = initialState, action) {
     case LOGIN:
       return {
         ...state,
-        data: action.value
+        data: action.value.authenticated
       };
     case SIGNUP:
       return {
         ...state,
-        data: action.value
+        signup: action.value.SignUp
       };
     case ADDPRODUCT:
       return {
         ...state,
         data: action.value
+      };
+    case AUTHSTATE:
+      return {
+        ...state,
+        user: action.user
       };
     default:
       return state;
