@@ -10,6 +10,8 @@ import Footer from "./Component/Home/Footer";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Layout from "./Component/Layout";
 
+console.log("b" + "a" + +"a" + "a");
+
 class App extends Component {
   render() {
     return (

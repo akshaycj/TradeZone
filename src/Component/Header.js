@@ -9,6 +9,7 @@ import m from "./pics/icon5.png";
 import { Link } from "react-router-dom";
 import { Menu, Dropdown, Icon, Select, Input, Button } from "antd";
 import Login from "./Login/Login.js";
+import Search from "./Search";
 
 const Option = Select.Option;
 
@@ -189,11 +190,7 @@ class Header extends React.Component {
                   <Option value="CDE">CDE</Option>
                   <Option value="EFG">EFG</Option>
                 </Select>
-                <Input
-                  className="search"
-                  prefix={<img src={k} width={16} />}
-                  placeholder="Search"
-                />
+                <Search className="search" />
                 <div
                   className="common-button"
                   style={{
