@@ -6,6 +6,14 @@ import OverView from "./Overview";
 
 export default class extends Component {
   render() {
-    return <div />;
+    return (
+      <div>
+        <Router>
+          <Main>
+            <Route path="/" component={OverView} />
+          </Main>
+        </Router>
+      </div>
+    );
   }
 }
