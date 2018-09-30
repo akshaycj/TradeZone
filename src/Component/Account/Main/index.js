@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./index.css";
 
 import { Menu, Icon } from "antd";
+import { Link } from "react-router-dom";
 
 const MenuItem = Menu.Item;
 
@@ -17,8 +18,12 @@ export default class extends Component {
               style={{ width: "100%", borderRight: 0 }}
               defaultSelectedKeys="1"
             >
-              <MenuItem key="1">Overview</MenuItem>
-              <MenuItem key="2">Add Product</MenuItem>
+              <MenuItem key="1">
+                <Link to="/">Overview</Link>
+              </MenuItem>
+              <MenuItem key="2">
+                <Link to="/account/add">Add Product</Link>
+              </MenuItem>
               <MenuItem key="3">Manage Products</MenuItem>
               <MenuItem key="4">Current Plan</MenuItem>
             </Menu>

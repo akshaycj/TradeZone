@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Input, Select, Upload, Icon, Modal, Button, Tag, Tooltip } from "antd";
 import "./Addproduct.css";
 import PicturesWall from "./Upload";
-import AddProductAction from "../Actions/AddProduct";
+
 import { connect } from "react-redux";
+import AddProductAction from "./../../Actions/AddProduct";
 const Option = Select.Option;
 
 class AddProduct extends Component {
