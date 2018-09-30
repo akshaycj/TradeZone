@@ -9,6 +9,7 @@ import AddProduct from "./Component/Addproduct/Addproduct";
 import Footer from "./Component/Home/Footer";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Layout from "./Component/Layout";
+import Account from "./Component/Account";
 
 console.log("b" + "a" + +"a" + "a");
 
@@ -23,6 +24,7 @@ class App extends Component {
               <Route path="/product" component={Product} />
               <Route path="/login" component={Login} />
               <Route path="/add" component={AddProduct} />
+              <Route path="/account" component={Account} />
             </Switch>
           </Layout>
         </Router>

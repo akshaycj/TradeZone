@@ -13,6 +13,7 @@ class Slider extends Component {
     return (
       <div className="cardi">
         <Carousel
+          autoPlay
           showThumbs={false}
           className="adjusti"
           width="1050px"
