@@ -1,18 +1,20 @@
 .account-main-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  margin: 40px;
 }
 
-.account-main-container .details {
-  min-width: 500px;
+.account-main-container .mdetails {
+  width: 85%;
   min-height: 500px;
+  background: white;
+  margin-left: 40px;
 }
 
 .account-profile-container {
   min-height: 500px;
-  max-width: 200px;
-  margin: 40px;
+  width: 220px;
+
   background: white;
   display: flex;
   flex-direction: column;

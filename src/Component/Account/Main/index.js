@@ -24,7 +24,7 @@ export default class extends Component {
             </Menu>
           </div>
         </div>
-        <div className="details">{this.props.children}</div>
+        <div className="mdetails">{this.props.children}</div>
       </div>
     );
   }
