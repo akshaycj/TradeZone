@@ -4,6 +4,11 @@
   justify-content: space-around;
 }
 
+.account-main-container .details {
+  min-width: 500px;
+  min-height: 500px;
+}
+
 .account-profile-container {
   min-height: 500px;
   max-width: 200px;

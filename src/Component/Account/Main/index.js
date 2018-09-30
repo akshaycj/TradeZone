@@ -23,7 +23,7 @@ export default class extends Component {
               <MenuItem key="4">Current Plan</MenuItem>
             </Menu>
           </div>
-          <div>{this.props.children}</div>
+          <div className="container">{this.props.children}</div>
         </div>
       </div>
     );
