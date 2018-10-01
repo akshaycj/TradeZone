@@ -36,6 +36,9 @@ export default class extends Component {
                 <Link to="/account/manage">Manage Products</Link>
               </MenuItem>
               <MenuItem key="4">Current Plan</MenuItem>
+              <MenuItem key="5">
+                <Link to="/account/profile">Profile</Link>
+              </MenuItem>
             </Menu>
           </div>
           <div

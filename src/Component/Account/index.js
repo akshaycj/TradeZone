@@ -4,7 +4,7 @@ import Main from "./Main";
 import AddProduct from "./Addproduct/Addproduct";
 import OverView from "./Overview";
 import Manage from "./Manage";
-
+import Profile from "./Profile"
 export default class extends Component {
   render() {
     return (
@@ -14,6 +14,7 @@ export default class extends Component {
             <Route path="/account" exact component={OverView} />
             <Route path="/account/add" component={AddProduct} />
             <Route path="/account/manage" component={Manage} />
+            <Route path="/account/profile" component={Profile} />
           </Switch>
         </Main>
       </div>
