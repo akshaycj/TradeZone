@@ -20,7 +20,10 @@ export default class extends Component {
           <h3>Top Categories</h3>
           <div className="app-accent" style={{ width: 50, height: 1 }} />
         </div>
-        <Menu mode="vertical" style={{ backgroundColor: "#f7f7f7", border: 0 }}>
+        <Menu
+          mode="vertical"
+          style={{ backgroundColor: "#f7f7f7", border: 0, textAlign: "left" }}
+        >
           <SubMenu
             key="sub1"
             title={
