@@ -24,7 +24,9 @@ export default class extends Component {
               <MenuItem key="2">
                 <Link to="/account/add">Add Product</Link>
               </MenuItem>
-              <MenuItem key="3">Manage Products</MenuItem>
+              <MenuItem key="3">
+                <Link to="/account/manage">Manage Products</Link>
+              </MenuItem>
               <MenuItem key="4">Current Plan</MenuItem>
             </Menu>
           </div>
