@@ -44,6 +44,8 @@ export default class extends Component {
   render() {
     return (
       <div>
+        <h2>Manage your products:</h2>
+        <br />
         <List
           className="demo-loadmore-list"
           loading={this.state.loading}

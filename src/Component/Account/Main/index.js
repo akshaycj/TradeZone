@@ -19,7 +19,13 @@ export default class extends Component {
     return (
       <div className="account-main-container">
         <div className="account-profile-container">
-          <div className="avatar">.</div>
+          <div className="avatar">
+            <img
+              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              width="100%"
+              height="100%"
+            />
+          </div>
           <div className="menu" style={{ width: "100%" }}>
             <Menu
               mode="inline"

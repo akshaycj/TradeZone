@@ -1,15 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import "./Header.css";
-import i from "./pics/icon1.png";
-import j from "./pics/icon2.png";
-import k from "./pics/icon3.png";
-import l from "./pics/icon4.png";
-import m from "./pics/icon5.png";
 import { Link } from "react-router-dom";
 import { Menu, Dropdown, Icon, Select, Input, Button } from "antd";
 import Login from "./Login/Login.js";
 import Search from "./Search";
+import i from "./pics/icon1.png";
+import j from "./pics/icon2.png";
+import { Auth } from "../config";
 
 const Option = Select.Option;
 
@@ -18,8 +15,17 @@ class Header extends React.Component {
     super(props);
     this.state = {
       showLogin: false,
-      redirect: false
+      redirect: false,
+      loggedin: false
     };
+  }
+  componentDidMount() {
+    var that = this;
+    Auth.onAuthStateChanged(user => {
+      if (user) {
+        that.setState({ loggedin: true });
+      }
+    });
   }
 
   getlogin() {
@@ -121,16 +127,6 @@ class Header extends React.Component {
                 alignSelf: "center"
               }}
             >
-              {/* <div className="head21">
-                <span style={{ display: "flex", flexDirection: "row" }}>
-                  <Dropdown overlay={menu1}>
-                    <div>
-                      <img src={l} style={{ width: "50%" }} />
-                      <img src={m} style={{ width: "20%" }} />
-                    </div>
-                  </Dropdown>
-                </span>
-              </div> */}
               <div className="head22">
                 <Select
                   showSearch
@@ -208,17 +204,21 @@ class Header extends React.Component {
                   />
                   Search
                 </div>
-                <div
-                  className="common-button app-accent"
-                  style={{
-                    alignSelf: "center",
-                    marginLeft: 15
-                  }}
-                  onClick={this.getlogin.bind(this)}
-                >
-                  <Icon type="user" style={{ marginRight: 5 }} />
-                  Be a Seller
-                </div>
+                {this.state.loggedin ? (
+                  <Icon type="user" />
+                ) : (
+                  <div
+                    className="common-button app-accent"
+                    style={{
+                      alignSelf: "center",
+                      marginLeft: 15
+                    }}
+                    onClick={this.getlogin.bind(this)}
+                  >
+                    <Icon type="user" style={{ marginRight: 5 }} />
+                    Be a Seller
+                  </div>
+                )}
               </div>
             </div>
           </div>
