@@ -10,6 +10,7 @@
   background: white;
   margin-left: 40px;
   padding: 25px;
+  overflow: auto;
 }
 
 .account-profile-container {

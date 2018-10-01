@@ -30,6 +30,17 @@ export default class extends Component {
               <MenuItem key="4">Current Plan</MenuItem>
             </Menu>
           </div>
+          <div
+            className="common-button app-primary-dark"
+            style={{
+              width: 30,
+              alignSelf: "center",
+              marginTop: "auto",
+              marginBottom: 10
+            }}
+          >
+            Log out
+          </div>
         </div>
         <div className="mdetails">{this.props.children}</div>
       </div>

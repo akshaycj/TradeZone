@@ -219,14 +219,6 @@ class Header extends React.Component {
                   <Icon type="user" style={{ marginRight: 5 }} />
                   Be a Seller
                 </div>
-                <Link to="/add">
-                  <div
-                    className="common-button"
-                    onClick={this.onAddProduct.bind(this)}
-                  >
-                    AddProduct(Remove)
-                  </div>
-                </Link>
               </div>
             </div>
           </div>
