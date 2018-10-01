@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { Menu, Dropdown, Icon, Select, Input, Button } from "antd";
+import { Menu, Dropdown, Icon, Select, Input, Button, Avatar } from "antd";
 import Login from "./Login/Login.js";
 import Search from "./Search";
 import i from "./pics/icon1.png";
@@ -118,7 +118,9 @@ class Header extends React.Component {
         </div>
         <div className="head2 app-primary">
           <div className="head3" style={{ maxHeight: 70 }}>
-            <img src={i} style={{ width: 100, margin: 8 }} />
+            <Link to="/">
+              <img src={i} style={{ width: 100, margin: 8 }} />
+            </Link>
             <div
               style={{
                 display: "flex",
@@ -204,8 +206,14 @@ class Header extends React.Component {
                   />
                   Search
                 </div>
-                {this.state.loggedin ? (
-                  <Icon type="user" />
+                {!this.state.loggedin ? (
+                  <Link to="/account" style={{ alignSelf: "center" }}>
+                    <Icon
+                      type="user"
+                      style={{ color: "white" }}
+                      className="header-avatar"
+                    />
+                  </Link>
                 ) : (
                   <div
                     className="common-button app-accent"
