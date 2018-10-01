@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
 import { db } from "../../../config";
-import { List, Avatar, Button, Skeleton, Icon } from "antd";
+import { List, Avatar, Button, Skeleton, Icon, Popconfirm } from "antd";
 
 export default class extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ export default class extends Component {
         }.bind(this)
       );
   }
+  onDelete = key => {};
   render() {
     return (
       <div>
@@ -36,7 +37,16 @@ export default class extends Component {
           dataSource={this.state.products}
           renderItem={item => (
             <List.Item
-              actions={[<Icon type="delete" style={{ fontSize: 18 }} />]}
+              actions={[
+                <Popconfirm
+                  title="Are you sure？"
+                  okText="Yes"
+                  cancelText="No"
+                  onConfirm={this.onDelete.bind(this, item.key)}
+                >
+                  <Icon type="delete" style={{ fontSize: 18 }} />
+                </Popconfirm>
+              ]}
             >
               <List.Item.Meta
                 avatar={<Avatar src={item.urls[0]} />}
