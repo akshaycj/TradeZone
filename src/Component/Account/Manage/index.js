@@ -8,25 +8,39 @@ export default class extends Component {
     super(props);
     this.state = {
       products: [],
-      loading: true
+      loading: true,
+      uid: "aYjX8BD4w5SADTlnTQB3pl13HKJ2"
     };
   }
   componentDidMount() {
     db.ref("users")
-      .child("aYjX8BD4w5SADTlnTQB3pl13HKJ2")
+      .child(this.state.uid)
       .on(
         "value",
         function(dataSnap) {
           var data = [];
           dataSnap.forEach(element => {
-            data.push(element.val());
+            var d = {
+              productName: element.val().productName,
+              key: element.key,
+              urls: element.val().urls
+            };
+            data.push(d);
           });
 
           this.setState({ products: data, loading: false });
         }.bind(this)
       );
   }
-  onDelete = key => {};
+  onDelete = key => {
+    db.ref("users")
+      .child(this.state.uid)
+      .child(key)
+      .remove();
+    db.ref("products")
+      .child(key)
+      .remove();
+  };
   render() {
     return (
       <div>
