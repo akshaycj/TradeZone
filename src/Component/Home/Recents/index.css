@@ -1,0 +1,12 @@
+.recents {
+  display: flex;
+  background-color: #fff;
+}
+
+@media only screen and (max-width: 600px) {
+  .recents {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  }
+}

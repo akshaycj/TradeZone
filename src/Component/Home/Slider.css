@@ -1,10 +1,15 @@
-.cardi {
-}
 .adjusti {
   margin: auto;
 }
 .imagei {
-  width: 90%;
-  height: 315px;
+  width: 100%;
   margin: auto;
+}
+@media only screen and (max-width: 600px) {
+  .cardi {
+    width: 100%;
+  }
+  .imagei {
+    width: 100%;
+  }
 }

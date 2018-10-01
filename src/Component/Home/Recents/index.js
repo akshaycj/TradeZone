@@ -18,7 +18,7 @@ export default class extends Component {
       className: "slider variable-width"
     };
     return (
-      <div style={{ display: "flex", width: 1050, backgroundColor: "white" }}>
+      <div className="recents">
         <Recent />
         <Recent />
         <Recent />

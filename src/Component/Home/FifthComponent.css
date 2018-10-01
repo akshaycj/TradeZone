@@ -76,6 +76,7 @@
   .mainDivInF5 {
     height: 400px;
     flex-direction: column;
+    padding: 10px;
   }
   .fifth1 {
     width: 100%;

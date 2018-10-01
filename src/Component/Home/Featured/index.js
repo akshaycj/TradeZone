@@ -55,7 +55,23 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <Slider {...settings}>
+        <div className="featured-main">
+          <Slider {...settings}>
+            <Link to="/product">
+              <Block name={"Watch"} text={"Loren Ipsum"} pic={i} price={250} />
+            </Link>
+            <Link to="/product">
+              <Block name={"Watch"} text={"Loren Ipsum"} pic={i} price={250} />
+            </Link>
+            <Link to="/product">
+              <Block name={"Watch"} text={"Loren Ipsum"} pic={i} price={250} />
+            </Link>
+            <Link to="/product">
+              <Block name={"Watch"} text={"Loren Ipsum"} pic={i} price={250} />
+            </Link>
+          </Slider>
+        </div>
+        <div className="featured-media">
           <Link to="/product">
             <Block name={"Watch"} text={"Loren Ipsum"} pic={i} price={250} />
           </Link>
@@ -68,7 +84,10 @@ export default class extends Component {
           <Link to="/product">
             <Block name={"Watch"} text={"Loren Ipsum"} pic={i} price={250} />
           </Link>
-        </Slider>
+          <Link to="/product">
+            <Block name={"Watch"} text={"Loren Ipsum"} pic={i} price={250} />
+          </Link>
+        </div>
       </div>
     );
   }

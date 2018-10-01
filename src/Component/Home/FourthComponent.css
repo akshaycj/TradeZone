@@ -113,6 +113,7 @@
   .mainDivInF4 {
     height: auto;
     flex-direction: column;
+    padding: 10px;
   }
   .fourth1 {
     height: auto;

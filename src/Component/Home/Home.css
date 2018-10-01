@@ -1,15 +1,36 @@
 .Home {
   text-align: center;
+  width: 100%;
 }
 .home-header {
   display: flex;
-  margin: 25px;
+  padding: 10px;
+  width: 100%;
+}
+.home-components {
+  width: 80%;
 }
 .home-category {
   padding: 10px;
   height: 700px;
-  width: 200px;
+  width: 18%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin-left: 20px;
   margin-right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .home-category {
+    display: none;
+  }
+  .home-components {
+    width: 100%;
+  }
+  .slider-home {
+    width: 100%;
+    margin: auto;
+  }
+  .recent-products {
+    width: 100%;
+  }
 }

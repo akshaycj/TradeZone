@@ -24,15 +24,11 @@ class Home extends Component {
             <br />
             <Category />
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}
-          >
-            <Slider />
-            <div>
+          <div className="home-components">
+            <div className="slider-home">
+              <Slider />
+            </div>
+            <div className="recent-products">
               <h3 style={{ textAlign: "left", fontStyle: "bold" }}>
                 Recent Products:
               </h3>

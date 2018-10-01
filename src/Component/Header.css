@@ -15,6 +15,7 @@
   width: 100%;
   color: white;
   padding: 5px;
+  display: flex;
 }
 .head3 {
   width: 90%;
@@ -26,6 +27,7 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  align-self: center;
   color: #fff;
 }
 .head21 {
@@ -58,15 +60,56 @@
   font-size: 22px;
   cursor: pointer;
 }
+.hamburger {
+  display: none;
+}
+.search-button {
+  margin: "3px";
+  width: 200px;
+  background-color: #63b5f5;
+  color: #fff;
+  justify-content: center;
+  align-self: center;
+  padding: 8px;
+  border-radius: 20px;
+}
+
 @media only screen and (max-width: 600px) {
-  .head3 {
-    width: 100%;
+  .select {
+    display: none;
   }
+
+  .hamburger {
+    width: 50px;
+    height: 33px;
+    align-self: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+  }
+  .hamSpan {
+    height: 6px;
+    border-radius: 10px;
+    background-color: #fff;
+    width: 42px;
+  }
+  .head22 {
+    flex-direction: row;
+  }
+  .head3 {
+    display: flex;
+  }
+
   .select {
     width: 60%;
     font-size: 100%;
   }
   .search {
     width: 50%;
+  }
+  .search-button {
+    width: 30%;
+    min-width: 93px;
   }
 }

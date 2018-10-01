@@ -12,13 +12,7 @@ class Slider extends Component {
   render() {
     return (
       <div className="cardi">
-        <Carousel
-          autoPlay
-          showThumbs={false}
-          className="adjusti"
-          width="1050px"
-          height="315px"
-        >
+        <Carousel autoPlay showThumbs={false} className="adjusti">
           <div>
             <img className="imagei" src={a} alt="mobile pic 1" />
           </div>
