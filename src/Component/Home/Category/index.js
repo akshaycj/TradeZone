@@ -8,7 +8,7 @@ const MenuItemGroup = Menu.ItemGroup;
 export default class extends Component {
   render() {
     return (
-      <div>
+      <div style={{ paddingTop: 10 }}>
         <div
           style={{
             textAlign: "center",
