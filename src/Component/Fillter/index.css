@@ -11,6 +11,7 @@
   min-height: 250px;
   background: white;
   flex-grow: 1;
+  min-width: 200px;
 }
 
 .filter-main-container .product-container {
@@ -19,4 +20,7 @@
   padding: 10px;
   flex-grow: 3;
   min-height: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
