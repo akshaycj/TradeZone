@@ -1,0 +1,22 @@
+.filter-main-container {
+  display: flex;
+  width: 90%;
+  min-height: 600px;
+  margin: auto;
+  padding: 25px;
+  justify-content: center;
+}
+
+.filter-main-container .sort-container {
+  min-height: 250px;
+  background: white;
+  flex-grow: 1;
+}
+
+.filter-main-container .product-container {
+  margin-left: 2px;
+  background: white;
+  padding: 10px;
+  flex-grow: 3;
+  min-height: 250px;
+}
