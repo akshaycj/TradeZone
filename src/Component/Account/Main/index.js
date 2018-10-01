@@ -2,11 +2,19 @@ import React, { Component } from "react";
 import "./index.css";
 
 import { Menu, Icon } from "antd";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { Auth } from "../../../config";
 
 const MenuItem = Menu.Item;
 
 export default class extends Component {
+  state = {
+    logout: false
+  };
+  onLogout = () => {
+    Auth.signOut();
+    this.setState({ logout: true });
+  };
   render() {
     return (
       <div className="account-main-container">
@@ -38,11 +46,13 @@ export default class extends Component {
               marginTop: "auto",
               marginBottom: 10
             }}
+            onClick={this.onLogout}
           >
             Log out
           </div>
         </div>
         <div className="mdetails">{this.props.children}</div>
+        {this.state.logout ? <Redirect to="/" /> : null}
       </div>
     );
   }
