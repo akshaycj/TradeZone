@@ -9,15 +9,13 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <Router>
-          <Main>
-            <Switch>
-              <Route path="/" exact component={OverView} />
-              <Route path="/account/add" component={AddProduct} />
-              <Route path="/account/manage" component={Manage} />
-            </Switch>
-          </Main>
-        </Router>
+        <Main>
+          <Switch>
+            <Route path="/account" exact component={OverView} />
+            <Route path="/account/add" component={AddProduct} />
+            <Route path="/account/manage" component={Manage} />
+          </Switch>
+        </Main>
       </div>
     );
   }

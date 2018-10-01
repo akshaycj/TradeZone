@@ -27,7 +27,7 @@ export default class extends Component {
               defaultSelectedKeys="1"
             >
               <MenuItem key="1">
-                <Link to="/">Overview</Link>
+                <Link to="/account">Overview</Link>
               </MenuItem>
               <MenuItem key="2">
                 <Link to="/account/add">Add Product</Link>
