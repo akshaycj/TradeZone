@@ -12,6 +12,7 @@
   background: white;
   flex-grow: 1;
   min-width: 200px;
+  padding-top: 20px;
 }
 
 .filter-main-container .product-container {
