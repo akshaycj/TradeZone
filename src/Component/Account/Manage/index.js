@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
 import { db } from "../../../config";
-import { List, Avatar, Button, Skeleton } from "antd";
+import { List, Avatar, Button, Skeleton, Icon } from "antd";
 
 export default class extends Component {
   constructor(props) {
@@ -35,13 +35,13 @@ export default class extends Component {
           itemLayout="horizontal"
           dataSource={this.state.products}
           renderItem={item => (
-            <List.Item actions={[<a>edit</a>, <a>more</a>]}>
+            <List.Item
+              actions={[<Icon type="delete" style={{ fontSize: 18 }} />]}
+            >
               <List.Item.Meta
-                avatar={
-                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                }
+                avatar={<Avatar src={item.urls[0]} />}
                 title={<a href="https://ant.design">{item.productName}</a>}
-                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+                description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
               />
             </List.Item>
           )}
