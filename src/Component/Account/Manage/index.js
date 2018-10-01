@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import "./index.css";
 import { db } from "../../../config";
+import { List, Avatar, Button, Skeleton } from "antd";
 
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: []
+      products: [],
+      loading: true
     };
   }
   componentDidMount() {
@@ -20,11 +22,31 @@ export default class extends Component {
             data.push(element.val());
           });
 
-          this.setState({ products: data });
+          this.setState({ products: data, loading: false });
         }.bind(this)
       );
   }
   render() {
-    return <div />;
+    return (
+      <div>
+        <List
+          className="demo-loadmore-list"
+          loading={this.state.loading}
+          itemLayout="horizontal"
+          dataSource={this.state.products}
+          renderItem={item => (
+            <List.Item actions={[<a>edit</a>, <a>more</a>]}>
+              <List.Item.Meta
+                avatar={
+                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                }
+                title={<a href="https://ant.design">{item.productName}</a>}
+                description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              />
+            </List.Item>
+          )}
+        />
+      </div>
+    );
   }
 }
