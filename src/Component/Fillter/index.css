@@ -15,6 +15,10 @@
   padding-top: 20px;
 }
 
+.sort-container-small{
+  display: none ;
+}
+
 .filter-main-container .product-container {
   margin-left: 2px;
   background: white;
@@ -24,4 +28,20 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+@media only screen and (max-width : 492px){
+  .sort-container{
+    display: none ;
+  }
+
+  .sort-container-small{
+    display: inline ;
+    position: absolute ;
+    left : 0 ;
+  }
+
+  .product-container{
+    margin-left: 50px ;
+  }
 }

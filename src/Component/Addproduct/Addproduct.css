@@ -22,8 +22,8 @@
   flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   min-height: 500px;
-  width: 500px;
-
+  width: 500px ;
+  max-width: 90% ;
   margin-bottom: 65px;
   margin-top: 5px;
   padding: 22px;

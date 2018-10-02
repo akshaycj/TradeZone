@@ -25,7 +25,7 @@ export default class index extends Component {
       >
         <h1>Your Profile</h1>
         <Input
-          style={{ width: "360px", margin: "10px" }}
+          style={{ width: "95%", maxWidth : "360px" , margin: "10px" }}
           addonBefore={
             <div
               style={{
@@ -41,7 +41,7 @@ export default class index extends Component {
           defaultValue={this.state.name}
         />
         <Input
-          style={{ width: "360px", margin: "10px" }}
+          style={{ width: "95%",  maxWidth : "360px" , margin: "10px" }}
           addonBefore={
             <div
               style={{
@@ -57,7 +57,7 @@ export default class index extends Component {
           defaultValue={this.state.email}
         />
         <Input
-          style={{ width: "360px", margin: "10px" }}
+          style={{ width: "95%" , maxWidth : "360px" , margin: "10px" }}
           addonBefore={
             <div
               style={{
