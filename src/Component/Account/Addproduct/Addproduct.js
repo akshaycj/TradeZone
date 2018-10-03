@@ -25,7 +25,7 @@ class AddProduct extends Component {
   }
 
   componentDidMount() {
-    //console.log(this.props.user.uid);
+    console.log(this.props.user.uid);
   }
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
@@ -63,10 +63,14 @@ class AddProduct extends Component {
   }
 
   onSubmit() {
+    console.log(this.props.user.uid);
     this.props.AddProductAction(
       this.state.dat,
       this.state.productName,
-      this.props.user.uid
+      this.props.user.uid,
+      this.state.productName,
+      this.state.category,
+      this.state.tags
     );
   }
 

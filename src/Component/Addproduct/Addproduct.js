@@ -4,6 +4,7 @@ import "./Addproduct.css";
 import PicturesWall from "./Upload";
 import AddProductAction from "../Actions/AddProduct";
 import { connect } from "react-redux";
+import { Auth } from "../../config.js";
 const Option = Select.Option;
 
 class AddProduct extends Component {
@@ -62,10 +63,14 @@ class AddProduct extends Component {
   }
 
   onSubmit() {
+    console.log(this.props.user.uid);
     this.props.AddProductAction(
       this.state.dat,
       this.state.productName,
-      this.props.user.uid
+      this.props.user.uid,
+      this.state.productName,
+      this.state.category,
+      this.state.tags
     );
   }
 

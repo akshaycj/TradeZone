@@ -5,7 +5,13 @@ const value = {
   urls: []
 };
 
-export default function AddProductAction(pics, productName, uid) {
+export default function AddProductAction(
+  pics,
+  productName,
+  uid,
+  category,
+  tags
+) {
   const path = db
     .ref("users")
     .child(uid)
@@ -30,13 +36,17 @@ export default function AddProductAction(pics, productName, uid) {
                 .child(path)
                 .set({
                   productName,
-                  urls: value.urls
+                  urls: value.urls,
+                  category,
+                  tags
                 });
               db.ref("products")
                 .child(path)
                 .set({
                   productName,
-                  urls: value.urls
+                  urls: value.urls,
+                  category,
+                  tags
                 });
             });
         });

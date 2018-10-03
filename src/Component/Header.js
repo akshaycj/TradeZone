@@ -40,6 +40,16 @@ class Header extends React.Component {
     console.log(this.props);
     this.setState({ redirect: true });
   }
+  signUserOut() {
+    Auth.signOut()
+      .then(function() {
+        // Sign-out successful.
+        this.setState({ loggedin: false });
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  }
   render() {
     const menu = (
       <Menu>
@@ -165,6 +175,15 @@ class Header extends React.Component {
         </SubMenu>
       </Menu>
     );
+    const userDropdownMenu = (
+      <Menu>
+        <Link to="/account">
+          <Menu.Item>Profile</Menu.Item>
+        </Link>
+        <Menu.Item>My Products</Menu.Item>
+        <Menu.Item onClick={this.signUserOut.bind(this)}>SignOut</Menu.Item>
+      </Menu>
+    );
     return (
       <div>
         {this.state.showLogin ? (
@@ -268,14 +287,14 @@ class Header extends React.Component {
                 />
                 Search
               </div>
-              {!this.state.loggedin ? (
-                <Link to="/account" style={{ alignSelf: "center" }}>
+              {this.state.loggedin ? (
+                <Dropdown overlay={userDropdownMenu}>
                   <Icon
                     type="user"
                     style={{ color: "white" }}
                     className="header-avatar"
                   />
-                </Link>
+                </Dropdown>
               ) : (
                 <div
                   className="common-button app-accent"

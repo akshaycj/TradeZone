@@ -8,36 +8,49 @@ const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
-
 export default class extends Component {
   state = {
-    logout: false ,
-    current : "mail" ,
+    logout: false,
+    current: "mail"
   };
-  
+
   onLogout = () => {
     Auth.signOut();
     this.setState({ logout: true });
   };
-  
-  handleClick = (e) => {
-   console.log('click ', e);
-   this.setState({
-     current: e.key,
-   });
- }
- 
+
+  handleClick = e => {
+    console.log("click ", e);
+    this.setState({
+      current: e.key
+    });
+  };
+
   render() {
     return (
       <div className="account-main-container">
-        <div className="top-nav" style={{padding : "7px" , alignSelf : "center"}}>
-          <div className="top-nav-elements"><Link to="/account/manage">Manage Products</Link></div>
+        <div
+          className="top-nav"
+          style={{ padding: "7px", alignSelf: "center" }}
+        >
+          <div className="top-nav-elements">
+            <Link to="/account/manage">Manage Products</Link>
+          </div>
           <div className="top-nav-elements">Current Plan</div>
-          <div className="top-nav-elements"><Link to="/account/add">Add Product</Link></div>
+          <div className="top-nav-elements">
+            <Link to="/account/add">Add Product</Link>
+          </div>
         </div>
-        <div className="top-nav" style={{width : "80%" , margin : "auto" , marginBottom : "30px"}}>
-          <div className="top-nav-elements"><Link to="/account">Overview</Link></div>
-          <div className="top-nav-elements"><Link to="/account/profile">Profile</Link></div>
+        <div
+          className="top-nav"
+          style={{ width: "80%", margin: "auto", marginBottom: "30px" }}
+        >
+          <div className="top-nav-elements">
+            <Link to="/account">Overview</Link>
+          </div>
+          <div className="top-nav-elements">
+            <Link to="/account/profile">Profile</Link>
+          </div>
         </div>
         <div className="account-profile-container">
           <div className="avatar">
