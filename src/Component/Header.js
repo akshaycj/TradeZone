@@ -180,10 +180,9 @@ class Header extends React.Component {
     );
     const userDropdownMenu = (
       <Menu>
-        <Link to="/account">
-          <Menu.Item>Profile</Menu.Item>
-        </Link>
-        <Menu.Item>My Products</Menu.Item>
+        <Menu.Item>
+          <Link to="/account">Account</Link>
+        </Menu.Item>
         <Menu.Item onClick={this.signUserOut.bind(this)}>SignOut</Menu.Item>
       </Menu>
     );
