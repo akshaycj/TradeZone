@@ -68,9 +68,9 @@ class AddProduct extends Component {
       this.state.dat,
       this.state.productName,
       this.props.user.uid,
-      this.state.productName,
       this.state.category,
-      this.state.tags
+      this.state.tags,
+      this.state.description
     );
   }
 

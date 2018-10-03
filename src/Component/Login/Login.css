@@ -7,22 +7,21 @@
   height: 80vh;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  z-index: 10;
-  top: 10%;
-  left: 40%;
-  animation-name: example;
-  animation-duration: 1s;
+  z-index: 100;
 }
 .backgroundlogin {
   width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   height: 100vh;
-  z-index: 1;
+  z-index: 10;
+  display: flex;
   position: fixed;
+  animation-name: example;
+  animation-duration: 1s;
 }
 .outers {
   width: 90%;
+  max-width: 360px;
   margin: auto;
   height: 95%;
   background-color: #fff;
@@ -33,11 +32,11 @@
 }
 @keyframes example {
   0% {
-    top: -500px;
+    display: none;
   }
 
   100% {
-    top: 10%;
+    display: flex;
   }
 }
 .signup {
@@ -49,11 +48,7 @@
   height: 80vh;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  position: absolute;
   z-index: 10;
-  top: 10%;
-  left: 40%;
 }
 .outersofsignup {
   width: 90%;
@@ -73,4 +68,12 @@
   100% {
     top: 10%;
   }
+}
+.image-icon {
+  width: 60%;
+  margin: auto;
+  border-radius: 90px;
+  padding: 0px;
+}
+@media only screen and (max-width: 600px) {
 }

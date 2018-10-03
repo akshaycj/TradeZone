@@ -90,15 +90,9 @@ class Login extends Component {
               />
               <div className="outers">
                 <h1 style={{ color: "rgba(250,125,150)" }}>Login</h1>
-                <img
-                  src={a}
-                  style={{
-                    width: "65%",
-                    margin: "auto",
-                    borderRadius: "90px",
-                    padding: "0"
-                  }}
-                />
+                <div className="image-icon">
+                  <img src={a} style={{ width: "100%" }} />
+                </div>
                 <div
                   style={{
                     margin: "auto",
@@ -152,15 +146,7 @@ class Login extends Component {
               />
               <div className="outersofsignup">
                 <h1 style={{ color: "rgba(250,125,150)" }}>SignUp</h1>
-                <img
-                  src={a}
-                  style={{
-                    width: "60%",
-                    margin: "auto",
-                    borderRadius: "90px",
-                    padding: "0"
-                  }}
-                />
+                <img src={a} className="image-icon" />
                 <span
                   style={{
                     margin: "auto",

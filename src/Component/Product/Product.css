@@ -1,77 +1,88 @@
- .product{
-     display: flex;
-     flex-direction: row;
-     
- }
- .card {
-  width:70%;
+.product {
+  display: flex;
+  flex-direction: row;
+}
+.card {
+  width: 70%;
   margin: auto;
   margin-top: 1%;
-
 }
-.details{
-    padding: 10px;
-    width: 100%;
-    margin: auto;
-    display: flex;
-    flex-direction: row;
+.details {
+  padding: 10px;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
 }
-.productpic{
-    width:60%;
-    align-self: center;
+.productpic {
+  width: 60%;
+  align-self: center;
 }
-.smallpics{
-    width:100%;
-    display: flex;
-    flex-direction: row;
-    height:100px;
-    justify-content: space-around;
-    }
-.description{
-    width:80%;
-    margin:6%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+.smallpics {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  justify-content: space-around;
 }
-.name{
-    display: flex;
-    justify-content: space-between;
+.description {
+  width: 80%;
+  margin: 6%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
-.rate{
-    display: flex;
-    justify-content: space-between;
+.name {
+  display: flex;
+  justify-content: space-between;
 }
-.textval{
-    width:100%;
-    text-align: left;
-display: flex;
-align-items: center;
+.rate {
+  display: flex;
+  justify-content: space-between;
+}
+.textval {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  align-items: center;
 }
 .textval p {
-    margin:0;
+  margin: 0;
 
-    width:70%;
+  width: 70%;
 }
-.bottomBut{
-    display:flex;
-    justify-content:space-around;
-    margin-top:5%;  
+.bottomBut {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5%;
+}
+.phoneNo {
+  display: flex;
+  margin: auto;
+  border: 1px solid #e3e3e3;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 1px #000;
+}
+.phoneNo:hover {
+  box-shadow: 2px 2px 3px #000;
 }
 
-@media only screen and (max-width: 600px){
-.productpic{
-    width:100%;
-}
-.details{
+@media only screen and (max-width: 600px) {
+  .productpic {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .details {
     padding: 10px;
     width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
-}
-.bottomBut{
+  }
+  .bottomBut {
     flex-direction: column;
-    
-}
+  }
 }
