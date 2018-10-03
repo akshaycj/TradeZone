@@ -12,7 +12,7 @@ export default function SingUpAction(email, password, name, phone) {
           email: email,
           phone: phone
         };
-        db.ref("users")
+        db.ref("usersDetails")
           .child(object.user.uid)
           .set(d);
         value.SignUp = true;
