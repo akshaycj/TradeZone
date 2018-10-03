@@ -24,9 +24,7 @@ class AddProduct extends Component {
     console.log(props.urls);
   }
 
-  componentDidMount() {
-    console.log(this.props.user.uid);
-  }
+  componentDidMount() {}
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     console.log(tags);
