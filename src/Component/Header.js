@@ -25,6 +25,9 @@ class Header extends React.Component {
     Auth.onAuthStateChanged(user => {
       if (user) {
         that.setState({ loggedin: true });
+      } else {
+        //kandoda kunda?
+        that.setState({ loggedin: false });
       }
     });
   }
