@@ -4,7 +4,6 @@ import Main from "./Main";
 import AddProduct from "./Addproduct/Addproduct";
 import SignUp from './User';
 import Featured from './FeaturedProducts';
-import Profile from "./Profile"
 export default class extends Component {
   render() {
     return (
