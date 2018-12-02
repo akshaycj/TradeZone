@@ -1,0 +1,8 @@
+.frame{
+    width:300px;
+}
+.frame-top{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-around;
+}

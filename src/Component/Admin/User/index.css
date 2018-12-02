@@ -1,0 +1,8 @@
+.admin-signup{
+    width:60%;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    justify-content: space-around;
+}

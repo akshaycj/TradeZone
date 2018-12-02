@@ -11,7 +11,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Layout from "./Component/Layout";
 import Account from "./Component/Account";
 import Fillter from "./Component/Fillter";
-
+import Seller from "./Component/SellerPage";
+import Admin from './Component/Admin/index'
 console.log("b" + "a" + +"a" + "a");
 
 class App extends Component {
@@ -22,11 +23,12 @@ class App extends Component {
           <Layout>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/product" component={Product} />
-              <Route path="/login" component={Login} />
-              <Route path="/add" component={AddProduct} />
-              <Route path="/account" component={Account} />
-              <Route path="/search" component={Fillter} />
+              <Route path="/login"  component={Login} />
+              <Route path="/account"  component={Account} />
+              <Route path="/search"  component={Fillter} />
+              <Route path="/seller"  component={Seller}/>
+              <Route path="/authUser" component={Admin}/>
+              <Route path="/product/:id"  component={Product} />
             </Switch>
           </Layout>
         </Router>

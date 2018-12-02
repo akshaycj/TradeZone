@@ -11,8 +11,18 @@ import "./FifthComponent.css";
 import "./Home.css";
 import Category from "./Category";
 import Recents from "./Recents";
-
+import {connect} from 'react-redux';
+import featuredProducts from './Featured';
+import  AuthStateAction from '../Actions/AuthSate';
 class Home extends Component {
+  constructor(props){
+    super(props);
+    this.state={}
+  }
+  
+  componentDidMount(){
+    this.props.AuthStateAction()
+  }
   render() {
     return (
       <div className="Home">
@@ -39,7 +49,7 @@ class Home extends Component {
         <br /> <br />
         <br />
         <div>
-          <Grid heading={"Featured Products"} />
+          <featuredProducts/>
           <Grid heading={"Top Rated Products"} />
           <FourthComponent />
           <FifthComponent />
@@ -48,5 +58,10 @@ class Home extends Component {
     );
   }
 }
-
-export default Home;
+const mapStateToProps = state =>({
+user: state.user
+})
+const mapActionToProps = {
+AuthStateAction:AuthStateAction
+}
+export default connect(mapStateToProps,mapActionToProps)(Home);

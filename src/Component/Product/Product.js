@@ -1,9 +1,11 @@
 import React from "react";
-import { Rate, Button, Card, Icon } from "antd";
+import { Rate, Button, Card, Icon,Spin } from "antd";
 import "./Product.css";
 import w from "./watch.jpg";
+import AuthStateAction from '../Actions/AuthSate';
 import { Auth, db } from "../../config";
-export default class Product extends React.Component {
+import {connect} from 'react-redux';
+class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,12 +14,40 @@ export default class Product extends React.Component {
       displayMessage: false,
       phone: "65465464654",
       email: "",
-      loginStateforContact: false
+      loginStateforContact: false,
+      urls:[],
+      productName:"",
+      seller:"",
+      spin:true,
+      ratings:{},
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.AuthStateAction()
+    var that = this
+    var rate = []
+    console.log(this.props.match.url,this.props.match.params.id)
+      db.ref("products").child(this.props.match.params.id+"").on("value",function(oath){
+        if(oath.val().ratings){
+
+          rate.push(oath.val().ratings)
+          rate.forEach(i=>{
+           
+           console.log(i);
+           
+            
+          })
+        }
+        
+       that.setState({urls:oath.val().urls,
+      productName:oath.val().productName,seller:oath.val().seller,spin:false,ratings:oath.val().ratings})
+        
+      })
+
+  }
   changeHeart() {
-    this.setState({
+
+        this.setState({
       heart: !this.state.heart
     });
   }
@@ -29,13 +59,31 @@ export default class Product extends React.Component {
         db.ref("users")
           .child(user.uid + "")
           .on("value", function(data) {
-            console.log(data.val());
             that.setState({ phone: data.val().phone });
           });
       } else {
         this.setState({ displayMessage: true });
       }
     });
+  }
+  onRate = (value) =>{
+    
+    var rate = {}
+    if(this.props.user){
+      
+      db.ref("products").child(this.props.match.params.id+'').child("ratings").child(this.props.user.uid).push(value)
+      //      , function(error) {
+      //   if (error) {
+      //   console.log(error);
+        
+      //   } else {
+      //     console.log("success");
+          
+      //   }
+      // });
+    
+    }
+    
   }
   onContactClick() {
     var that = this;
@@ -55,23 +103,24 @@ export default class Product extends React.Component {
   render() {
     return (
       <div className="product">
+      {this.state.spin ? <Spin/> : <div>
         <Card className="card">
           <div className="details">
             <div className="productpic">
               <div className="bigpic">
-                <img src={w} style={{ width: "100%" }} />
+                <img src={this.state.urls[0]} style={{ width: "100%" }} />
               </div>
               <div className="smallpics">
-                <img src={w} style={{ width: "33%" }} />
-                <img src={w} style={{ width: "33%" }} />
-                <img src={w} style={{ width: "33%" }} />
+                <img src={this.state.urls[1]} style={{ width: "33%" }} />
+                <img src={this.state.urls[2]} style={{ width: "33%" }} />
+                <img src={this.state.urls[3]} style={{ width: "33%" }} />
               </div>
             </div>
             <div className="description">
               <span className="name">
                 <span style={{ display: "flex", flexDirection: "column" }}>
-                  <h1 style={{ marginBottom: "0px" }}>Watch-Marius</h1>
-                  <Rate style={{ float: "left", display: "inline-block" }} />
+                  <h1 style={{ marginBottom: "0px" }}>{this.state.productName}</h1>
+                  <Rate style={{ float: "left", display: "inline-block" }} onChange={this.onRate}/>
                 </span>
                 <span>
                   {this.state.heart ? (
@@ -137,7 +186,17 @@ export default class Product extends React.Component {
             </div>
           </div>
         </Card>
+
+      </div>}
+       
       </div>
     );
   }
 }
+const mapStateToProps = state =>({
+  user:state.user
+})
+const mapActionsToProps = {
+AuthStateAction:AuthStateAction
+}
+export default connect(mapStateToProps,mapActionsToProps)(Product)

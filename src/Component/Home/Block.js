@@ -1,9 +1,22 @@
 import React,{Component} from 'react';
 import './Block.css';
-
+import {Link} from 'react-router-dom';
 export default class Block extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            link:""
+        }
+    }
+    componentDidMount(){
+        
+        
+
+    }
 render(){
     return(
+            <div>
+        
            <div className='element'>
                 <img src={this.props.pic} alt="maga" style={{width:'100%'}} />
                 <div className='overlay1'>
@@ -17,6 +30,7 @@ render(){
                     </span>
                 </div>
            </div>
+        </div>
 
     )
 }

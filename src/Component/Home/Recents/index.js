@@ -1,29 +1,44 @@
 import React, { Component } from "react";
 import "./index.css";
 import Recent from "./Recent";
-
+import  {db } from '../../../config';
 import { Carousel } from "react-responsive-carousel";
 
 import styles from "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default class extends Component {
-  render() {
-    const settings = {
-      dots: true,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      variableWidth: true,
+  constructor(props){
+    super(props);
+    this.state={
+      recent :[],
+      spin:false
+    }
+  }
+  componentDidMount(){
+      var thus = this
+          db.ref("products").
+    limitToLast(5).on("value",function(data){
+     data.forEach(i=> {
+       thus.state.recent.push({data:i.val(),key:i.key})
+       
+     })
+     thus.setState({spin:true})
+    })
+    
+  }
 
-      className: "slider variable-width"
-    };
+  render() {
+  
+   
     return (
-      <div className="recents">
-        <Recent />
-        <Recent />
-        <Recent />
-        <Recent />
-        <Recent />
+      <div >
+      {this.state.spin ? <div className="recents">
+        {this.state.recent.map(o=>(
+
+<Recent value={o} />
+))}
+      </div> : null }
+       
       </div>
     );
   }
