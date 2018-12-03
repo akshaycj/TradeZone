@@ -58,6 +58,7 @@ class Header extends React.Component {
     //     // An error happened.
     //   });
     this.props.SignOut();
+    this.props.AuthStateAction();
     this.setState({ loggedin: false });
 
   }
