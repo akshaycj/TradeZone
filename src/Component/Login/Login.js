@@ -4,9 +4,10 @@ import a from "../pics/tradeZone.png";
 import { Input, Button, Icon } from "antd";
 import { Auth, db } from "../../config.js";
 import { connect } from "react-redux";
-import LoginAction from "../Actions/Login";
+import {LoginAction,SignOut} from "../Actions/Login";
 import SignUpAction from "../Actions/SignUp";
 import AuthStateAction from "../Actions/AuthSate";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +23,6 @@ class Login extends Component {
     };
   }
   componentWillReceiveProps(props) {
-    console.log(props);
     if (props.authenticated === true) {
       this.props.AuthStateAction();
       this.closeLogin();
@@ -58,7 +58,6 @@ class Login extends Component {
 
   onLogin = () => {
     this.props.LoginAction(this.state.email, this.state.password);
-    this.props.AuthStateAction();
   };
 
   closeLogin() {
@@ -198,12 +197,12 @@ class Login extends Component {
 const mapActionToProps = {
   LoginAction: LoginAction,
   SignUpAction: SignUpAction,
-  AuthStateAction: AuthStateAction
+  AuthStateAction: AuthStateAction,
 };
 const mapStateToProps = state => (
   console.log(state),
   {
-    authenticated: state.data,
+    authenticated: state.authenticated,
     signup: state.signup,
     user: state.user
   }

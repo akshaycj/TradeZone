@@ -18,16 +18,18 @@
   display: flex;
 }
 .head3 {
-  width: 90%;
+  width: 100%;
   margin: auto;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  
 }
 .head22 {
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   align-self: center;
+  justify-content: space-around;
   color: #fff;
 }
 .head21 {
@@ -41,7 +43,7 @@
   margin: 4px;
 }
 .search {
-  width: 58%;
+  width: 40%;
   margin: 3px;
 }
 
@@ -65,12 +67,12 @@
 }
 .search-button {
   margin: "3px";
-  width: 200px;
+  width: 150px;
   background-color: #63b5f5;
   color: #fff;
   justify-content: center;
   align-self: center;
-  padding: 8px;
+  padding: 6px;
   border-radius: 20px;
 }
 

@@ -1,9 +1,10 @@
-import { LOGIN } from "../ActionCreators/ActionCreators";
+import { LOGIN ,SIGN_OUT} from "../ActionCreators/ActionCreators";
 import { Auth } from "../../config";
+import AuthStateAction from './AuthSate';
 const value = {
   authenticated: false
 };
-export default function LoginAction(email, password) {
+export function LoginAction(email, password) {
   return dispatch => {
     Auth.signInWithEmailAndPassword(email, password)
       .catch(function(error) {
@@ -19,4 +20,23 @@ export default function LoginAction(email, password) {
         });
       });
   };
+}
+
+export function SignOut(){
+  return dispatch =>{
+    Auth.signOut()
+      .then(function() {
+
+        value.authenticated = false
+        // Sign-out successful.
+      dispatch({
+        type:SIGN_OUT,
+        value,
+      })
+
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
+  }
 }

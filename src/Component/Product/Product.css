@@ -1,6 +1,11 @@
 .product {
   display: flex;
   flex-direction: row;
+  justify-content:center; 
+}
+.spinClass{
+  display: flex;
+  height: 60vh;
 }
 .card {
   width: 70%;

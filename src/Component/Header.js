@@ -6,7 +6,10 @@ import Login from "./Login/Login.js";
 import Search from "./Search";
 import i from "./pics/icon1.png";
 import j from "./pics/icon2.png";
+import {connect} from 'react-redux';
 import { Auth } from "../config";
+import AuthStateAction from './Actions/AuthSate';
+import {SignOut} from './Actions/Login';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const Option = Select.Option;
@@ -20,6 +23,7 @@ class Header extends React.Component {
       loggedin: false
     };
   }
+  
   componentDidMount() {
     var that = this;
     Auth.onAuthStateChanged(user => {
@@ -44,14 +48,18 @@ class Header extends React.Component {
     this.setState({ redirect: true });
   }
   signUserOut() {
-    Auth.signOut()
-      .then(function() {
-        // Sign-out successful.
-        this.setState({ loggedin: false });
-      })
-      .catch(function(error) {
-        // An error happened.
-      });
+    // Auth.signOut()
+    //   .then(function() {
+    //     // Sign-out successful.
+    //     this.setState({ loggedin: false });
+
+    //   })
+    //   .catch(function(error) {
+    //     // An error happened.
+    //   });
+    this.props.SignOut();
+    this.setState({ loggedin: false });
+
   }
   render() {
     const menu = (
@@ -213,6 +221,8 @@ class Header extends React.Component {
               <img
                 src={i}
                 style={{
+                  display:'block',
+                  transform:"scale(2)",
                   width: "80%",
                   margin: 8,
                   maxWidth: "100px",
@@ -317,5 +327,11 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;
+const mapStateToProps = state =>({
+  user:state.user
+})
+const mapActionsToProps = {
+  AuthStateAction:AuthStateAction,
+  SignOut:SignOut
+}
+export default connect(mapStateToProps,mapActionsToProps)(Header);

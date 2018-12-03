@@ -29,10 +29,7 @@ class Home extends Component {
         <div className="home-header">
           <div className="home-category">
             <Category />
-            <br />
-            <Category />
-            <br />
-            <Category />
+           
           </div>
           <div className="home-components">
             <div className="slider-home">
@@ -49,7 +46,6 @@ class Home extends Component {
         <br /> <br />
         <br />
         <div>
-          <featuredProducts/>
           <Grid heading={"Top Rated Products"} />
           <FourthComponent />
           <FifthComponent />

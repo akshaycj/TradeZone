@@ -1,5 +1,5 @@
 import React from "react";
-import { Rate, Button, Card, Icon, Spin } from "antd";
+import { Rate, Button, Card, Icon, Spin,message } from "antd";
 import "./Product.css";
 import w from "./watch.jpg";
 import AuthStateAction from "../Actions/AuthSate";
@@ -12,44 +12,56 @@ class Product extends React.Component {
       heart: false,
       loginState: false,
       displayMessage: false,
-      phone: "65465464654",
+      phone: "",
       email: "",
       loginStateforContact: false,
       urls: [],
       productName: "",
-      seller: "",
+      sellerName: "",
       spin: true,
-      ratings: {}
+      rating: ""
     };
   }
+  
   componentDidMount() {
     this.props.AuthStateAction();
     var that = this;
     var rate = [];
-    console.log(this.props.match.url, this.props.match.params.id);
+    var sellerid = "";
     db.ref("products")
       .child(this.props.match.params.id)
       .on("value", function(oath) {
         const data = oath.val();
-        // if (oath.val().ratings) {
-        //   rate.push(oath.val().ratings);
-        //   rate.forEach(i => {
-        //     console.log(i);
-        //   });
-        // }
-
         if (data.ratings) {
+          var rate =  0
+          var num = 1
+          var calc = 0
           const ratings = Object.values(data.ratings);
-          ratings.map(item => console.log("u", item.value));
+          ratings.map((item,index) =>{rate = rate + item.value, num=num+index });      
+          calc = rate/num
+          that.setState({rating:calc})
+          
         }
-
+       
+       
         that.setState({
           urls: data.urls,
           productName: data.productName,
-          seller: data.seller,
+          sellerName: "sasd",
           spin: false,
           ratings: data.ratings
         });
+        //get seller id form oath.val().seller and fetch user details using  thazahte fetch
+        
+        var sellerName = ""
+        var sellerEmail = ""
+        console.log(oath.val().seller);
+        
+        db.ref("usersDetails").child(oath.val().seller+'').on("value",function(data){
+          console.log(data.val());
+          
+
+        })
       });
   }
   changeHeart() {
@@ -62,7 +74,7 @@ class Product extends React.Component {
     Auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ loginState: true });
-        db.ref("users")
+        db.ref("usersDetails")
           .child(user.uid + "")
           .on("value", function(data) {
             that.setState({ phone: data.val().phone });
@@ -73,29 +85,26 @@ class Product extends React.Component {
     });
   }
   onRate = value => {
+    this.setState({ratings:value})
     var rate = [];
+    
     if (this.props.user) {
       db.ref("products")
         .child(this.props.match.params.id)
         .child("ratings")
         .child(this.props.user.uid)
         .set({ value });
-      //      , function(error) {
-      //   if (error) {
-      //   console.log(error);
-
-      //   } else {
-      //     console.log("success");
-
-      //   }
-      // });
+     
+    }
+    else{
+      message.error("Please Login to Rate a Product")
     }
   };
   onContactClick() {
     var that = this;
     Auth.onAuthStateChanged(user => {
       if (user) {
-        db.ref("users")
+        db.ref("usersDetails")
           .child(user.uid + "")
           .on("value", function(data) {
             that.setState({ email: data.val().email });
@@ -110,7 +119,10 @@ class Product extends React.Component {
     return (
       <div className="product">
         {this.state.spin ? (
-          <Spin />
+         <div className="spinClass">
+
+           <Spin style={{margin:'auto'}}/>
+         </div>
         ) : (
           <div>
             <Card className="card">
@@ -131,7 +143,7 @@ class Product extends React.Component {
                       <h1 style={{ marginBottom: "0px" }}>
                         {this.state.productName}
                       </h1>
-                      <Rate
+                      <Rate value={this.state.rating}
                         style={{ float: "left", display: "inline-block" }}
                         onChange={this.onRate}
                       />
@@ -153,6 +165,7 @@ class Product extends React.Component {
                       <Icon type="share-alt" style={{ fontSize: "25px" }} />
                     </span>
                   </span>
+                  <div>{this.state.sellerName}</div>
                   <div className="rate">
                     <h3>Price</h3>
                     <h2>240.00</h2>
@@ -207,7 +220,8 @@ class Product extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  authenticated:state.authenticated
 });
 const mapActionsToProps = {
   AuthStateAction: AuthStateAction

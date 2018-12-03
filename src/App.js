@@ -26,8 +26,8 @@ class App extends Component {
               <Route path="/login"  component={Login} />
               <Route path="/account"  component={Account} />
               <Route path="/search"  component={Fillter} />
-              <Route path="/seller"  component={Seller}/>
               <Route path="/authUser" component={Admin}/>
+              <Route path="/seller/:id"  component={Seller}/>
               <Route path="/product/:id"  component={Product} />
             </Switch>
           </Layout>

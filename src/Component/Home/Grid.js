@@ -16,8 +16,10 @@ class Grid extends React.Component {
   render() {
     return (
       <div className="sub">
-        <h1>{this.props.heading}</h1>
+        
 
+        <Featured />
+        <br/>
         <Featured />
 
         {/* <div className='grid1'>

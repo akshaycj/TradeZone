@@ -8,6 +8,7 @@ export default function AuthStateAction() {
           type: AUTHSTATE,
           user
         });
+        
       }
     });
   };
