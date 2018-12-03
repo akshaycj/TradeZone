@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import {db } from '../../config';
 import Frame from './Frame';
+import {Spin} from 'antd';
 export default class extends Component {
   constructor(props){
     super(props)
     this.state={value:[],done:false}
   }
   componentDidMount(){
-    
     var that = this
     var item = {}
     var products = []
-    db.ref("users").child("2Bjx7eeWGLPcNtcjrwArLD55iy03").on("value",function(data){
+    db.ref("users").child(this.props.match.params.id).on("value",function(data){
       
       var products = []
       data.forEach(e=>{
@@ -21,7 +21,6 @@ export default class extends Component {
         products.push(item)
       })
       that.setState({done:true,value:products})
-      console.log(that.state.value);
     })
 
   }
@@ -35,7 +34,10 @@ export default class extends Component {
           </div>
         ))}
 
-        </div> : null}
+        </div> : <div style={{display:'flex',margin:'auto',height:'100vh',justifyContent:'center',alignItems:'center'}}>
+        <Spin/>
+        </div>
+        }
        
       </div>
     )
