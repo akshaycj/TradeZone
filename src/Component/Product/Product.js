@@ -1,5 +1,5 @@
 import React from "react";
-import { Rate, Button, Card, Icon, Spin,message } from "antd";
+import { Rate, Button, Card, Icon, Spin, message } from "antd";
 import "./Product.css";
 import w from "./watch.jpg";
 import AuthStateAction from "../Actions/AuthSate";
@@ -22,7 +22,7 @@ class Product extends React.Component {
       rating: ""
     };
   }
-  
+
   componentDidMount() {
     this.props.AuthStateAction();
     var that = this;
@@ -30,40 +30,49 @@ class Product extends React.Component {
     var sellerid = "";
     db.ref("products")
       .child(this.props.match.params.id)
-      .on("value", function(oath) {
-        const data = oath.val();
-        if (data.ratings) {
-          var rate =  0
-          var num = 1
-          var calc = 0
-          const ratings = Object.values(data.ratings);
-          ratings.map((item,index) =>{rate = rate + item.value, num=num+index });      
-          calc = rate/num
-          that.setState({rating:calc})
-          
-        }
-       
-       
-        that.setState({
-          urls: data.urls,
-          productName: data.productName,
-          sellerName: "sasd",
-          spin: false,
-          ratings: data.ratings
-        });
-        //get seller id form oath.val().seller and fetch user details using  thazahte fetch
-        
-        var sellerName = ""
-        var sellerEmail = ""
-        console.log(oath.val().seller);
-        
-        db.ref("usersDetails").child(oath.val().seller+'').on("value",function(data){
-          console.log(data.val());
-          
+      .on(
+        "value",
+        function(oath) {
+          const data = oath.val();
+          if (data.ratings) {
+            var rate = 0;
+            var num = 1;
+            var calc = 0;
+            const ratings = Object.values(data.ratings);
+            ratings.map((item, index) => {
+              (rate = rate + item.value), (num = num + index);
+            });
+            calc = rate / num;
+            that.setState({ rating: calc });
+          }
 
-        })
-      });
+          that.setState({
+            urls: data.urls,
+            productName: data.productName,
+            sellerName: "sasd",
+            spin: false,
+            ratings: data.ratings
+          });
+          //get seller id form oath.val().seller and fetch user details using  thazahte fetch
+
+          var sellerName = "";
+          var sellerEmail = "";
+
+          const sellerId = data.seller;
+
+          const sellerDetails = this.getUserDetails(sellerId);
+        }.bind(this)
+      );
   }
+
+  getUserDetails = id => {
+    db.ref("usersDetails")
+      .child(id)
+      .on("value", function(data) {
+        return data.val();
+      });
+  };
+
   changeHeart() {
     this.setState({
       heart: !this.state.heart
@@ -85,19 +94,17 @@ class Product extends React.Component {
     });
   }
   onRate = value => {
-    this.setState({ratings:value})
+    this.setState({ ratings: value });
     var rate = [];
-    
+
     if (this.props.user) {
       db.ref("products")
         .child(this.props.match.params.id)
         .child("ratings")
         .child(this.props.user.uid)
         .set({ value });
-     
-    }
-    else{
-      message.error("Please Login to Rate a Product")
+    } else {
+      message.error("Please Login to Rate a Product");
     }
   };
   onContactClick() {
@@ -119,10 +126,9 @@ class Product extends React.Component {
     return (
       <div className="product">
         {this.state.spin ? (
-         <div className="spinClass">
-
-           <Spin style={{margin:'auto'}}/>
-         </div>
+          <div className="spinClass">
+            <Spin style={{ margin: "auto" }} />
+          </div>
         ) : (
           <div>
             <Card className="card">
@@ -143,7 +149,8 @@ class Product extends React.Component {
                       <h1 style={{ marginBottom: "0px" }}>
                         {this.state.productName}
                       </h1>
-                      <Rate value={this.state.rating}
+                      <Rate
+                        value={this.state.rating}
                         style={{ float: "left", display: "inline-block" }}
                         onChange={this.onRate}
                       />
@@ -221,7 +228,7 @@ class Product extends React.Component {
 }
 const mapStateToProps = state => ({
   user: state.user,
-  authenticated:state.authenticated
+  authenticated: state.authenticated
 });
 const mapActionsToProps = {
   AuthStateAction: AuthStateAction
