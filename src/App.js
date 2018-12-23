@@ -12,8 +12,10 @@ import Layout from "./Component/Layout";
 import Account from "./Component/Account";
 import Fillter from "./Component/Fillter";
 import Seller from "./Component/SellerPage";
-import Admin from './Component/Admin/index'
-console.log("b" + "a" + +"a" + "a");
+import Admin from "./Component/Admin/index";
+import SellerSignup from "./Component/SellerSignup";
+
+//console.log("b" + "a" + +"a" + "a");
 
 class App extends Component {
   render() {
@@ -23,12 +25,13 @@ class App extends Component {
           <Layout>
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/login"  component={Login} />
-              <Route path="/account"  component={Account} />
-              <Route path="/search"  component={Fillter} />
-              <Route path="/authUser" component={Admin}/>
-              <Route path="/seller/:id"  component={Seller}/>
-              <Route path="/product/:id"  component={Product} />
+              <Route path="/login" component={Login} />
+              <Route path="/account" component={Account} />
+              <Route path="/search" component={Fillter} />
+              <Route path="/authUser" component={Admin} />
+              <Route path="/seller/:id" component={Seller} />
+              <Route path="/product/:id" component={Product} />
+              <Route path="/sellerSign" component={SellerSignup} />
             </Switch>
           </Layout>
         </Router>

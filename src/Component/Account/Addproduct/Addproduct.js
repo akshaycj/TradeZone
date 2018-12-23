@@ -104,6 +104,15 @@ class AddProduct extends Component {
               this.setState({ description: a.target.value });
             }}
           />
+          <Input placeholder="Price" style={{ margin: "10px" }} />
+          <Input placeholder="Product Weight" style={{ margin: 10 }} />
+          <Input placeholder="Colour" style={{ margin: "10px" }} />
+          <Input.TextArea
+            placeholder="Add Specification Details"
+            style={{ margin: 10 }}
+            autosize={{ minRows: 2, maxRows: 5 }}
+          />
+          <Input placeholder="Area Of Usage" style={{ margin: "10px" }} />
           <div
             style={{
               display: "flex",
