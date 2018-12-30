@@ -8,6 +8,9 @@ import {LoginAction,SignOut} from "../Actions/Login";
 import SignUpAction from "../Actions/SignUp";
 import AuthStateAction from "../Actions/AuthSate";
 
+const { TextArea } = Input;
+
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -15,13 +18,26 @@ class Login extends Component {
       login: false,
       show: false,
       showLogin: true,
+      showSellerSignUp : false ,
       showSignUp: false,
       email: "",
       password: "",
       phone: "",
-      name: ""
+      name: "",
+      companyName : "",
+      yearOfEstab : "",
+      liscenceNo : "",
+      staffNo : "",
+      vatNo : "",
     };
   }
+
+  componentDidMount(){
+    if(this.props.button === "seller"){
+      this.setState({showLogin : false , showSellerSignUp : true})
+    }
+  }
+
   componentWillReceiveProps(props) {
     if (props.authenticated === true) {
       this.props.AuthStateAction();
@@ -47,6 +63,35 @@ class Login extends Component {
     this.setState({ password: e.target.value });
   };
 
+  onCompanyName = e => {
+    this.setState({ companyName : e.target.value });
+  }
+
+  onYearOfEstab = e => {
+    this.setState({ yearOfEstab : e.target.value });
+  }
+
+  onLisenceNo = e => {
+    this.setState({ liscenceNo : e.target.value });
+  }
+
+  onStaffNo = e => {
+    this.setState({ staffNo : e.target.value });
+  }
+
+  onVatNo = e => {
+    this.setState({ vatNo : e.target.value });
+  }
+
+  onCompanyAddress = e => {
+    this.setState({ companyAddr : e.target.value });
+  }
+
+  onAboutCompany = e => {
+    this.setState({ aboutCompany : e.target.value });
+  }
+
+
   onSignUp = () => {
     this.props.SignUpAction(
       this.state.email,
@@ -61,12 +106,17 @@ class Login extends Component {
   };
 
   closeLogin() {
-    this.setState({ showLogin: false });
+    this.setState({ showLogin: false , showSellerLogin : false});
     this.props.value(false);
   }
 
   showsignup() {
-    this.setState({ showLogin: false });
+    if(this.props.button === "user"){
+      this.setState({ showLogin: false , showSignUp : true , showSellerSignUp : false});
+    }
+    else{
+      this.setState({ showLogin: false , showSignUp : false , showSellerSignUp : true});
+    }
   }
 
   render() {
@@ -129,7 +179,8 @@ class Login extends Component {
                 </div>
               </div>
             </div>
-          ) : (
+          ) : null}
+          {this.state.showSignUp?(
             <div className="signup">
               <Icon
                 type="close-circle"
@@ -188,7 +239,103 @@ class Login extends Component {
                 </div>
               </div>
             </div>
-          )}
+          ):null}
+          {this.state.showSellerSignUp?(
+            <div className="signup" style={{height : "90vh"}}>
+              <Icon
+                type="close-circle"
+                theme="outlined"
+                onClick={this.closeLogin.bind(this)}
+                style={{
+                  cursor: "pointer",
+                  alignSelf: "flex-end",
+                  fontSize: "15px",
+                  padding: "10px",
+                  position: "absolute"
+                }}
+              />
+              <div className="outersofsignup">
+                <h1 style={{ color: "rgba(250,125,150)" }}>SignUp</h1>
+                <img src={a} className="image-icon" />
+                <span
+                  style={{
+                    margin: "auto",
+                    display: "block",
+                    overflow:"auto",
+                    height: "50%",
+                    justifyContent: "space-evenly",
+                    width: "100%"
+                  }}
+                >
+                  <Input
+                    placeholder="Name"
+                    style={{ width: "90%", margin: "10px", borderRadius: 15 }}
+                    onChange={this.onName}
+                  />
+                  <Input
+                    placeholder="Phone"
+                    style={{ width: "90%", margin: "10px", borderRadius: 15 }}
+                    onChange={this.onPhone}
+                  />
+                  <Input
+                    placeholder="Email"
+                    style={{ width: "90%", margin: "10px", borderRadius: 15 }}
+                    onChange={this.onEmail}
+                  />
+                  <Input
+                    placeholder="Password"
+                    type="password"
+                    style={{ width: "90%", margin: "10px", borderRadius: 15 }}
+                    onChange={this.onPassword}
+                  />
+                  <Input
+                    placeholder="Company Name"
+                    style={{width : "90%" , margin: "auto" , borderRadius : 15}}
+                    onChange={this.onCompanyName}
+                  />
+                  <Input
+                    placeholder="Year Of Establishment"
+                    style={{width: "90%" , margin : "10px" , borderRadius : 15}}
+                    onChange={this.onYearOfEstab}
+                  />
+                  <Input
+                    placeholder="Commercial Liscence Number"
+                    style={{width : "90%" , margin : "auto" , borderRadius :15}}
+                    onChange={this.onLisenceNo}
+                  />
+                  <Input
+                    placeholder="No of Staff"
+                    style={{width: "90%" , margin : "10px" , borderRadius : 15}}
+                    onChange={this.onStaffNo}
+                  />
+                  <Input
+                    placeholder="Vat No"
+                    style={{width : "90%" , margin : "10px" , borderRadius : 15}}
+                    onChange={this.onVatNo}
+                  />
+                  <TextArea
+                    placeholder="Company Address"
+                    autosize={{ minRows: 3, maxRows: 6 }}
+                    style={{width : "90%" , margin : "10px" , borderRadius : 15}}
+                    onChange={this.onCompanyAddress}
+                  />
+                  <TextArea
+                    placeholder="About the Company"
+                    autosize={{ minRows: 3, maxRows: 6 }}
+                    style={{width : "90%" , margin : "10px" , borderRadius : 15}}
+                    onChange={this.onAboutCompany}
+                  />
+                  <div
+                    className="common-button app-primary-dark"
+                    style={{ width: "40%", margin: "auto", borderRadius: 15 }}
+                    onClick={this.onSignUp}
+                  >
+                    SignUp
+                  </div>
+                </span>
+              </div>
+            </div>
+          ):null}
         </div>
       </div>
     );

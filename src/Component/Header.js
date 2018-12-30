@@ -19,11 +19,12 @@ class Header extends React.Component {
     super(props);
     this.state = {
       showLogin: false,
+      showSellerLogin : false ,
       redirect: false,
-      loggedin: false
+      loggedin: false,
     };
   }
-  
+
   componentDidMount() {
     var that = this;
     Auth.onAuthStateChanged(user => {
@@ -40,9 +41,18 @@ class Header extends React.Component {
     this.setState({ showLogin: true });
   }
 
+  getSellerLogin(){
+    this.setState({showSellerLogin : true});
+  }
+
   loginVal(data) {
     this.setState({ showLogin: data });
   }
+
+  sellerLoginVal(dataS){
+    this.setState({ showSellerLogin : dataS})
+  }
+
   onAddProduct() {
     console.log(this.props);
     this.setState({ redirect: true });
@@ -198,8 +208,11 @@ class Header extends React.Component {
     return (
       <div>
         {this.state.showLogin ? (
-          <Login value={this.loginVal.bind(this)} />
+          <Login button="user" value={this.loginVal.bind(this)} />
         ) : null}
+        {this.state.showSellerLogin ? (
+          <Login button="seller" value={this.sellerLoginVal.bind(this)}/>
+        ):null}
 
         <div className="head1 app-primary-dark">
           <Dropdown overlay={menu} style={{ margin: "6px" }}>
@@ -309,6 +322,7 @@ class Header extends React.Component {
                   />
                 </Dropdown>
               ) : (
+                <div style={{display : "flex" , flexDirection : "row"}}>
                 <div
                   className="common-button app-accent"
                   style={{
@@ -317,8 +331,20 @@ class Header extends React.Component {
                   }}
                   onClick={this.getlogin.bind(this)}
                 >
+                  <Icon type="shopping-cart" style={{ marginRight: 5 }} />
+                  User
+                </div>
+                <div
+                  className="common-button app-accent"
+                  style={{
+                    alignSelf: "center",
+                    marginLeft: 15
+                  }}
+                  onClick={this.getSellerLogin.bind(this)}
+                >
                   <Icon type="user" style={{ marginRight: 5 }} />
-                  Be a Seller
+                  Seller
+                </div>
                 </div>
               )}
             </div>
