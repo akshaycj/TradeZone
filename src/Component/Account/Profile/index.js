@@ -21,8 +21,8 @@ class index extends Component {
     Auth.onAuthStateChanged(user => {
       if (user) {
         this.setState({ uid: user.uid });
-        db.ref("usersDetails")
-          .child(user.uid + "")
+        db.ref("users")
+          .child(user.uid + "").child("details")
           .on("value", function(data) {
             that.setState({
               name: data.val().name,

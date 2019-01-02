@@ -1,15 +1,15 @@
-import React from "react";
-import "./Header.css";
-import { Link } from "react-router-dom";
-import { Menu, Dropdown, Icon, Select, Input, Button, Avatar } from "antd";
-import Login from "./Login/Login.js";
-import Search from "./Search";
-import i from "./pics/icon1.png";
-import j from "./pics/icon2.png";
-import {connect} from 'react-redux';
-import { Auth } from "../config";
+import React from 'react';
+import './Header.css';
+import { Link } from 'react-router-dom';
+import { Menu, Dropdown, Icon, Select, Input, Button, Avatar } from 'antd';
+import Login from './Login/Login.js';
+import Search from './Search';
+import i from './pics/icon1.png';
+import j from './pics/icon2.png';
+import { connect } from 'react-redux';
+import { Auth, db } from '../config';
 import AuthStateAction from './Actions/AuthSate';
-import {SignOut} from './Actions/Login';
+import { SignOut } from './Actions/Login';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const Option = Select.Option;
@@ -19,58 +19,59 @@ class Header extends React.Component {
     super(props);
     this.state = {
       showLogin: false,
-      showSellerLogin : false ,
+      showSellerLogin: false,
       redirect: false,
       loggedin: false,
+      type: '',
     };
   }
 
   componentDidMount() {
     var that = this;
-    Auth.onAuthStateChanged(user => {
+    Auth.onAuthStateChanged((user) => {
       if (user) {
-        that.setState({ loggedin: true });
+        that.setState({ loggedin: true, uid: user.uid });
+        db
+          .ref('users')
+          .child(`${user.uid}`)
+          .child('type')
+          .on('value', function(data) {
+            console.log(data.val(), 'here');
+            that.setState({ type: data.val() });
+          });
       } else {
         //kandoda kunda?
         that.setState({ loggedin: false });
       }
     });
   }
-
+  static getDerivedStateFromProps(props, state){
+    if(props.user !== state.user){
+      return{
+        user:props.user
+      }
+    }
+  }
   getlogin() {
     this.setState({ showLogin: true });
   }
 
-  getSellerLogin(){
-    this.setState({showSellerLogin : true});
+  getSellerLogin() {
+    this.setState({ showSellerLogin: true });
   }
 
   loginVal(data) {
     this.setState({ showLogin: data });
   }
 
-  sellerLoginVal(dataS){
-    this.setState({ showSellerLogin : dataS})
+  sellerLoginVal(dataS) {
+    this.setState({ showSellerLogin: dataS, showLogin: false });
   }
 
-  onAddProduct() {
-    console.log(this.props);
-    this.setState({ redirect: true });
-  }
   signUserOut() {
-    // Auth.signOut()
-    //   .then(function() {
-    //     // Sign-out successful.
-    //     this.setState({ loggedin: false });
-
-    //   })
-    //   .catch(function(error) {
-    //     // An error happened.
-    //   });
     this.props.SignOut();
     this.props.AuthStateAction();
     this.setState({ loggedin: false });
-
   }
   render() {
     const menu = (
@@ -136,7 +137,7 @@ class Header extends React.Component {
       </Menu>
     );
     const menuforham = (
-      <Menu mode="vertical" style={{ backgroundColor: "#f7f7f7", border: 0 }}>
+      <Menu mode="vertical" style={{ backgroundColor: '#f7f7f7', border: 0 }}>
         <SubMenu
           key="sub1"
           title={
@@ -200,22 +201,29 @@ class Header extends React.Component {
     const userDropdownMenu = (
       <Menu>
         <Menu.Item>
-          <Link to="/account">Account</Link>
+          {this.state.type === 'seller' ? (
+            <Link to="/account">Account</Link>
+          ) : null}
         </Menu.Item>
         <Menu.Item onClick={this.signUserOut.bind(this)}>SignOut</Menu.Item>
       </Menu>
     );
+    console.log(this.state.type);
     return (
       <div>
         {this.state.showLogin ? (
           <Login button="user" value={this.loginVal.bind(this)} />
         ) : null}
         {this.state.showSellerLogin ? (
-          <Login button="seller" value={this.sellerLoginVal.bind(this)}/>
-        ):null}
+          <Login
+            button="seller"
+            value={this.sellerLoginVal.bind(this)}
+            showSellerLogin={this.state.showSellerLogin}
+          />
+        ) : null}
 
         <div className="head1 app-primary-dark">
-          <Dropdown overlay={menu} style={{ margin: "6px" }}>
+          <Dropdown overlay={menu} style={{ margin: '6px' }}>
             <span>
               English <Icon type="down" />
             </span>
@@ -235,12 +243,12 @@ class Header extends React.Component {
               <img
                 src={i}
                 style={{
-                  display:'block',
-                  transform:"scale(2)",
-                  width: "80%",
+                  display: 'block',
+                  transform: 'scale(2)',
+                  width: '80%',
                   margin: 8,
-                  maxWidth: "100px",
-                  minWidth: "50px"
+                  maxWidth: '100px',
+                  minWidth: '50px',
                 }}
               />
             </Link>
@@ -254,13 +262,13 @@ class Header extends React.Component {
                   <span>
                     <Icon
                       type="environment"
-                      style={{ fontSize: "12px", color: "#64b5f5" }}
+                      style={{ fontSize: '12px', color: '#64b5f5' }}
                     />
                     <span
                       style={{
-                        fontSize: "100%",
-                        color: "#64b5f5",
-                        padding: 10
+                        fontSize: '100%',
+                        color: '#64b5f5',
+                        padding: 10,
                       }}
                     >
                       Location
@@ -272,8 +280,7 @@ class Header extends React.Component {
                 filterOption={(input, option) =>
                   option.props.children
                     .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
+                    .indexOf(input.toLowerCase()) >= 0}
               >
                 <Option value="ABC">ABC</Option>
                 <Option value="CDE">CDE</Option>
@@ -286,8 +293,8 @@ class Header extends React.Component {
                 placeholder={
                   <span>
                     <img src={j} width={16} />
-                    <span style={{ fontSize: "100%", color: "#64b5f5" }}>
-                      {" "}
+                    <span style={{ fontSize: '100%', color: '#64b5f5' }}>
+                      {' '}
                       Category
                     </span>
                   </span>
@@ -297,8 +304,7 @@ class Header extends React.Component {
                 filterOption={(input, option) =>
                   option.props.children
                     .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0
-                }
+                    .indexOf(input.toLowerCase()) >= 0}
               >
                 <Option value="ABC">ABC</Option>
                 <Option value="CDE">CDE</Option>
@@ -313,38 +319,60 @@ class Header extends React.Component {
                 />
                 Search
               </div>
-              {this.state.loggedin ? (
+              {this.state.loggedin ? 
+                  this.state.type === 'seller' ? (
                 <Dropdown overlay={userDropdownMenu}>
                   <Icon
                     type="user"
-                    style={{ color: "white" }}
+                    style={{ color: 'white' }}
                     className="header-avatar"
                   />
                 </Dropdown>
-              ) : (
-                <div style={{display : "flex" , flexDirection : "row"}}>
-                <div
-                  className="common-button app-accent"
-                  style={{
-                    alignSelf: "center",
-                    marginLeft: 15
-                  }}
-                  onClick={this.getlogin.bind(this)}
-                >
-                  <Icon type="shopping-cart" style={{ marginRight: 5 }} />
-                  User
+              ) : this.state.type === 'user' ? (
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <Dropdown overlay={userDropdownMenu}>
+                    <Icon
+                      type="user"
+                      style={{ color: 'white' }}
+                      className="header-avatar"
+                    />
+                  </Dropdown>
+                  <div
+                    className="common-button app-accent"
+                    style={{
+                      alignSelf: 'center',
+                      marginLeft: 15,
+                    }}
+                    onClick={this.getSellerLogin.bind(this)}
+                  >
+                    <Icon type="user" style={{ marginRight: 5 }} />
+                    Seller
+                  </div>
                 </div>
-                <div
-                  className="common-button app-accent"
-                  style={{
-                    alignSelf: "center",
-                    marginLeft: 15
-                  }}
-                  onClick={this.getSellerLogin.bind(this)}
-                >
-                  <Icon type="user" style={{ marginRight: 5 }} />
-                  Seller
-                </div>
+              ) : null : (
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <div
+                    className="common-button app-accent"
+                    style={{
+                      alignSelf: 'center',
+                      marginLeft: 15,
+                    }}
+                    onClick={this.getlogin.bind(this)}
+                  >
+                    <Icon type="shopping-cart" style={{ marginRight: 5 }} />
+                    User
+                  </div>
+                  <div
+                    className="common-button app-accent"
+                    style={{
+                      alignSelf: 'center',
+                      marginLeft: 15,
+                    }}
+                    onClick={this.getSellerLogin.bind(this)}
+                  >
+                    <Icon type="user" style={{ marginRight: 5 }} />
+                    Seller
+                  </div>
                 </div>
               )}
             </div>
@@ -354,11 +382,11 @@ class Header extends React.Component {
     );
   }
 }
-const mapStateToProps = state =>({
-  user:state.user
-})
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
 const mapActionsToProps = {
-  AuthStateAction:AuthStateAction,
-  SignOut:SignOut
-}
-export default connect(mapStateToProps,mapActionsToProps)(Header);
+  AuthStateAction: AuthStateAction,
+  SignOut: SignOut,
+};
+export default connect(mapStateToProps, mapActionsToProps)(Header);

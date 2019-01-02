@@ -5,7 +5,6 @@ import "./App.css";
 import Product from "./Component/Product/Product";
 import Home from "./Component/Home/Home.js";
 import Login from "./Component/Login/Login.js";
-import AddProduct from "./Component/Addproduct/Addproduct";
 import Footer from "./Component/Home/Footer";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Layout from "./Component/Layout";

@@ -24,6 +24,15 @@ class Product extends React.Component {
 		};
 	}
 
+	static getDerivedStateFromProps(props,state){
+		if(props.user !== state){
+			return{
+				user:props.user
+			}
+		}
+		null
+
+	}
 	componentDidMount() {
 		this.props.AuthStateAction();
 		var that = this;
@@ -49,10 +58,11 @@ class Product extends React.Component {
         sellerid:url
 			});
 
-			db.ref('usersDetails').child(oath.val().seller + '').on('value', function(data) {
+			db.ref('users').child(oath.val().seller + '').child("details").on('value', function(data) {
 				that.setState({ sellerName: data.val().name, spin: false });
 			});
 		});
+		
 	}
 	changeHeart() {
 		this.setState({
@@ -61,16 +71,16 @@ class Product extends React.Component {
 	}
 	onGetPhoneNo() {
 		var that = this;
-		Auth.onAuthStateChanged((user) => {
+		var user = this.state.user
 			if (user) {
 				this.setState({ loginState: true });
-				db.ref('usersDetails').child(user.uid + '').on('value', function(data) {
+				db.ref('users').child(user.uid + '').child("details").on('value', function(data) {
 					that.setState({ phone: data.val().phone });
 				});
 			} else {
 				this.setState({ displayMessage: true });
 			}
-		});
+		
 	}
 	onRate = (value) => {
 		this.setState({ ratings: value });
@@ -89,16 +99,16 @@ class Product extends React.Component {
 	};
 	onContactClick() {
 		var that = this;
-		Auth.onAuthStateChanged((user) => {
+		var user = this.state.user
 			if (user) {
-				db.ref('usersDetails').child(user.uid + '').on('value', function(data) {
+				db.ref('users').child(user.uid + '').child("details").on('value', function(data) {
 					that.setState({ email: data.val().email });
 				});
 				this.setState({ loginStateforContact: true });
 			} else {
 				this.setState({ displayMessage: true });
 			}
-		});
+		
 	}
 	render() {
 		return (
@@ -162,7 +172,7 @@ class Product extends React.Component {
 									</div>
 									<div style={{ display: 'flex', marginTop: '3%' }}>More</div>
 									<div className="bottomBut">
-										{this.state.loginState ? (
+										{this.state.loginState ?  (
 											<div className="phoneNo">
 												Phone No:
 												{this.state.phone}
@@ -202,7 +212,7 @@ class Product extends React.Component {
 		);
 	}
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => (console.log(state),{
 	user: state.user,
 	authenticated: state.authenticated
 });

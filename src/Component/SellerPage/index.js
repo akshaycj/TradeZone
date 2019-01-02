@@ -11,7 +11,7 @@ export default class extends Component {
     var that = this
     var item = {}
     var products = []
-    db.ref("users").child(this.props.match.params.id).on("value",function(data){
+    db.ref("users").child(this.props.match.params.id).child("products").on("value",function(data){
       
       var products = []
       data.forEach(e=>{

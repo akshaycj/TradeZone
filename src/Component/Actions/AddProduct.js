@@ -10,7 +10,12 @@ export default function AddProductAction(
   productName,
   uid,
   category,
-  tags
+  tags,
+  price,
+  color,
+  areaofusage,
+  weight,
+  specififcation
 ) {
   const path = db
     .ref("users")
@@ -27,18 +32,23 @@ export default function AddProductAction(
           data.ref
             .getDownloadURL()
             .then(function(downloadURL) {
-              console.log("ASdasd", downloadURL);
               value.urls.push(downloadURL);
             })
             .then(function(data) {
               db.ref("users")
-                .child(uid)
+                .child(uid).child("products")
                 .child(path)
                 .set({
                   productName,
                   urls: value.urls,
                   category,
-                  tags
+                  tags,
+                  price,
+                  color,
+                  areaofusage,
+                  specififcation,
+                  weight
+                  
                 });
               db.ref("products")
                 .child(path)
@@ -46,7 +56,13 @@ export default function AddProductAction(
                   productName,
                   urls: value.urls,
                   category,
-                  tags
+                  tags,
+                  price,
+                  color,
+                  areaofusage,
+                  specififcation,
+                  weight,
+                  seller:uid
                 });
             });
         });

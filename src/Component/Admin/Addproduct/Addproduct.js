@@ -31,7 +31,12 @@ class AddProduct extends Component {
       inputValue: "",
       users: [],
       spin: true,
-      uid: ""
+      uid: "",
+      price:"",
+      color:"",
+      areaofusage:"",
+      weight:"",
+      specififcation:""
     };
   }
   componentWillReceiveProps(props) {
@@ -151,15 +156,26 @@ class AddProduct extends Component {
                   this.setState({ description: a.target.value });
                 }}
               />
-              <Input placeholder="Price" style={{ margin: "10px" }} />
-              <Input placeholder="Product Weight" style={{ margin: 10 }} />
-              <Input placeholder="Colour" style={{ margin: "10px" }} />
-              <Input.TextArea
-                placeholder="Add Specification Details"
-                style={{ margin: 10 }}
-                autosize={{ minRows: 2, maxRows: 5 }}
-              />
-              <Input placeholder="Area Of Usage" style={{ margin: "10px" }} />
+             <Input placeholder="Price" style={{ margin: "10px" }}   onChange={e => {
+              this.setState({ price: e.target.value });
+            }}/>
+          <Input placeholder="Product Weight" style={{ margin: 10 }}   onChange={e => {
+              this.setState({ weight: e.target.value });
+            }} />
+          <Input placeholder="Colour" style={{ margin: "10px" }}    onChange={e => {
+              this.setState({ color: e.target.value });
+            }}/>
+          <Input.TextArea
+            placeholder="Add Specification Details"
+            style={{ margin: 10 }}
+            autosize={{ minRows: 2, maxRows: 5 }}
+            onChange={e => {
+              this.setState({ specififcation: e.target.value });
+            }}
+          />
+          <Input placeholder="Area Of Usage" style={{ margin: "10px" }}   onChange={e => {
+              this.setState({ areaofusage: e.target.value });
+            }} />
               <div
                 style={{
                   display: "flex",

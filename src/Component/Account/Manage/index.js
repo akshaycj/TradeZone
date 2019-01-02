@@ -20,14 +20,14 @@ export default class extends Component {
           console.log("user", user.uid);
           this.setState({ uid: user.uid });
           db.ref("users")
-            .child(this.state.uid)
+            .child(this.state.uid).child("products")
             .on(
               "value",
               function(dataSnap) {
                 var data = [];
                 dataSnap.forEach(element => {
                   var d = {
-                    productName: element.val().productName,
+                    productName: element.val().name,
                     key: element.key,
                     urls: element.val().urls
                   };

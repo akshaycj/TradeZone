@@ -18,7 +18,7 @@ render(){
             <div>
         
            <div className='element'>
-                <img src={this.props.pic} alt="maga" style={{width:'100%'}} />
+                <img src={this.props.pic} alt="maga" style={{minWidth:'250px',maxHeight:'250px'}} />
                 <div className='overlay1'>
                     <span className="detail">
                         <h1>{this.props.name}</h1>

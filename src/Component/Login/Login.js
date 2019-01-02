@@ -5,7 +5,7 @@ import { Input, Button, Icon } from "antd";
 import { Auth, db } from "../../config.js";
 import { connect } from "react-redux";
 import {LoginAction,SignOut} from "../Actions/Login";
-import SignUpAction from "../Actions/SignUp";
+import {SignUpUserAction,SignUpSellerAction} from "../Actions/SignUp";
 import AuthStateAction from "../Actions/AuthSate";
 
 const { TextArea } = Input;
@@ -15,11 +15,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: false,
-      show: false,
-      showLogin: true,
-      showSellerSignUp : false ,
-      showSignUp: false,
+      showLogin: true,  
       email: "",
       password: "",
       phone: "",
@@ -29,13 +25,13 @@ class Login extends Component {
       liscenceNo : "",
       staffNo : "",
       vatNo : "",
+      companyAddr:"",
+      aboutCompany:""
     };
   }
 
   componentDidMount(){
-    if(this.props.button === "seller"){
-      this.setState({showLogin : false , showSellerSignUp : true})
-    }
+    
   }
 
   componentWillReceiveProps(props) {
@@ -92,14 +88,31 @@ class Login extends Component {
   }
 
 
-  onSignUp = () => {
-    this.props.SignUpAction(
+  onSignUpUser = () => {
+    this.props.SignUpUserAction(
       this.state.email,
       this.state.password,
       this.state.name,
       this.state.phone
     );
+    this.props.value(false);
   };
+  onSignUpSeller = () =>{
+    this.props.SignUpSellerAction( 
+      this.state.email,
+      this.state.password,
+      this.state.name,
+      this.state.phone,
+      this.state.companyName ,
+      this.state.yearOfEstab ,
+      this.state.liscenceNo ,
+      this.state.staffNo ,
+      this.state.vatNo,
+      this.state.companyAddr,
+      this.state.aboutCompany
+    )
+    this.props.value(false);
+  }
 
   onLogin = () => {
     this.props.LoginAction(this.state.email, this.state.password);
@@ -111,137 +124,14 @@ class Login extends Component {
   }
 
   showsignup() {
-    if(this.props.button === "user"){
-      this.setState({ showLogin: false , showSignUp : true , showSellerSignUp : false});
-    }
-    else{
-      this.setState({ showLogin: false , showSignUp : false , showSellerSignUp : true});
-    }
+   this.setState({showLogin:false})
   }
 
   render() {
     return (
       <div>
         <div className="backgroundlogin">
-          {this.state.showLogin ? (
-            <div className="login">
-              <Icon
-                type="close-circle"
-                theme="outlined"
-                onClick={this.closeLogin.bind(this)}
-                style={{
-                  cursor: "pointer",
-                  alignSelf: "flex-end",
-                  fontSize: "25px",
-                  padding: "10px",
-                  position: "absolute"
-                }}
-              />
-              <div className="outers">
-                <h1 style={{ color: "rgba(250,125,150)" }}>Login</h1>
-                <div className="image-icon">
-                  <img src={a} style={{ width: "100%" }} />
-                </div>
-                <div
-                  style={{
-                    margin: "auto",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "20%",
-                    width: "100%",
-                    justifyContent: "space-evenly"
-                  }}
-                >
-                  <Input
-                    placeholder="Email"
-                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
-                    onChange={this.onEmail}
-                  />
-                  <Input
-                    type="password"
-                    placeholder="Password"
-                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
-                    onChange={this.onPassword}
-                  />
-                </div>
-                <div
-                  className="common-button app-primary-dark"
-                  style={{ width: "40%", margin: "auto", borderRadius: 15 }}
-                  onClick={this.onLogin}
-                >
-                  Login
-                </div>
-                <div
-                  onClick={this.showsignup.bind(this)}
-                  style={{ cursor: "pointer" }}
-                >
-                  Not a user? SignUp
-                </div>
-              </div>
-            </div>
-          ) : null}
-          {this.state.showSignUp?(
-            <div className="signup">
-              <Icon
-                type="close-circle"
-                theme="outlined"
-                onClick={this.closeLogin.bind(this)}
-                style={{
-                  cursor: "pointer",
-                  alignSelf: "flex-end",
-                  fontSize: "15px",
-                  padding: "10px",
-                  position: "absolute"
-                }}
-              />
-              <div className="outersofsignup">
-                <h1 style={{ color: "rgba(250,125,150)" }}>SignUp</h1>
-                <img src={a} className="image-icon" />
-                <span
-                  style={{
-                    margin: "auto",
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "40%",
-                    justifyContent: "space-evenly",
-
-                    width: "100%"
-                  }}
-                >
-                  <Input
-                    placeholder="Name"
-                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
-                    onChange={this.onName}
-                  />
-                  <Input
-                    placeholder="Phone"
-                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
-                    onChange={this.onPhone}
-                  />
-                  <Input
-                    placeholder="Email"
-                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
-                    onChange={this.onEmail}
-                  />
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
-                    onChange={this.onPassword}
-                  />
-                </span>
-                <div
-                  className="common-button app-primary-dark"
-                  style={{ width: "40%", margin: "auto", borderRadius: 15 }}
-                  onClick={this.onSignUp}
-                >
-                  SignUp
-                </div>
-              </div>
-            </div>
-          ):null}
-          {this.state.showSellerSignUp?(
-            <div className="signup" style={{height : "90vh"}}>
+        {this.props.showSellerLogin ?  <div className="signup" style={{height : "90vh"}}>
               <Icon
                 type="close-circle"
                 theme="outlined"
@@ -328,14 +218,129 @@ class Login extends Component {
                   <div
                     className="common-button app-primary-dark"
                     style={{ width: "40%", margin: "auto", borderRadius: 15 }}
-                    onClick={this.onSignUp}
+                    onClick={this.onSignUpSeller}
                   >
                     SignUp
                   </div>
                 </span>
               </div>
+            </div> : 
+          this.state.showLogin ? (
+            <div className="login">
+              <Icon
+                type="close-circle"
+                theme="outlined"
+                onClick={this.closeLogin.bind(this)}
+                style={{
+                  cursor: "pointer",
+                  alignSelf: "flex-end",
+                  fontSize: "25px",
+                  padding: "10px",
+                  position: "absolute"
+                }}
+              />
+              <div className="outers">
+                <h1 style={{ color: "rgba(250,125,150)" }}>Login</h1>
+                <div className="image-icon">
+                  <img src={a} style={{ width: "100%" }} />
+                </div>
+                <div
+                  style={{
+                    margin: "auto",
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "20%",
+                    width: "100%",
+                    justifyContent: "space-evenly"
+                  }}
+                >
+                  <Input
+                    placeholder="Email"
+                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
+                    onChange={this.onEmail}
+                  />
+                  <Input
+                    type="password"
+                    placeholder="Password"
+                    style={{ width: "90%", margin: "auto", borderRadius: 15 }}
+                    onChange={this.onPassword}
+                  />
+                </div>
+                <div
+                  className="common-button app-primary-dark"
+                  style={{ width: "40%", margin: "auto", borderRadius: 15 }}
+                  onClick={this.onLogin}
+                >
+                  Login
+                </div>
+                <div
+                  onClick={this.showsignup.bind(this)}
+                  style={{ cursor: "pointer" }}
+                >
+                  Not a user? SignUp
+                </div>
+              </div>
             </div>
-          ):null}
+          ) : <div className="signup">
+          <Icon
+            type="close-circle"
+            theme="outlined"
+            onClick={this.closeLogin.bind(this)}
+            style={{
+              cursor: "pointer",
+              alignSelf: "flex-end",
+              fontSize: "15px",
+              padding: "10px",
+              position: "absolute"
+            }}
+          />
+          <div className="outersofsignup">
+            <h1 style={{ color: "rgba(250,125,150)" }}>SignUp</h1>
+            <img src={a} className="image-icon" />
+            <span
+              style={{
+                margin: "auto",
+                display: "flex",
+                flexDirection: "column",
+                height: "40%",
+                justifyContent: "space-evenly",
+
+                width: "100%"
+              }}
+            >
+              <Input
+                placeholder="Name"
+                style={{ width: "90%", margin: "auto", borderRadius: 15 }}
+                onChange={this.onName}
+              />
+              <Input
+                placeholder="Phone"
+                style={{ width: "90%", margin: "auto", borderRadius: 15 }}
+                onChange={this.onPhone}
+              />
+              <Input
+                placeholder="Email"
+                style={{ width: "90%", margin: "auto", borderRadius: 15 }}
+                onChange={this.onEmail}
+              />
+              <Input
+                placeholder="Password"
+                type="password"
+                style={{ width: "90%", margin: "auto", borderRadius: 15 }}
+                onChange={this.onPassword}
+              />
+            </span>
+            <div
+              className="common-button app-primary-dark"
+              style={{ width: "40%", margin: "auto", borderRadius: 15 }}
+              onClick={this.onSignUpUser}
+            >
+              SignUp
+            </div>
+          </div>
+        </div>}
+          
+         
         </div>
       </div>
     );
@@ -343,7 +348,8 @@ class Login extends Component {
 }
 const mapActionToProps = {
   LoginAction: LoginAction,
-  SignUpAction: SignUpAction,
+  SignUpUserAction: SignUpUserAction,
+  SignUpSellerAction:SignUpSellerAction,
   AuthStateAction: AuthStateAction,
 };
 const mapStateToProps = state => (

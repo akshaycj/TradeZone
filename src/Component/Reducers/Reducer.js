@@ -1,6 +1,7 @@
 import {
   LOGIN,
-  SIGNUP,
+  SIGNUP_SELLER,
+  SIGNUP_USER,
   ADDPRODUCT,
   AUTHSTATE,
   SIGN_OUT
@@ -14,7 +15,12 @@ export default function Reducer(state = initialState, action) {
         ...state,
         authenticated: action.value.authenticated
       };
-    case SIGNUP:
+    case SIGNUP_SELLER:
+      return {
+        ...state,
+        signup: action.value.SignUp
+      };
+      case SIGNUP_USER:
       return {
         ...state,
         signup: action.value.SignUp
