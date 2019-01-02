@@ -45,7 +45,7 @@ class index extends Component {
   };
   onUpdateClick = () => {
     db.ref("users")
-      .child(this.state.uid + "")
+      .child(this.state.uid + "").child("details")
       .set({
         email: this.state.email,
         name: this.state.name,
