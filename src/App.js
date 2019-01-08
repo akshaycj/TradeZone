@@ -14,7 +14,6 @@ import Seller from "./Component/SellerPage";
 import Admin from "./Component/Admin/index";
 import SellerSignup from "./Component/SellerSignup";
 
-//console.log("b" + "a" + +"a" + "a");
 
 class App extends Component {
   render() {
