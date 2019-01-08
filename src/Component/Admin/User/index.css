@@ -3,6 +3,5 @@
     margin:auto;
     display: flex;
     flex-direction: column;
-    height: 50vh;
     justify-content: space-around;
 }

@@ -4,8 +4,8 @@ import a from "../pics/tradeZone.png";
 import { Input, Button, Icon } from "antd";
 import { Auth, db } from "../../config.js";
 import { connect } from "react-redux";
-import {LoginAction,SignOut} from "../Actions/Login";
-import {SignUpUserAction,SignUpSellerAction} from "../Actions/SignUp";
+import {LoginAction,SignOut,setDefault} from "../Actions/Login";
+import {SignUpUserAction,SignUpSellerAction,setDefaultSignUp} from "../Actions/SignUp";
 import AuthStateAction from "../Actions/AuthSate";
 
 const { TextArea } = Input;
@@ -26,23 +26,47 @@ class Login extends Component {
       staffNo : "",
       vatNo : "",
       companyAddr:"",
-      aboutCompany:""
+      aboutCompany:"",
+      showErr:false,
+      err:"",
+      location:''
+      
     };
   }
-
-  componentDidMount(){
-    
+static getDerivedStateFromProps(props,state){
+if(props.err !== state.err){
+  return{
+    err:props.err,showErr:true
   }
-
-  componentWillReceiveProps(props) {
-    if (props.authenticated === true) {
-      this.props.AuthStateAction();
+}
+if(props.signuperr !== state.err){
+  return{
+    err:props.signuperr,showErr:true
+  }
+}
+null
+}
+ componentDidUpdate(prevProps,prevState){
+ if(prevProps.authenticated !== this.props.authenticated){
+  this.props.AuthStateAction();
       this.closeLogin();
-    }
-    if (props.signup === true) {
-      this.setState({ showLogin: true });
-    }
-  }
+ }
+ if(prevProps.signup !== this.props.signup){
+  this.props.AuthStateAction();
+  this.closeSignup();
+ }
+ 
+ }
+
+  // componentWillReceiveProps(props) {
+  //   if (props.authenticated === true) {
+  //     this.props.AuthStateAction();
+  //     this.closeLogin();
+  //   }
+  //   if (props.signup === true) {
+  //     this.setState({ showLogin: true });
+  //   }
+  // }
   onName = e => {
     this.setState({ name: e.target.value });
   };
@@ -95,7 +119,6 @@ class Login extends Component {
       this.state.name,
       this.state.phone
     );
-    this.props.value(false);
   };
   onSignUpSeller = () =>{
     this.props.SignUpSellerAction( 
@@ -109,22 +132,31 @@ class Login extends Component {
       this.state.staffNo ,
       this.state.vatNo,
       this.state.companyAddr,
-      this.state.aboutCompany
+      this.state.aboutCompany,
+      this.state.location
     )
-    this.props.value(false);
   }
 
   onLogin = () => {
     this.props.LoginAction(this.state.email, this.state.password);
   };
+closeSignup(){
+  this.props.value(false);
+  this.setState({showErr:false,err:''})
 
+  this.props.setDefaultSignUp()
+}
   closeLogin() {
-    this.setState({ showLogin: false , showSellerLogin : false});
+   this.setState({showErr:false,err:''})
+   this.props.setDefault(), 
     this.props.value(false);
   }
 
   showsignup() {
    this.setState({showLogin:false})
+  }
+  onChangeLocation =(e) =>{
+    this.setState({location:e.target.value})
   }
 
   render() {
@@ -135,7 +167,7 @@ class Login extends Component {
               <Icon
                 type="close-circle"
                 theme="outlined"
-                onClick={this.closeLogin.bind(this)}
+                onClick={this.closeSignup.bind(this)}
                 style={{
                   cursor: "pointer",
                   alignSelf: "flex-end",
@@ -203,18 +235,25 @@ class Login extends Component {
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
                     onChange={this.onVatNo}
                   />
+                    <Input
+                    placeholder="Location"
+                    style={{width : "90%" , margin : "10px" , borderRadius : 15}}
+                    onChange={this.onChangeLocation}
+                  />
                   <TextArea
                     placeholder="Company Address"
                     autosize={{ minRows: 3, maxRows: 6 }}
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
                     onChange={this.onCompanyAddress}
                   />
+                 
                   <TextArea
                     placeholder="About the Company"
                     autosize={{ minRows: 3, maxRows: 6 }}
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
                     onChange={this.onAboutCompany}
                   />
+                    {this.state.showErr === true ? <div>{this.state.err}</div> : null}
                   <div
                     className="common-button app-primary-dark"
                     style={{ width: "40%", margin: "auto", borderRadius: 15 }}
@@ -266,6 +305,7 @@ class Login extends Component {
                     onChange={this.onPassword}
                   />
                 </div>
+                {this.state.showErr === true ? <div>{this.state.err}</div> : null}
                 <div
                   className="common-button app-primary-dark"
                   style={{ width: "40%", margin: "auto", borderRadius: 15 }}
@@ -285,7 +325,7 @@ class Login extends Component {
           <Icon
             type="close-circle"
             theme="outlined"
-            onClick={this.closeLogin.bind(this)}
+            onClick={this.closeSignup.bind(this)}
             style={{
               cursor: "pointer",
               alignSelf: "flex-end",
@@ -330,6 +370,7 @@ class Login extends Component {
                 onChange={this.onPassword}
               />
             </span>
+            {this.state.showErr === true ? <div>{this.state.err}</div> : null}
             <div
               className="common-button app-primary-dark"
               style={{ width: "40%", margin: "auto", borderRadius: 15 }}
@@ -351,12 +392,15 @@ const mapActionToProps = {
   SignUpUserAction: SignUpUserAction,
   SignUpSellerAction:SignUpSellerAction,
   AuthStateAction: AuthStateAction,
+  setDefault:setDefault,
+  setDefaultSignUp:setDefaultSignUp
 };
-const mapStateToProps = state => (
-  console.log(state),
+const mapStateToProps = state => (console.log(state),
   {
     authenticated: state.authenticated,
     signup: state.signup,
+    err:state.err,
+    signuperr:state.signuperr,
     user: state.user
   }
 );

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Input,Button} from 'antd';
 import {connect } from "react-redux";
 import {db,Auth} from '../../../config';
+import {SignUpSellerAction} from '../../Actions/SignUp'
 import './index.css';
 
 const {TextArea} = Input;
@@ -19,34 +20,29 @@ class SignUp extends Component {
           staffNo : "",
           vatNo : "",
           companyAddr:"",
-          aboutCompany:""
+          aboutCompany:"",
+          location:""
         }
     }
     onChangeField =(e) =>{
         this.setState({[e.target.name]:e.target.value})
     }
     setUser = () => {
-        var that = this
-        Auth.createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(function(object) {
-        var d = {
-          name: this.state.name,
-          email: this.state.email,
-          phone: this.state.phone,
-          companyName:this.state.companyName,
-          yearofEstab:this.state.yearofEstab,
-          liscenceNo:this.state.liscenceNo,
-          staffNo:this.state.staffNo,
-          vatNo:this.state.vatNo,
-          companyAddr:this.state.companyAddr,
-          aboutCompany:this.state.aboutCompany
-        };
-        db.ref("users")
-          .child(object.user.uid).child("detalis")
-          .set(d);
-        db.ref("users").child(object.user.uid).child("type").set("seller")
-        db.ref("AdminAdded").push(object.user.uid)
-      })
+      this.props.SignUpSellerAction( 
+        this.state.email,
+        this.state.password,
+        this.state.name,
+        this.state.phone,
+        this.state.companyName ,
+        this.state.yearOfEstab ,
+        this.state.liscenceNo ,
+        this.state.staffNo ,
+        this.state.vatNo,
+        this.state.companyAddr,
+        this.state.aboutCompany,
+        this.state.location,
+        true
+      )
       };
   render() {
     return (
@@ -55,71 +51,65 @@ class SignUp extends Component {
                     name="name"
                     placeholder="Name"
                     style={{ width: "90%", margin: "10px", borderRadius: 15 }}
-                    onChange={this.onName}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
                     name="phone"
                     placeholder="Phone"
                     style={{ width: "90%", margin: "10px", borderRadius: 15 }}
-                    onChange={this.onPhone}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
                     name="email"
                     placeholder="Email"
                     style={{ width: "90%", margin: "10px", borderRadius: 15 }}
-                    onChange={this.onEmail}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
                     name="password"
                     placeholder="Password"
                     type="password"
                     style={{ width: "90%", margin: "10px", borderRadius: 15 }}
-                    onChange={this.onPassword}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
                     name="companyName"
                     placeholder="Company Name"
                     style={{width : "90%" , margin: "auto" , borderRadius : 15}}
-                    onChange={this.onCompanyName}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
                     name="yearOfEstab"
                     placeholder="Year Of Establishment"
                     style={{width: "90%" , margin : "10px" , borderRadius : 15}}
-                    onChange={this.onYearOfEstab}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
-                    name="licenceNo"
+                    name="liscenceNo"
                     placeholder="Commercial Liscence Number"
                     style={{width : "90%" , margin : "auto" , borderRadius :15}}
-                    onChange={this.onLisenceNo}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
                     name="staffNo"
                     placeholder="No of Staff"
                     style={{width: "90%" , margin : "10px" , borderRadius : 15}}
-                    onChange={this.onStaffNo}
-                  />
+                    onChange={this.onChangeField}                  />
                   <Input
                     name="vatNo"
                     placeholder="Vat No"
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
-                    onChange={this.onVatNo}
-                  />
+                    onChange={this.onChangeField}                  />
+                    <Input
+                    name="location"
+                    placeholder="Location"
+                    style={{width : "90%" , margin : "10px" , borderRadius : 15}}
+                    onChange={this.onChangeField}                  />
                   <TextArea
                   name="companyAddr"
                     placeholder="Company Address"
                     autosize={{ minRows: 3, maxRows: 6 }}
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
-                    onChange={this.onCompanyAddress}
-                  />
+                    onChange={this.onChangeField}                  />
                   <TextArea
                     name="aboutCompany"
                     placeholder="About the Company"
                     autosize={{ minRows: 3, maxRows: 6 }}
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
-                    onChange={this.onAboutCompany}
-                  />
+                    onChange={this.onChangeField}                  />
         <Button onClick={this.setUser} style={{width:'40%',alignSelf:'center'}}>Add User</Button>
       </div>
     )
@@ -129,4 +119,8 @@ class SignUp extends Component {
 const mapStateToProps = state =>({
     data:state
 })
-export default connect(mapStateToProps)(SignUp)
+const mapActionsToProps = {
+  SignUpSellerAction:SignUpSellerAction,
+
+}
+export default connect(mapStateToProps,mapActionsToProps)(SignUp)

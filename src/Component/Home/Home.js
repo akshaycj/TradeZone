@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Slider from "./Slider";
+import Slider1 from "./Slider";
 import "./Slider.css";
 import "./Block";
 import "./Block.css";
@@ -33,7 +33,7 @@ class Home extends Component {
           </div>
           <div className="home-components">
             <div className="slider-home">
-              <Slider />
+              <Slider1 />
             </div>
             <div className="recent-products">
               <h3 style={{ textAlign: "left", fontStyle: "bold" }}>

@@ -1,7 +1,8 @@
-import { SIGNUP_USER,SIGNUP_SELLER } from "../ActionCreators/ActionCreators";
+import { SIGNUP} from "../ActionCreators/ActionCreators";
 import { Auth, db } from "../../config";
 const value = {
-  SignUp: false
+  SignUp: false,
+  signuperr:null
 };
 export function SignUpUserAction(email, password, name, phone) {
   return dispatch => {
@@ -23,14 +24,30 @@ export function SignUpUserAction(email, password, name, phone) {
       })
       .then(function(userdata) {
         dispatch({
-          type: SIGNUP_USER,
+          type: SIGNUP,
           value
         });
-      });
+      }).catch(error =>{
+        value.signuperr = error.message
+        dispatch({
+          type: SIGNUP,
+          value
+        });
+      })
   };
 }
-export  function SignUpSellerAction(email, password, name, phone,companyName,yearofEstab,liscenceNo,staffNo,vatNo,companyAddr,aboutCompany) {
-  console.log(email)
+export function setDefaultSignUp(){
+  return dispatch =>{
+    value.SignUp = false,
+    value.signuperr =null
+
+    dispatch({
+      type: SIGNUP,
+      value
+    });
+  }
+}
+export  function SignUpSellerAction(email, password, name, phone,companyName,yearofEstab,liscenceNo,staffNo,vatNo,companyAddr,aboutCompany,location,adminAdded = false) {
   return dispatch => {
     Auth.createUserWithEmailAndPassword(email, password)
       .then(function(object) {
@@ -44,7 +61,8 @@ export  function SignUpSellerAction(email, password, name, phone,companyName,yea
           staffNo:staffNo,
           vatNo:vatNo,
           companyAddr:companyAddr,
-          aboutCompany:aboutCompany
+          aboutCompany:aboutCompany,
+          location:location
         };
         db.ref("users")
           .child(object.user.uid).child("details")
@@ -52,14 +70,20 @@ export  function SignUpSellerAction(email, password, name, phone,companyName,yea
           db.ref("users")
           .child(object.user.uid).child("type")
           .set("seller");
-          
+          adminAdded ? db.ref("AdminAdded").push(object.user.uid) : null
         value.SignUp = true;
       })
       .then(function(userdata) {
         dispatch({
-          type: SIGNUP_SELLER,
+          type: SIGNUP,
           value
         });
+      }).catch(error =>{
+        value.signuperr = error.message,
+        dispatch({
+          type:SIGNUP,
+          value
+        })
       });
   };
 }

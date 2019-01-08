@@ -1,6 +1,5 @@
 .product {
   display: flex;
-  flex-direction: row;
   justify-content:center; 
 }
 .spinClass{
@@ -49,7 +48,8 @@
   width: 100%;
   text-align: left;
   display: flex;
-  align-items: center;
+  align-items:flex-start;
+  flex-direction: column;
 }
 .textval p {
   margin: 0;

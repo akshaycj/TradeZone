@@ -1,28 +1,26 @@
 import {
   LOGIN,
-  SIGNUP_SELLER,
-  SIGNUP_USER,
+  SIGNUP,
   ADDPRODUCT,
   AUTHSTATE,
   SIGN_OUT
 } from "../ActionCreators/ActionCreators";
 
-const initialState = {};
+const initialState = {
+  
+};
 export default function Reducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN:
       return {
         ...state,
-        authenticated: action.value.authenticated
+        authenticated: action.value.authenticated,
+        err:action.value.err
       };
-    case SIGNUP_SELLER:
+      case SIGNUP:
       return {
         ...state,
-        signup: action.value.SignUp
-      };
-      case SIGNUP_USER:
-      return {
-        ...state,
+        signuperr:action.value.signuperr,
         signup: action.value.SignUp
       };
       case SIGN_OUT:
@@ -33,7 +31,7 @@ export default function Reducer(state = initialState, action) {
     case ADDPRODUCT:
       return {
         ...state,
-        data: action.value
+        urls: action.value.urls
       };
     case AUTHSTATE:
       return {

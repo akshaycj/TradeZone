@@ -11,11 +11,12 @@ export default function AddProductAction(
   uid,
   category,
   tags,
+  description,
   price,
   color,
   areaofusage,
+  specififcation,
   weight,
-  specififcation
 ) {
   const path = db
     .ref("users")
@@ -43,6 +44,7 @@ export default function AddProductAction(
                   urls: value.urls,
                   category,
                   tags,
+                  description,
                   price,
                   color,
                   areaofusage,
@@ -57,6 +59,7 @@ export default function AddProductAction(
                   urls: value.urls,
                   category,
                   tags,
+                  description,
                   price,
                   color,
                   areaofusage,

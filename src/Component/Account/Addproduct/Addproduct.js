@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Input, Select, Upload, Icon, Modal, Button, Tag, Tooltip } from "antd";
 import "./Addproduct.css";
 import PicturesWall from "./Upload";
-
+import AuthStateAction from '../../Actions/AuthSate';
 import { connect } from "react-redux";
 import AddProductAction from "./../../Actions/AddProduct";
 const Option = Select.Option;
@@ -22,17 +22,33 @@ class AddProduct extends Component {
       color:"",
       areaofusage:"",
       weight:"",
-      specififcation:""
+      specififcation:"",
+      urls:[]
     };
   }
-  componentWillReceiveProps(props) {
-    console.log(props.urls);
-  }
+ 
 
-  componentDidMount() {}
+
+  componentDidMount() {
+    this.props.AuthStateAction();
+  }
+  static getDerivedStateFromProps(props,state){
+    console.log(props)
+      if(props.urls !== state.urls){
+        return{
+          urls:props.urls
+        }
+      }
+      null
+  }
+  componentDidUpdate(prevProps,prevState){
+    if(this.props.urls.length === prevState.dat.length && prevState.dat.length !==0 ){
+      alert("product added")
+    }
+
+  }
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
-    console.log(tags);
     this.setState({ tags });
   };
 
@@ -66,7 +82,6 @@ class AddProduct extends Component {
   }
 
   onSubmit() {
-    console.log(this.props.user.uid);
     this.props.AddProductAction(
       this.state.dat,
       this.state.productName,
@@ -203,11 +218,14 @@ class AddProduct extends Component {
   }
 }
 const mapActionToProps = {
-  AddProductAction: AddProductAction
+  AddProductAction: AddProductAction,
+  AuthStateAction: AuthStateAction,
+
 };
 const mapSateToProps = state => ({
-  urls: state.data,
-  user: state.user
+  urls: state.urls,
+  user: state.user,
+  
 });
 export default connect(
   mapSateToProps,

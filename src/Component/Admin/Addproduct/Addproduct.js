@@ -47,20 +47,18 @@ class AddProduct extends Component {
     var that = this;
 
     db.ref("AdminAdded").on("value", function(owl) {
-      db.ref("usersDetails").on("value", function(cat) {
-        cat.forEach(y => {
-          owl.forEach(p => {
-            if (y.key === p.val()) {
-              var it = {};
-              it = y.val();
-              it["uid"] = p.val();
-              that.state.users.push(it);
-            }
-          });
-        });
+      owl.forEach(p=>{
+        db.ref("users").child(p.val()+'').child("details").on('value',function(data){
+            var it = data.val();
+            it["uid"] = p.val();
+            that.state.users.push(it)
+            that.setState({ spin: false });
+        })
+      })
+     
+      
 
-        that.setState({ spin: false });
-      });
+      
     });
   }
   handleClose = removedTag => {
@@ -83,7 +81,6 @@ class AddProduct extends Component {
     if (inputValue && tags.indexOf(inputValue) === -1) {
       tags = [...tags, inputValue];
     }
-    console.log(tags);
     this.setState({
       tags,
       inputVisible: false,
@@ -98,14 +95,18 @@ class AddProduct extends Component {
   }
 
   onSubmit() {
-    console.log(this.props.user.uid);
     this.props.AddProductAction(
       this.state.dat,
       this.state.productName,
       this.state.uid,
       this.state.category,
       this.state.tags,
-      this.state.description
+      this.state.description,  
+      this.state.price,
+      this.state.color,
+      this.state.areaofusage,
+      this.state.specififcation,
+      this.state.weight
     );
   }
   userSelect = e => {
@@ -127,7 +128,7 @@ class AddProduct extends Component {
                 style={{ width: "100%", margin: 10 }}
               >
                 {this.state.users.map(t => (
-                  <Option value={t.uid}>{t.name}</Option>
+                  <Option value={t.uid}>{t.email}</Option>
                 ))}
               </Select>
               <Input
@@ -247,7 +248,8 @@ class AddProduct extends Component {
   }
 }
 const mapActionToProps = {
-  AddProductAction: AddProductAction
+  AddProductAction: AddProductAction,
+
 };
 const mapSateToProps = state => ({
   urls: state.data,

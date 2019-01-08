@@ -68,7 +68,7 @@ export default class extends Component {
       dots: true,
       infinite: true,
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow: 5,
       slidesToScroll: 1,
       arrows: true,
       autoplay: true,
@@ -83,9 +83,9 @@ export default class extends Component {
        <div className="featured-main">
           <Slider {...settings}>
            {this.state.data.map(l =>(
-             <div>
+             <div style={{display:'flex',justifyContent:'space-around'}}>
             
-           <Link to={"/product/"+l.key}> <Block name={l.value.productName} pic={l.value.urls[0]} /></Link>
+           <Link to={"/product/"+l.key}> <Block name={l.value.productName} price={l.value.price} pic={l.value.urls[0]} /></Link>
              </div>
            ))}
           </Slider>

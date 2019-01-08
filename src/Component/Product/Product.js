@@ -18,9 +18,19 @@ class Product extends React.Component {
 			loginStateforContact: false,
 			urls: [],
 			productName: '',
+			description:"",
+			specification:"",
+			category:"",
+			tags:[],
+			areaofuseage:"",
+			color:"",
+			weight:"",
 			sellerName: '',
 			spin: true,
-			rating: ''
+			price:"",
+			rating: '',
+			sellerLocation:"",
+			expand:false,
 		};
 	}
 
@@ -54,12 +64,20 @@ class Product extends React.Component {
 			that.setState({
 				urls: data.urls,
 				productName: data.productName,
-        ratings: data.ratings,
-        sellerid:url
+        		ratings: data.ratings,
+				sellerid:url,
+				price:data.price,
+				description:data.description,
+				specification:data.specififcation,
+				category:data.category,
+				weight:data.weight,
+				color:data.color,
+				areaofuseage:data.areaofusage,
+
 			});
 
 			db.ref('users').child(oath.val().seller + '').child("details").on('value', function(data) {
-				that.setState({ sellerName: data.val().name, spin: false });
+				that.setState({ sellerName: data.val().name,sellerLocation:data.val().location, spin: false });
 			});
 		});
 		
@@ -110,6 +128,9 @@ class Product extends React.Component {
 			}
 		
 	}
+	onClickMore = () =>{
+		this.setState({expand:!this.state.expand})
+	}
 	render() {
 		return (
 			<div className="product">
@@ -118,7 +139,7 @@ class Product extends React.Component {
 						<Spin style={{ margin: 'auto' }} />
 					</div>
 				) : (
-					<div>
+					<div style={{width:'100%'}}>
 						<Card className="card">
 							<div className="details">
 								<div className="productpic">
@@ -158,19 +179,56 @@ class Product extends React.Component {
 											<Icon type="share-alt" style={{ fontSize: '25px' }} />
 										</span>
 									</span>
-								<Link to={this.state.sellerid}>	<div>{this.state.sellerName}</div></Link>
+								<div>
+
+								<Link to={this.state.sellerid}>	<div>Sold By:{this.state.sellerName}</div></Link>
+												<span>From:{this.state.sellerLocation}</span>
+								</div>
 									<div className="rate">
 										<h3>Price</h3>
-										<h2>240.00</h2>
+										<h2>{this.state.price}</h2>
 									</div>
 									<div className="textval">
+									<h3>Category:</h3>
 										<p>
-											Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-											Lorem Ipsum has been the industry's standard dummy text ever since the
-											1500s,
+											{this.state.category}
 										</p>
 									</div>
-									<div style={{ display: 'flex', marginTop: '3%' }}>More</div>
+									<div className="textval">
+									<h3>Color:</h3>
+										<p>
+											{this.state.color}
+										</p>
+									</div>
+									{this.state.expand ? <div>
+
+									<div className="textval">
+									<h3>Weight:</h3>
+										<p>
+											{this.state.weight}
+										</p>
+									</div>
+									<div className="textval">
+									<h3>Area Of Usage:</h3>
+										<p>
+											{this.state.areaofuseage}
+										</p>
+									</div>
+									<div className="textval">
+									<h3>Description:</h3>
+										<p>
+											{this.state.description}
+										</p>
+									</div>
+									<div className="textval">
+									<h3>Specification:</h3>
+										<p>
+											{this.state.specification}
+										</p>
+									</div>
+
+									</div> : null}
+									<div style={{ display: 'flex', marginTop: '3%' }} onClick={this.onClickMore}> {this.state.expand ? <div style={{cursor:'pointer'}}>Less</div> : <div style={{cursor:'pointer'}}>More</div>}</div>
 									<div className="bottomBut">
 										{this.state.loginState ?  (
 											<div className="phoneNo">
