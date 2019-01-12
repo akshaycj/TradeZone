@@ -36,7 +36,8 @@ class AddProduct extends Component {
       color:"",
       areaofusage:"",
       weight:"",
-      specififcation:""
+      specififcation:"",
+      categoryList:[]
     };
   }
   componentWillReceiveProps(props) {
@@ -47,15 +48,24 @@ class AddProduct extends Component {
     var that = this;
 
     db.ref("AdminAdded").on("value", function(owl) {
+
       owl.forEach(p=>{
         db.ref("users").child(p.val()+'').child("details").on('value',function(data){
             var it = data.val();
             it["uid"] = p.val();
             that.state.users.push(it)
+            
             that.setState({ spin: false });
         })
       })
-     
+     db.ref("category").on("value",function(dat){
+       var list = []
+       dat.forEach(y=>{
+         list.push(y.val())
+       })
+       that.setState({categoryList:list})
+
+     })
       
 
       
@@ -145,10 +155,9 @@ class AddProduct extends Component {
                 }}
                 style={{ width: "100%", margin: 10 }}
               >
-                <Option value="Electronics">Electronics</Option>
-                <Option value="Home">Home</Option>
-                <Option value="Mens">Mens</Option>
-                <Option value="Women">Women</Option>
+              {this.state.categoryList.map(p =>(
+                <Option key={p}>{p}</Option>
+              ))}
               </Select>
               <Input.TextArea
                 style={{ margin: 10 }}

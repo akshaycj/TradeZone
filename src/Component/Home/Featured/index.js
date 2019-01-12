@@ -77,7 +77,7 @@ export default class extends Component {
     };
     
     return (
-      <div>
+      <div style={{padding:"10px",margin:'10px'}}>
         <h1>Featured Products</h1>
         {this.state.load ? <Spin/>: 
        <div className="featured-main">

@@ -29,26 +29,7 @@ export default class extends Component {
   render() {
     return (
       <div className="account-main-container">
-        <div
-          className="top-nav"
-          style={{ padding: "7px", alignSelf: "center" }}
-        >
-          <div className="top-nav-elements">
-            <Link to="/authUser">Add User</Link>
-          </div>
-          <div className="top-nav-elements">
-            <Link to="/authUser/add">Add Product</Link>
-          </div>
-        </div>
-        <div
-          className="top-nav"
-          style={{ width: "80%", margin: "auto", marginBottom: "30px" }}
-        >
-          <div className="top-nav-elements">
-            <Link to="/authUser/featured">Featured</Link>
-          </div>
-        
-        </div>
+       
         <div className="account-profile-container">
           <div className="avatar">
             <img
@@ -71,6 +52,12 @@ export default class extends Component {
               </MenuItem>
               <MenuItem key="3">
                 <Link to="/authUser/featured">Featured</Link>
+              </MenuItem>
+              <MenuItem key="4">
+                <Link to="/authUser/latest">Latest Offers</Link>
+              </MenuItem>
+              <MenuItem key="5">
+                <Link to="/authUser/CategoryUpdate">CategoryUpdate</Link>
               </MenuItem>
 
             </Menu>

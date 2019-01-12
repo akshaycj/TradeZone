@@ -4,7 +4,9 @@ import Main from "./Main";
 import AddProduct from "./Addproduct/Addproduct";
 import SignUp from './User';
 import Featured from './FeaturedProducts';
-export default class extends Component {
+import LatestOffers from './LatestOffers/LatestOffers'
+import CategoryUpdate from "./CategoryUpdate/CategoryUpdate";
+export default class extends Component {  
   render() {
     return (
       <div>
@@ -13,6 +15,9 @@ export default class extends Component {
             <Route path="/authUser"  exact component={SignUp} />
             <Route path="/authUser/featured"  component={Featured} />
             <Route path="/authUser/add"   component={AddProduct} />
+            <Route path="/authUser/latest"   component={LatestOffers} />
+            <Route path="/authUser/CategoryUpdate"   component={CategoryUpdate} />
+
           </Switch>
         </Main>
       </div>

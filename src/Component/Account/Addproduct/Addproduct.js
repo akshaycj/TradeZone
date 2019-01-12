@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Input, Select, Upload, Icon, Modal, Button, Tag, Tooltip } from "antd";
+import { Input, Select,Spin, Upload, Icon, Modal, Button, Tag, Tooltip } from "antd";
 import "./Addproduct.css";
+import {db} from './../../../config';
 import PicturesWall from "./Upload";
 import AuthStateAction from '../../Actions/AuthSate';
 import { connect } from "react-redux";
@@ -23,7 +24,9 @@ class AddProduct extends Component {
       areaofusage:"",
       weight:"",
       specififcation:"",
-      urls:[]
+      urls:[],
+      categoryList:[],
+      load:true
     };
   }
  
@@ -31,6 +34,15 @@ class AddProduct extends Component {
 
   componentDidMount() {
     this.props.AuthStateAction();
+    var that = this
+    
+    db.ref("category").on("value",function(data){
+      var list = []
+      data.forEach(i=>{
+       list.push(i.val())
+      })
+      that.setState({load:false,categoryList:list})
+    })
   }
   static getDerivedStateFromProps(props,state){
     console.log(props)
@@ -101,6 +113,9 @@ class AddProduct extends Component {
     const { tags, inputVisible, inputValue } = this.state;
     return (
       <div>
+
+      {this.state.load === true  ? <Spin></Spin>:
+        <div>
         <h1>Add Product</h1>
         <div className="add-main">
           <Input
@@ -117,10 +132,9 @@ class AddProduct extends Component {
             }}
             style={{ width: "100%", margin: 10 }}
           >
-            <Option value="Electronics">Electronics</Option>
-            <Option value="Home">Home</Option>
-            <Option value="Mens">Mens</Option>
-            <Option value="Women">Women</Option>
+            {this.state.categoryList.map(o=>(
+              <Option key={o}>{o}</Option>
+            ))}
           </Select>
           <Input.TextArea
             style={{ margin: 10 }}
@@ -214,13 +228,15 @@ class AddProduct extends Component {
           </div>
         </div>
       </div>
+  }
+      </div>
     );
   }
 }
 const mapActionToProps = {
   AddProductAction: AddProductAction,
   AuthStateAction: AuthStateAction,
-
+  
 };
 const mapSateToProps = state => ({
   urls: state.urls,

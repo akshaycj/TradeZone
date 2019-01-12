@@ -2,38 +2,57 @@ import React from "react";
 import Block from "./Block";
 import BlockBroad from "./BlockBroad";
 import "./Grid.css";
-import { Link } from "react-router-dom";
-import i from "./pics/watch.jpg";
-import j from "./pics/bag.jpg";
-import k from "./pics/dialer.jpg";
-import l from "./pics/drone.jpg";
-import m from "./pics/gadget.jpg";
-import n from "./pics/phone.jpg";
-import o from "./pics/mouse.jpg";
+
+import "./Slider.css";
+import Slider from "react-slick";
+
+import a from "./pics/1.jpg";
+import b from "./pics/2.jpg";
+import c from "./pics/3.jpg";
+import d from "./pics/4.jpg";
 import Featured from "./Featured";
 
 class Grid extends React.Component {
   render() {
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 600,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+    };  
     return (
       <div className="sub">
         
 
         <Featured />
         <br/>
+        <br/>
+        <div>
+        <h1>Latest Offers </h1>
+        <Slider {...settings} style={{margin:'10px'}}>
+          
+        <div>
+            <img className="imagei" src={a} alt="mobile pic 1" />
+          </div>
+          <div>
+            <img className="imagei" src={b} alt="mobile pic 2" />
+          </div>
+          <div>
+            <img className="imagei" src={c} alt="Laptop pic 1" />
+          </div>
+          <div>
+            <img className="imagei" src={d} alt="Laptop pic 2" />
+          </div>
+        </Slider>
+        </div>
+        <br/>
+        <br/>
+        
         <Featured />
 
-        {/* <div className='grid1'>
-                    <Link to='/product'><BlockBroad name={'Watch'} text={'Loren Ipsum'} pic={i} price={250} /></Link>
-                    <Link to='/product'><BlockBroad name={'Watch'} text={'Loren Ipsum'} pic={i} price={250} /></Link>
-                    <Link to='/product'><BlockBroad name={'Watch'} text={'Loren Ipsum'} pic={i} price={250} /></Link>
-                 
-                </div>
-                <div className='grid2'>
-                <Link to='/product'><Block name={'Watch'} text={'Loren Ipsum'} pic={i} price={250} /></Link>
-                <Link to='/product'><Block name={'Watch'} text={'Loren Ipsum'} pic={i} price={250} /></Link>
-                <Link to='/product'><Block name={'Watch'} text={'Loren Ipsum'} pic={i} price={250} /></Link>
-                <Link to='/product'><Block name={'Watch'} text={'Loren Ipsum'} pic={i} price={250} /></Link>
-                </div> */}
       </div>
     );
   }
