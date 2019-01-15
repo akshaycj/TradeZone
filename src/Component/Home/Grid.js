@@ -11,18 +11,11 @@ import b from "./pics/2.jpg";
 import c from "./pics/3.jpg";
 import d from "./pics/4.jpg";
 import Featured from "./Featured";
+import LatestOffers from "./Latestoffers";
 
 class Grid extends React.Component {
   render() {
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 600,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: true,
-      autoplay: true,
-    };  
+    
     return (
       <div className="sub">
         
@@ -30,27 +23,10 @@ class Grid extends React.Component {
         <Featured />
         <br/>
         <br/>
-        <div>
-        <h1>Latest Offers </h1>
-        <Slider {...settings} style={{margin:'10px'}}>
-          
-        <div>
-            <img className="imagei" src={a} alt="mobile pic 1" />
-          </div>
-          <div>
-            <img className="imagei" src={b} alt="mobile pic 2" />
-          </div>
-          <div>
-            <img className="imagei" src={c} alt="Laptop pic 1" />
-          </div>
-          <div>
-            <img className="imagei" src={d} alt="Laptop pic 2" />
-          </div>
-        </Slider>
-        </div>
+       
         <br/>
         <br/>
-        
+        <LatestOffers/>
         <Featured />
 
       </div>

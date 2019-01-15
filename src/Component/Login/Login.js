@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import {LoginAction,SignOut,setDefault} from "../Actions/Login";
 import {SignUpUserAction,SignUpSellerAction,setDefaultSignUp} from "../Actions/SignUp";
 import AuthStateAction from "../Actions/AuthSate";
+import PicturesWall from "./Upload";
 
 const { TextArea } = Input;
 
@@ -29,7 +30,8 @@ class Login extends Component {
       aboutCompany:"",
       showErr:false,
       err:"",
-      location:''
+      location:'',
+      file:{}
       
     };
   }
@@ -133,7 +135,8 @@ null
       this.state.vatNo,
       this.state.companyAddr,
       this.state.aboutCompany,
-      this.state.location
+      this.state.location,
+      this.state.file
     )
   }
 
@@ -157,6 +160,11 @@ closeSignup(){
   }
   onChangeLocation =(e) =>{
     this.setState({location:e.target.value})
+  }
+  onGetLogo = (e) =>{
+    console.log(e);
+    
+    this.setState({file:e.originFileObj})
   }
 
   render() {
@@ -253,6 +261,7 @@ closeSignup(){
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
                     onChange={this.onAboutCompany}
                   />
+                  <PicturesWall value={this.onGetLogo}></PicturesWall>
                     {this.state.showErr === true ? <div>{this.state.err}</div> : null}
                   <div
                     className="common-button app-primary-dark"

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./Main";
 import AddProduct from "./Addproduct/Addproduct";
-import OverView from "./Overview";
+import OverView from "./Overview/Overview";
 import Manage from "./Manage";
 import Profile from "./Profile"
 export default class extends Component {

@@ -5,6 +5,7 @@ import AddProduct from "./Addproduct/Addproduct";
 import SignUp from './User';
 import Featured from './FeaturedProducts';
 import LatestOffers from './LatestOffers/LatestOffers'
+import TopBanner from './TopBanner/TopBanner'
 import CategoryUpdate from "./CategoryUpdate/CategoryUpdate";
 export default class extends Component {  
   render() {
@@ -17,6 +18,7 @@ export default class extends Component {
             <Route path="/authUser/add"   component={AddProduct} />
             <Route path="/authUser/latest"   component={LatestOffers} />
             <Route path="/authUser/CategoryUpdate"   component={CategoryUpdate} />
+            <Route path="/authUser/topBanner"   component={TopBanner} />
 
           </Switch>
         </Main>

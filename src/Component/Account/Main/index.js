@@ -1,18 +1,36 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Menu, Icon } from "antd";
+import { Menu, Icon,Spin } from "antd";
 import { Link, Redirect } from "react-router-dom";
-import { Auth } from "../../../config";
+import { Auth,db } from "../../../config";
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 export default class extends Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      url:'',load:true
+    }
+  }
   state = {
     logout: false,
     current: "mail"
   };
+  componentDidMount(){
+    var that = this
+    Auth.onAuthStateChanged(function(user){
+      if(user){
+        
+        db.ref('users').child(user.uid).child('details').child('url').on("value",function(data){
+          let url = data.val()
+          that.setState({url,load:false})
+        })
+      }
+    })
+  }
 
   onLogout = () => {
     Auth.signOut();
@@ -53,12 +71,14 @@ export default class extends Component {
           </div>
         </div>
         <div className="account-profile-container">
-          <div className="avatar">
+          <div className="avatar" style={{alignItems:'center',justifyContent:'center',display:'flex'}}>
+          {this.state.load ? <Spin/> : 
             <img
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              src={this.state.url}
               width="100%"
               height="100%"
             />
+          }
           </div>
           <div className="menu" style={{ width: "100%" }}>
             <Menu

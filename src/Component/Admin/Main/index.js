@@ -59,6 +59,9 @@ export default class extends Component {
               <MenuItem key="5">
                 <Link to="/authUser/CategoryUpdate">CategoryUpdate</Link>
               </MenuItem>
+              <MenuItem key="6">
+                <Link to="/authUser/topBanner">TopBanner</Link>
+              </MenuItem>
 
             </Menu>
           </div>

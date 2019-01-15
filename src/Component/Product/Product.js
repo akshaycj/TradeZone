@@ -181,8 +181,8 @@ class Product extends React.Component {
 									</span>
 								<div>
 
-								<Link to={this.state.sellerid}>	<div>Sold By:{this.state.sellerName}</div></Link>
-												<span>From:{this.state.sellerLocation}</span>
+								<div><Link to={this.state.sellerid}>	{this.state.sellerName},</Link>{this.state.sellerLocation}</div>
+												
 								</div>
 									<div className="rate">
 										<h3>Price</h3>

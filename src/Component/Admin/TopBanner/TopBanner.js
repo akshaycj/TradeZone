@@ -3,7 +3,7 @@ import PictureWall from './Upload';
 import { Upload, Icon, Modal,Button,Spin } from "antd";
 import { db ,storage} from '../../../config';
 import Frame from './Frame';
-export default class LatestOffers extends Component {
+export default class TopBanner extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -16,7 +16,7 @@ export default class LatestOffers extends Component {
   }
   componentDidMount(){
     var that = this
-    db.ref("latestOffers").on("value",function(data){
+    db.ref("topBanner").on("value",function(data){
       var uploaded = []
       data.forEach(item =>{
           uploaded.push({name:item.val().fileName,url:item.val().url})
@@ -34,7 +34,7 @@ export default class LatestOffers extends Component {
   this.setState({load:true})
 this.state.pics.forEach(p=>{
 
-   storage.ref('latestOffers/').child(p.originFileObj.name).getDownloadURL().then(o=>{
+   storage.ref('topBanner/').child(p.originFileObj.name).getDownloadURL().then(o=>{
   
         alert("file name alredy exist ")
       that.setState({pics:[],visible:false,load:false})
@@ -42,7 +42,7 @@ this.state.pics.forEach(p=>{
     
   }).catch(function(data){
     storage
-  .ref("latestOffers/")
+  .ref("topBanner/")
   .child(p.originFileObj.name)
   .put(p.originFileObj)
   .then(function(data) {
@@ -51,12 +51,12 @@ this.state.pics.forEach(p=>{
     .then(function(downloadURL) {
       if(downloadURL){
 
-        db.ref("latestOffers").push().set({fileName:p.originFileObj.name,url:downloadURL})
+        db.ref("topBanner").push().set({fileName:p.originFileObj.name,url:downloadURL})
         that.setState({load:false})
       }
       else{
         storage
- .ref("latestOffers/")
+ .ref("topBanner/")
  .child(p.originFileObj.name).delete()
       }
     }).then(function(data){
@@ -75,11 +75,11 @@ this.state.pics.forEach(p=>{
 }
 onRemoveItem = (a) =>{
  storage
- .ref("latestOffers/")
+ .ref("topBanner/")
  .child(a).delete().then(function(data){
-    db.ref("latestOffers").orderByChild("fileName").equalTo(a).on("value",data=>{
+    db.ref("topBanner").orderByChild("fileName").equalTo(a).on("value",data=>{
         data.forEach(o=>{
-          db.ref("latestOffers").child(o.key).set(null)
+          db.ref("topBanner").child(o.key).set(null)
         })
    })
    
