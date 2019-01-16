@@ -37,11 +37,11 @@ export default class extends Component {
           </h3>
 
         </div>
-        <div className="common-button app-accent">
           <Link to={this.state.link} style={{ color: "white" }}>
+        <div className="common-button app-accent">
             View
-          </Link>
         </div>
+          </Link>
       </div>
     );
   }

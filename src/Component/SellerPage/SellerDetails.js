@@ -1,60 +1,111 @@
 import React, { Component } from 'react'
-import {db } from '../../config';
-import {Spin} from 'antd';
+import { db } from '../../config'
+import { Spin } from 'antd'
 export default class SellerDetails extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            email: "",
-            name: "",
-      phone: "",
-      companyName : "",
-      yearOfEstab : "",
-      liscenceNo : "",
-      staffNo : "",
-      vatNo : "",
-      companyAddr:"",
-      aboutCompany:"",
-      location:'',
-      spin:true,
-        }
+  constructor (props) {
+    super(props)
+    this.state = {
+      email: '',
+      name: '',
+      phone: '',
+      companyName: '',
+      yearOfEstab: '',
+      liscenceNo: '',
+      staffNo: '',
+      vatNo: '',
+      companyAddr: '',
+      aboutCompany: '',
+      location: '',
+      url: '',
+      spin: true
     }
-    componentDidMount(){
-        var that = this
+  }
+  componentDidMount () {
+    var that = this
     var item = {}
     var products = []
-    db.ref("users").child(this.props.match.params.id).child("details").on("value",function(data){
-         var common = data.val()
+    db.ref('users')
+      .child(this.props.match.params.id)
+      .child('details')
+      .on('value', function (data) {
+        var common = data.val()
 
-         that.setState({spin:false,name:common.name,email:common.email,phone:common.phone,
-        companyName : common.companyName,
-        yearOfEstab : common.yearOfEstab,
-        liscenceNo : common.liscenceNo,
-        staffNo : common.staffNo,
-        vatNo : common.vatNo,
-        companyAddr:common.companyAddr,
-        aboutCompany:common.aboutCompany,
-        location:common.location})
-    })
-    }
-  render() {
+        that.setState({
+          spin: false,
+          name: common.name,
+          email: common.email,
+          phone: common.phone,
+          companyName: common.companyName,
+          yearOfEstab: common.yearOfEstab,
+          liscenceNo: common.liscenceNo,
+          staffNo: common.staffNo,
+          vatNo: common.vatNo,
+          companyAddr: common.companyAddr,
+          aboutCompany: common.aboutCompany,
+          location: common.location,
+          url: common.url
+        })
+      })
+  }
+  render () {
     return (
       <div>
-      {this.state.spin ? <div style={{display:'flex',margin:'auto',height:'100vh',justifyContent:'center',alignItems:'center'}}>
-        <Spin/>
-        </div> : <div style={{display:'flex',flexDirection:'column',justifyContent:"space-between",height:'60vh'}}>
-        <div>Name:{this.state.name}</div>
-        <div>Email:{this.state.email}</div>
-        <div>CompanyName:{this.state.companyName}</div>
-        <div>Phone:{this.state.phone}</div>
-        <div>AboutCompany:{this.state.aboutCompany}</div>
-        <div>No of staff:{this.state.staffNo}</div>
-        <div>Company Address:{this.state.companyAddr}</div>
-        <div>VatNo:{this.state.vatNo}</div>
-        <div>Location:{this.state.location}</div>
-        <div>LiscenceNo:{this.state.liscenceNo}</div>
-        <div>YearOf Establishment:{this.state.yearOfEstab}</div>
-        </div>}
+        {this.state.spin ? (
+          <div
+            style={{
+              display: 'flex',
+              margin: 'auto',
+              height: '100vh',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Spin />
+          </div>
+        ) : (
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              height: '60vh'
+            }}
+          >
+            <div>
+              <span style={{ fontSize: '18px', fontWeight: 500 }}>Email:</span>
+             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.email}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+                CompanyName:
+              </span>
+              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.companyName}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '18px', fontWeight: 500 }}>Phone:</span>
+              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.phone}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+                Location:
+              </span>
+              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.location}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+                Company Address:
+              </span>
+              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.companyAddr}</span>
+            </div>
+            <div>
+              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+                AboutCompany:
+              </span>
+              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.aboutCompany}</span>
+            </div>
+          </div>
+        )}
       </div>
     )
   }

@@ -10,7 +10,7 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <Main url={this.props.match.url}>
+        <Main url={this.props.match.url} param={this.props.match.params.id}>
           <Switch>
             <Route path="/seller/:id"  exact component={SellerDetails} />
             <Route path="/seller/:id/products"  component={SellerProducts} />

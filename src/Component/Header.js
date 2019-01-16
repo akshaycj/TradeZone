@@ -254,7 +254,7 @@ class Header extends React.Component {
             </Link>
 
             <div className="head22">
-              <Select
+              {/* <Select
                 showSearch
                 showArrow={false}
                 className="select"
@@ -309,7 +309,7 @@ class Header extends React.Component {
                 <Option value="ABC">ABC</Option>
                 <Option value="CDE">CDE</Option>
                 <Option value="EFG">EFG</Option>
-              </Select>
+              </Select> */}
               <Search className="search" />
               <div className="search-button">
                 <Icon

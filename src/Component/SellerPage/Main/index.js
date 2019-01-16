@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Menu, Icon } from "antd";
+import { Menu, Icon,Spin } from "antd";
 import { Link, Redirect } from "react-router-dom";
-import { Auth } from "../../../config";
+import { Auth, db } from "../../../config";
 
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -15,10 +15,19 @@ export default class extends Component {
       logout: false,
       current: "mail",
       productUrl:'',
+      img:'',
+      load:true
     }
   };
 componentDidMount(){
+  var that = this
    var product = this.props.url+"/products"
+   var url = ''
+   db.ref('users').child(this.props.param+"").child("details").child('url').on("value",function(data){
+     
+     url = data.val()
+     that.setState({load:false,img:url})
+   })
    this.setState({productUrl:product})
 }
   onLogout = () => {
@@ -27,7 +36,6 @@ componentDidMount(){
   };
 
   handleClick = e => {
-    console.log("click ", e);
     this.setState({
       current: e.key
     });
@@ -49,11 +57,13 @@ componentDidMount(){
         
         <div className="account-profile-container">
           <div className="avatar">
+          {this.state.load ? <Spin/> : 
             <img
-              src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+              src={this.state.img}
               width="100%"
               height="100%"
             />
+          }
           </div>
           <div className="menu" style={{ width: "100%" }}>
             <Menu
