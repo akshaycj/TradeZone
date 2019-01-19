@@ -12,6 +12,7 @@ import c from "./pics/3.jpg";
 import d from "./pics/4.jpg";
 import Featured from "./Featured";
 import LatestOffers from "./Latestoffers";
+import FeaturedServices from "./FeaturedServices";
 
 class Grid extends React.Component {
   render() {
@@ -27,7 +28,8 @@ class Grid extends React.Component {
         <br/>
         <br/>
         <LatestOffers/>
-        <Featured />
+        <br/>
+        <FeaturedServices />
 
       </div>
     );

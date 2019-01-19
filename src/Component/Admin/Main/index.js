@@ -54,12 +54,15 @@ export default class extends Component {
                 <Link to="/authUser/featured">Featured</Link>
               </MenuItem>
               <MenuItem key="4">
-                <Link to="/authUser/latest">Latest Offers</Link>
+                <Link to="/authUser/featuredServices">Featured Services</Link>
               </MenuItem>
               <MenuItem key="5">
-                <Link to="/authUser/CategoryUpdate">CategoryUpdate</Link>
+                <Link to="/authUser/latest">Latest Offers</Link>
               </MenuItem>
               <MenuItem key="6">
+                <Link to="/authUser/CategoryUpdate">CategoryUpdate</Link>
+              </MenuItem>
+              <MenuItem key="7">
                 <Link to="/authUser/topBanner">TopBanner</Link>
               </MenuItem>
 

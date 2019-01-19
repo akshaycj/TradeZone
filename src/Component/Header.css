@@ -21,7 +21,7 @@
   width: 100%;
   margin: auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   
 }
 .head22 {
@@ -43,7 +43,7 @@
   margin: 4px;
 }
 .search {
-  width: 60%;
+  width: 57%;
   margin: 3px;
 }
 

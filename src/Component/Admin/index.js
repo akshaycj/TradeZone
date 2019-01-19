@@ -4,6 +4,8 @@ import Main from "./Main";
 import AddProduct from "./Addproduct/Addproduct";
 import SignUp from './User';
 import Featured from './FeaturedProducts';
+import FeaturedServices from './FeaturedServices';
+
 import LatestOffers from './LatestOffers/LatestOffers'
 import TopBanner from './TopBanner/TopBanner'
 import CategoryUpdate from "./CategoryUpdate/CategoryUpdate";
@@ -15,6 +17,7 @@ export default class extends Component {
           <Switch>
             <Route path="/authUser"  exact component={SignUp} />
             <Route path="/authUser/featured"  component={Featured} />
+            <Route path="/authUser/featuredServices"  component={FeaturedServices} />
             <Route path="/authUser/add"   component={AddProduct} />
             <Route path="/authUser/latest"   component={LatestOffers} />
             <Route path="/authUser/CategoryUpdate"   component={CategoryUpdate} />

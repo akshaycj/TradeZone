@@ -181,7 +181,7 @@ class Product extends React.Component {
 									</span>
 								<div>
 
-								<div><Link to={this.state.sellerid}>	{this.state.sellerName},</Link>{this.state.sellerLocation}</div>
+								<div><span style={{fontSize:'20px',fontWeight:600}}><Link to={this.state.sellerid}>{this.state.sellerName},</Link></span>{this.state.sellerLocation}</div>
 												
 								</div>
 									<div className="rate">

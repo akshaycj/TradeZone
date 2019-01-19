@@ -239,19 +239,21 @@ class Header extends React.Component {
             </div>
           </Dropdown>
           <div className="head3" style={{ maxHeight: 70 }}>
+            <div style={{width:'20%'}}> 
+
             <Link to="/">
               <img
                 src={i}
                 style={{
-                  display: 'block',
                   transform: 'scale(2)',
-                  width: '80%',
+                  width: '100%',
                   margin: 8,
-                  maxWidth: '100px',
+                  maxWidth: '110px',
                   minWidth: '50px',
                 }}
               />
             </Link>
+            </div>
 
             <div className="head22">
               {/* <Select
