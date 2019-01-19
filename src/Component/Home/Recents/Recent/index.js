@@ -16,9 +16,9 @@ export default class extends Component {
   }
   render() {
     return (
-      <Link to={this.state.link} style={{ color: "white" }}>
-
+      
       <div className="recent-card">
+      <Link to={this.state.link} style={{ color: "white" }}>
         <img src={this.props.value.data.urls[0]} style={{ margin: 5 }} width="90%" height={180} />
 
         <div
@@ -40,8 +40,8 @@ export default class extends Component {
 
         </div>
        
-      </div>
           </Link>
+      </div>
     );
   }
 }
