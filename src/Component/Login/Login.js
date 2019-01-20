@@ -171,7 +171,7 @@ closeSignup(){
     return (
       <div>
         <div className="backgroundlogin">
-        {this.props.showSellerLogin ?  <div className="signup" style={{height : "90vh"}}>
+        {this.props.showSellerSignUp ?  <div className="signup" style={{height : "90vh"}}>
               <Icon
                 type="close-circle"
                 theme="outlined"
@@ -272,7 +272,8 @@ closeSignup(){
                   </div>
                 </span>
               </div>
-            </div> : 
+            </div> 
+            : 
           this.state.showLogin ? (
             <div className="login">
               <Icon
@@ -330,7 +331,8 @@ closeSignup(){
                 </div>
               </div>
             </div>
-          ) : <div className="signup">
+          ) : 
+          <div className="signup">
           <Icon
             type="close-circle"
             theme="outlined"

@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 import AuthStateAction from '../Actions/AuthSate';
 import { Auth, db } from '../../config';
 import { connect } from 'react-redux';
+import Login from '../Login/Login';
 class Product extends React.Component {
 	constructor(props) {
 		super(props);
@@ -20,6 +21,7 @@ class Product extends React.Component {
 			productName: '',
 			description:"",
 			specification:"",
+			address:'',
 			category:"",
 			tags:[],
 			areaofuseage:"",
@@ -31,6 +33,7 @@ class Product extends React.Component {
 			rating: '',
 			sellerLocation:"",
 			expand:false,
+			showLogin:false,
 		};
 	}
 
@@ -96,7 +99,7 @@ class Product extends React.Component {
 					that.setState({ phone: data.val().phone });
 				});
 			} else {
-				this.setState({ displayMessage: true });
+				this.setState({ displayMessage: true,showLogin:true });
 			}
 		
 	}
@@ -120,16 +123,19 @@ class Product extends React.Component {
 		var user = this.state.user
 			if (user) {
 				db.ref('users').child(user.uid + '').child("details").on('value', function(data) {
-					that.setState({ email: data.val().email });
+					that.setState({ email: data.val().email,address:data.val().companyAddr });
 				});
 				this.setState({ loginStateforContact: true });
 			} else {
-				this.setState({ displayMessage: true });
+				this.setState({ displayMessage: true,showLogin:true });
 			}
 		
 	}
 	onClickMore = () =>{
 		this.setState({expand:!this.state.expand})
+	}
+	closeLogin = () =>{
+		this.setState({showLogin:false})
 	}
 	render() {
 		return (
@@ -140,6 +146,13 @@ class Product extends React.Component {
 					</div>
 				) : (
 					<div style={{width:'100%'}}>
+					{this.state.showLogin ? 
+											<Login
+											value={this.closeLogin}
+            								button="user"
+            								showSellerSignUp={false}
+          									/> : null
+											}
 						<Card className="card">
 							<div className="details">
 								<div className="productpic">
@@ -233,9 +246,11 @@ class Product extends React.Component {
 										{this.state.loginState ?  (
 											<div className="phoneNo">
 												Phone No:
-												{this.state.phone}
+												<b>{this.state.phone}</b>
 											</div>
 										) : (
+											<div>
+											
 											<Button
 												type="primary"
 												ghost
@@ -244,13 +259,19 @@ class Product extends React.Component {
 											>
 												View Phone No
 											</Button>
+											</div>
 										)}
 										{this.state.loginStateforContact ? (
-											<div className="phoneNo">
+											<div className="phoneNo" style={{width:'50%'}}>
 												Email:
-												{this.state.email}
+												<b>{this.state.email}</b>
+												<br/>
+												Address:
+												<b>{this.state.address}</b>
 											</div>
 										) : (
+											<div>
+											
 											<Button
 												type="danger"
 												ghost
@@ -259,6 +280,7 @@ class Product extends React.Component {
 											>
 												Contact seller
 											</Button>
+											</div>
 										)}
 									</div>
 								</div>

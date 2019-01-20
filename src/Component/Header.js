@@ -19,7 +19,7 @@ class Header extends React.Component {
     super(props);
     this.state = {
       showLogin: false,
-      showSellerLogin: false,
+      showSellerSignUp: false,
       redirect: false,
       loggedin: false,
       type: '',
@@ -57,7 +57,7 @@ class Header extends React.Component {
   }
 
   getSellerLogin() {
-    this.setState({ showSellerLogin: true });
+    this.setState({ showSellerSignUp: true });
   }
 
   loginVal(data) {
@@ -65,7 +65,7 @@ class Header extends React.Component {
   }
 
   sellerLoginVal(dataS) {
-    this.setState({ showSellerLogin: dataS, showLogin: false });
+    this.setState({ showSellerSignUp: dataS, showLogin: false });
   }
 
   signUserOut() {
@@ -214,11 +214,11 @@ class Header extends React.Component {
         {this.state.showLogin ? (
           <Login button="user" value={this.loginVal.bind(this)} />
         ) : null}
-        {this.state.showSellerLogin ? (
+        {this.state.showSellerSignUp ? (
           <Login
             button="seller"
             value={this.sellerLoginVal.bind(this)}
-            showSellerLogin={this.state.showSellerLogin}
+            showSellerSignUp={this.state.showSellerSignUp}
           />
         ) : null}
 
