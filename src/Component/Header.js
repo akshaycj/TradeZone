@@ -1,12 +1,13 @@
 import React from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link,withRouter } from 'react-router-dom';
 import { Menu, Dropdown, Icon, Select, Input, Button, Avatar } from 'antd';
 import Login from './Login/Login.js';
 import Search from './Search';
 import i from './pics/icon1.png';
 import j from './pics/icon2.png';
 import { connect } from 'react-redux';
+
 import { Auth, db } from '../config';
 import AuthStateAction from './Actions/AuthSate';
 import { SignOut } from './Actions/Login';
@@ -23,6 +24,7 @@ class Header extends React.Component {
       redirect: false,
       loggedin: false,
       type: '',
+      searchWord:'',
     };
   }
 
@@ -72,6 +74,12 @@ class Header extends React.Component {
     this.props.SignOut();
     this.props.AuthStateAction();
     this.setState({ loggedin: false });
+  }
+  recieveSearchWord = (word) =>{
+   this.setState({searchWord:word})
+  }
+  onClickSearchButton = () =>{
+    this.props.history.push(`/search/${this.state.searchWord}`)
   }
   render() {
     const menu = (
@@ -312,8 +320,8 @@ class Header extends React.Component {
                 <Option value="CDE">CDE</Option>
                 <Option value="EFG">EFG</Option>
               </Select> */}
-              <Search className="search" />
-              <div className="search-button">
+              <Search className="search" recieveSearchWord={this.recieveSearchWord} />
+              <div className="search-button" onClick={this.onClickSearchButton}>
                 <Icon
                   type="arrow-left"
                   className="arrow-anim"
@@ -391,4 +399,4 @@ const mapActionsToProps = {
   AuthStateAction: AuthStateAction,
   SignOut: SignOut,
 };
-export default connect(mapStateToProps, mapActionsToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapActionsToProps)(Header));

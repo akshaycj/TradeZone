@@ -25,6 +25,7 @@ export default class extends Component {
           this.setState({ result });
         }.bind(this)
       );
+      this.props.recieveSearchWord(value)
   };
   render() {
     const { result } = this.state;

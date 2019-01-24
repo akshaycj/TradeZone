@@ -66,6 +66,7 @@
   display: none;
 }
 .search-button {
+  cursor: pointer;
   margin: "3px";
   width: 150px;
   background-color: #63b5f5;

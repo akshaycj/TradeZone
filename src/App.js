@@ -13,7 +13,7 @@ import Fillter from "./Component/Fillter";
 import Seller from "./Component/SellerPage";
 import Admin from "./Component/Admin/index";
 import SellerSignup from "./Component/SellerSignup";
-
+import SearchResult from './Component/SearchResult/SearchResult';
 
 class App extends Component {
   render() {
@@ -23,6 +23,7 @@ class App extends Component {
           <Layout>
             <Switch>
               <Route path="/" exact component={Home} />
+              <Route path="/search/:id" exact component={SearchResult} />
               <Route path="/login" component={Login} />
               <Route path="/account" component={Account} />
               <Route path="/search" component={Fillter} />

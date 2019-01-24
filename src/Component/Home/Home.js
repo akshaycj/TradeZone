@@ -23,6 +23,7 @@ class Home extends Component {
   componentDidMount(){
     this.props.AuthStateAction()
   }
+  
   render() {
     return (
       <div className="Home">
