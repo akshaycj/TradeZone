@@ -261,8 +261,11 @@ closeSignup(){
                     style={{width : "90%" , margin : "10px" , borderRadius : 15}}
                     onChange={this.onAboutCompany}
                   />
+                  <div style={{display:'flex',justifyContent:'center',alignSelf:'center',margin:'5px'}}>
+
                   <PicturesWall value={this.onGetLogo}></PicturesWall>
                     {this.state.showErr === true ? <div>{this.state.err}</div> : null}
+                  </div>
                   <div
                     className="common-button app-primary-dark"
                     style={{ width: "40%", margin: "auto", borderRadius: 15 }}

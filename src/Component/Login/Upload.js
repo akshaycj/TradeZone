@@ -28,7 +28,7 @@ class PicturesWall extends React.Component {
           onChange={this.handleChange.bind(this)}
         > 
          <Button>
-      <Icon type="upload" /> Upload
+      <Icon type="upload" /> Upload Logo
     </Button>
         </Upload>
         
