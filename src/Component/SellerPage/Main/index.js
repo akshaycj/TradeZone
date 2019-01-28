@@ -49,14 +49,14 @@ componentDidMount(){
           style={{ padding: "7px", alignSelf: "center" }}
         >
           <div className="top-nav-elements">
-            <Link to={this.props.url}>SellerDetails</Link>
+            <Link to={this.props.url}>Seller Details</Link>
           </div>
-          <div className="top-nav-elements">SellerProducts</div>
+          <div className="top-nav-elements">Seller Products</div>
           
         </div>
         
         <div className="account-profile-container">
-          <div className="avatar">
+          <div className="avatar" style={{alignItems:'center',justifyContent:'center',display:'flex'}}>
           {this.state.load ? <Spin/> : 
             <img
               src={this.state.img}
@@ -72,10 +72,10 @@ componentDidMount(){
               defaultSelectedKeys="1"
             >
               <MenuItem key="1">
-                <Link to={this.props.url}>SellerDetails</Link>
+                <Link to={this.props.url}>Seller Details</Link>
               </MenuItem>
               <MenuItem key="2">
-                <Link to={this.state.productUrl}>SellerProducts</Link>
+                <Link to={this.state.productUrl}>Seller Products</Link>
               </MenuItem>
              
             </Menu>

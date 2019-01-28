@@ -79,7 +79,10 @@ class Header extends React.Component {
    this.setState({searchWord:word})
   }
   onClickSearchButton = () =>{
-    this.props.history.push(`/search/${this.state.searchWord}`)
+    if(this.state.searchWord.length != 0 ){
+
+      this.props.history.push(`/search/${this.state.searchWord}`)
+    }
   }
   render() {
     const menu = (

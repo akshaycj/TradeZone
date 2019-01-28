@@ -73,36 +73,36 @@ export default class SellerDetails extends Component {
             }}
           >
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>Email:</span>
-             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.email}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>Email:</span>
+             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.email}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 CompanyName:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.companyName}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.companyName}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>Phone:</span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.phone}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>Phone:</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.phone}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 Location:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.location}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.location}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 Company Address:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.companyAddr}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.companyAddr}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 AboutCompany:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.aboutCompany}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.aboutCompany}</span>
             </div>
           </div>
         )}

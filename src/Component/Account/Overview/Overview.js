@@ -89,8 +89,8 @@ import {connect } from 'react-redux';
       {this.state.spin ? <div style={{display:'flex',margin:'auto',height:'100vh',justifyContent:'center',alignItems:'center'}}>
         <Spin/>
         </div> : 
-        <div>
-        {this.state.updateMode ?  <div>
+        <div> 
+        {this.state.updateMode ?  <div style={{display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100vh'}}>
             <Input   value={this.state.name} name="name" onChange={this.changeField}/>
             <Input  value={this.state.email} name="email" onChange={this.changeField}/> 
             <Input value={this.state.companyName} name="companyName" onChange={this.changeField}/>
@@ -103,65 +103,72 @@ import {connect } from 'react-redux';
             <Input value={this.state.companyAddr} name="companyAddr" onChange={this.changeField}/>
             <Input value={this.state.aboutCompany} name="aboutCompany" onChange={this.changeField}/>
             
-            <Button type="default" onClick={this.updateValue}>Update value</Button>
+            <Button type='primary' onClick={this.updateValue} style={{width:'30%'}}>Update value</Button>
 
         </div> : 
-        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:"flex-start",height:'60vh'}}>
+        <div  style={{display:'flex',flexDirection:'row'}}>
+
+        
+        <div style={{display:'flex',flexDirection:'column',alignItems:'flex-start',justifyContent:"space-around",height:'100vh'}}>
                 <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>Name:</span>
-             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.name}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>Name:</span>
+             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.name}</span>
             </div>
         <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>Email:</span>
-             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.email}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>Email:</span>
+             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.email}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 CompanyName:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.companyName}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.companyName}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>Phone:</span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.phone}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>Phone:</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.phone}</span>
             </div>
           
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>LiscenceNo:</span>
-             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.liscenceNo}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>LiscenceNo:</span>
+             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.liscenceNo}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>No of staff:</span>
-             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.staffNo}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>No of staff:</span>
+             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.staffNo}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>Vat No:</span>
-             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.vatNo}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>Vat No:</span>
+             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.vatNo}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>Year of Establishment:</span>
-             <span style={{fontSize:'20px',fontWeight:'600'}}> {this.state.yearofEstab}</span>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>Year of Establishment:</span>
+             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.yearofEstab}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 Location:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.location}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.location}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 Company Address:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.companyAddr}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.companyAddr}</span>
             </div>
             <div>
-              <span style={{ fontSize: '18px', fontWeight: 500 }}>
+              <span style={{ fontSize: '18px', fontWeight: '600' }}>
                 AboutCompany:
               </span>
-              <span style={{fontSize:'20px',fontWeight:'600'}}>{this.state.aboutCompany}</span>
+              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.aboutCompany}</span>
             </div>
-          <Button onClick={this.onClickUpdate}>Update</Button>
+          
           </div>
+          <div>
+        <Button type='ghost' onClick={this.onClickUpdate}>Update</Button>
+        </div>
+        </div>
         }
         </div>}
       </div>
