@@ -18,6 +18,7 @@ export default function AddProductAction(
   specififcation,
   weight,
 ) {
+  var length = 0;
   const path = db
     .ref("users")
     .child(uid)
@@ -36,6 +37,7 @@ export default function AddProductAction(
               value.urls.push(downloadURL);
             })
             .then(function(data) {
+              length = length + 1
               db.ref("users")
                 .child(uid).child("products")
                 .child(path)
@@ -70,9 +72,12 @@ export default function AddProductAction(
             });
         });
     });
-    dispatch({
-      type: ADDPRODUCT,
-      value
-    });
+    if(length !== pics.length){
+
+      dispatch({
+        type: ADDPRODUCT,
+        value
+      });
+    }
   };
 }

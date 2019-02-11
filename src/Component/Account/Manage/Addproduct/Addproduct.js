@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Input, Select,Spin, Upload, Icon, Modal, Button, Tag, Tooltip } from "antd";
 import "./Addproduct.css";
-import {db} from './../../../config';
+import {db} from '../../../../config';
 import PicturesWall from "./Upload";
-import AuthStateAction from '../../Actions/AuthSate';
+import AuthStateAction from '../../../Actions/AuthSate';
 import { connect } from "react-redux";
-import AddProductAction from "./../../Actions/AddProduct";
+import AddProductAction from "../../../Actions/AddProduct";
 const Option = Select.Option;
 
 class AddProduct extends Component {
@@ -25,52 +25,71 @@ class AddProduct extends Component {
       weight:"",
       specififcation:"",
       urls:[],
+      listUrl:[],
       categoryList:[],
-      load:true
+      load:true,
+      seller:''
     };
   }
  
+componentDidMount(){
 
 
-  componentDidMount() {
-    this.props.AuthStateAction();
-    var that = this
-    
-    db.ref("category").on("value",function(data){
-      var list = []
-      data.forEach(i=>{
-       list.push(i.val())
-      })
-      that.setState({load:false,categoryList:list})
+  this.setState({load:true})
+  var that = this
+  db.ref('products').child(this.props.val).on('value',function(data){
+    var product = {}
+    const {productName ,category,description,tags,specififcation,urls,seller,price,weight,color,areaofusage} = data.val()
+    typeof tags === 'undefined' ? [] : tags
+    that.setState({productName:typeof productName === 'undefined' ? "" : productName,
+    tags:typeof tags === 'undefined' ? [] : tags,
+    category:typeof category === 'undefined' ? "" : category,description:typeof description === 'undefined' ? "" : description,
+    specififcation:typeof specififcation === 'undefined' ? "" : specififcation,
+      listUrl:typeof urls === 'undefined' ? [] : urls,
+      seller:typeof seller === 'undefined' ? "" : seller,
+      price:typeof price === 'undefined' ? "" : price,weight:typeof weight === 'undefined' ? "" : weight,
+      color:typeof color === 'undefined' ? "" : color,areaofusage:typeof areaofusage === 'undefined' ? "" : areaofusage,
+      load:false
     })
-  }
-  static getDerivedStateFromProps(props,state){
-    console.log(props.urls,state.urls)
-      if(props.urls !== state.urls){
-        return{
-          urls:props.urls,
-        
-        }
-      }
-      return  null
-  }
-  componentDidUpdate(prevProps,prevState){
-  if( prevProps.urls !== this.props.urls ){
-    alert("Product added successfully")
-    this.setState({ dat:[],
-      load:false,
-      productName:'',
-      category:'',
-      tags:[],
-      description:'',  
-      price:'',
-      color:'',
-      areaofusage:'',
-      specififcation:'',
-      weight:''})
-  }
+  })
 
+  this.props.AuthStateAction();
+  var that = this
+  
+  db.ref("category").on("value",function(data){
+    var list = []
+    data.forEach(i=>{
+     list.push(i.val())
+    })
+    that.setState({load:false,categoryList:list})
+  })
+}
+
+  componentDidUpdate(prevProps,prevState) {
+    if(prevProps.val !== this.props.val){
+
+      this.setState({load:true})
+      var that = this
+      db.ref('products').child(this.props.val).on('value',function(data){
+        var product = {}
+        const {productName ,category,description,tags,specififcation,urls,seller,price,weight,color,areaofusage} = data.val()
+        typeof tags === 'undefined' ? [] : tags
+        that.setState({productName:typeof productName === 'undefined' ? "" : productName,
+        tags:typeof tags === 'undefined' ? [] : tags,
+        category:typeof category === 'undefined' ? "" : category,description:typeof description === 'undefined' ? "" : description,
+        specififcation:typeof specififcation === 'undefined' ? "" : specififcation,
+          listUrl:typeof urls === 'undefined' ? [] : urls,
+          seller:typeof seller === 'undefined' ? "" : seller,
+          price:typeof price === 'undefined' ? "" : price,weight:typeof weight === 'undefined' ? "" : weight,
+          color:typeof color === 'undefined' ? "" : color,areaofusage:typeof areaofusage === 'undefined' ? "" : areaofusage,
+          load:false
+        })
+      })
+    }
+  
   }
+  
+  
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     this.setState({ tags });
@@ -91,6 +110,7 @@ class AddProduct extends Component {
     if (inputValue && tags.indexOf(inputValue) === -1) {
       tags = [...tags, inputValue];
     }
+    console.log(tags);
     this.setState({
       tags,
       inputVisible: false,
@@ -105,40 +125,68 @@ class AddProduct extends Component {
   }
 
   onSubmit() {
-    this.setState({load:true})
-    this.props.AddProductAction(
-      this.state.dat,
-      this.state.productName,
-      this.props.user.uid,
-      this.state.category,
-      this.state.tags,
-      this.state.description,  
-      this.state.price,
-      this.state.color,
-      this.state.areaofusage,
-      this.state.specififcation,
-      this.state.weight
-    );
+    const { productName,
+      category,
+      tags,
+      description,
+      price,
+      color,
+      areaofusage,
+      specififcation,
+      weight,
+      seller} = this.state
+    db.ref("products").child(this.props.val).set({
+      
+        productName,
+        urls:this.state.listUrl,
+        category,
+        tags,
+        description,
+        price,
+        color,
+        areaofusage,
+        specififcation,
+        weight,
+        seller      
+    }).then(()=>{
+      db.ref('users').child(this.state.seller).child('products').child(this.props.val).set({
+        productName,
+        urls:this.state.listUrl,
+        category,
+        tags,
+        description,
+        price,
+        color,
+        areaofusage,
+        specififcation,
+        weight,
+        seller  })
+    }).then(()=>{
+      alert('Prodct updated successfully')
+    })
   }
 
   render() {
+    
     const { tags, inputVisible, inputValue } = this.state;
     return (
       <div>
 
       {this.state.load === true  ? <Spin></Spin>:
         <div>
-        <h1>Add Product</h1>
+        <h1 className='heading-add'>Update Product</h1>
         <div className="add-main">
           <Input
             placeholder="Product Name"
             onChange={e => {
               this.setState({ productName: e.target.value });
             }}
+            value={this.state.productName}
             style={{ margin: 10 }}
           />
           <Select
             placeholder="Select Category"
+            value={this.state.category}
             onChange={value => {
               this.setState({ category: value });
             }}
@@ -151,20 +199,28 @@ class AddProduct extends Component {
           <Input.TextArea
             style={{ margin: 10 }}
             placeholder="Product description"
+            value={this.state.description}
             onChange={a => {
               this.setState({ description: a.target.value });
             }}
           />
           <Input placeholder="Price" style={{ margin: "10px" }}   onChange={e => {
               this.setState({ price: e.target.value });
-            }}/>
+              
+            }}
+            value={this.state.price}
+            />
           <Input placeholder="Product Weight" style={{ margin: 10 }}   onChange={e => {
               this.setState({ weight: e.target.value });
-            }} />
-          <Input placeholder="Colour" style={{ margin: "10px" }}    onChange={e => {
+
+            }} 
+              value={this.state.weight}
+            />
+          <Input placeholder="Colour" style={{ margin: "10px" }} value={this.state.color}    onChange={e => {
               this.setState({ color: e.target.value });
             }}/>
           <Input.TextArea
+            value={this.state.specififcation}
             placeholder="Add Specification Details"
             style={{ margin: 10 }}
             autosize={{ minRows: 2, maxRows: 5 }}
@@ -174,7 +230,8 @@ class AddProduct extends Component {
           />
           <Input placeholder="Area Of Usage" style={{ margin: "10px" }}   onChange={e => {
               this.setState({ areaofusage: e.target.value });
-            }} />
+            }}
+            value={this.state.areaofusage} />
           <div
             style={{
               display: "flex",
@@ -227,16 +284,14 @@ class AddProduct extends Component {
               </Tag>
             )}
           </div>
-          <div style={{ marginTop: 10 }}>
-            <PicturesWall value={this.getdata.bind(this)} />
-          </div>
+          
 
           <div
             className="common-button app-accent"
             style={{ marginTop: "auto" }}
             onClick={this.onSubmit.bind(this)}
           >
-            + Add
+            Update
           </div>
         </div>
       </div>

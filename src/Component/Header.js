@@ -323,8 +323,8 @@ class Header extends React.Component {
                 <Option value="CDE">CDE</Option>
                 <Option value="EFG">EFG</Option>
               </Select> */}
-              <Search className="search" recieveSearchWord={this.recieveSearchWord} />
-              <div className="search-button" onClick={this.onClickSearchButton}>
+              <Search className="search" recieveSearchWord={this.recieveSearchWord} onClickSearchButton={this.onClickSearchButton} />
+              <div className="search-button" onClick={this.onClickSearchButton}  >
                 <Icon
                   type="arrow-left"
                   className="arrow-anim"

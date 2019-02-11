@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import "./index.css";
 import { db, Auth } from "../../../config";
-import { List, Avatar, Button, Skeleton, Icon, Popconfirm } from "antd";
-
+import { List, Avatar, Button, Skeleton, Icon, Popconfirm ,Modal} from "antd";
+import Frame from './Frame'
+import Addproduct from "./Addproduct/Addproduct";
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
       products: [],
       loading: true,
-      uid: ""
+      uid: "",
+      modal:false,
+      key:'',
     };
   }
   componentDidMount() {
@@ -17,13 +20,14 @@ export default class extends Component {
     Auth.onAuthStateChanged(
       function(user) {
         if (user) {
-          console.log("user", user.uid);
+          
           this.setState({ uid: user.uid });
           db.ref("users")
             .child(this.state.uid).child("products")
             .on(
               "value",
               function(dataSnap) {
+                
                 var data = [];
                 dataSnap.forEach(element => {
                   var d = {
@@ -40,48 +44,50 @@ export default class extends Component {
         }
       }.bind(this)
     );
+    
+  }
+  showModal = (key) =>{
+    console.log(key);
+    
+    this.setState({modal:true,key:key})
   }
   onDelete = key => {
+    
     db.ref("users")
-      .child(this.state.uid)
+      .child(this.state.uid).child('products')
       .child(key)
       .remove();
     db.ref("products")
       .child(key)
       .remove();
   };
+  handleOk = ()  =>{
+this.setState({modal:false})
+  }
+  handleCancel = ()=>{
+    this.setState({modal:false})
+  }
   render() {
     return (
       <div>
         <h2>Manage your products:</h2>
         <br />
+         <Modal
+          title="Update Product"
+          visible={this.state.modal}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        ><Addproduct val={this.state.key} /></Modal>
         {this.state.products ? (
-          <List
-            className="demo-loadmore-list"
-            loading={this.state.loading}
-            itemLayout="horizontal"
-            dataSource={this.state.products}
-            renderItem={item => (
-              <List.Item
-                actions={[
-                  <Popconfirm
-                    title="Are you sure？"
-                    okText="Yes"
-                    cancelText="No"
-                    onConfirm={this.onDelete.bind(this, item.key)}
-                  >
-                    <Icon type="delete" style={{ fontSize: 18 }} />
-                  </Popconfirm>
-                ]}
-              >
-                <List.Item.Meta
-                  avatar={<Avatar src={item.urls[0] || ""} />}
-                  title={<a href="https://ant.design">{item.productName}</a>}
-                  description="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard"
-                />
-              </List.Item>
-            )}
-          />
+          <div style={{display:'flex',flexWrap:"wrap",justifyContent:"space-evenly]"}}>
+          {this.state.products.map(p=>(
+          <div style={{margin:'20px'}}>
+           <Frame value={p} showModal={this.showModal} onDelete={this.onDelete}/>
+          </div>
+        ))}
+
+        </div>
+           
         ) : (
           <h2>No Products</h2>
         )}

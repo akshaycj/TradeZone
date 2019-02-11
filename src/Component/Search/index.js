@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import { AutoComplete, Icon } from "antd";
+import { AutoComplete, Icon,Input } from "antd";
 import { db } from "../../config";
 
 const Option = AutoComplete.Option;
 
 export default class extends Component {
   state = {
-    result: []
+    result: [],
+    value:''
   };
 
   handleSearch = value => {
+      this.setState({value})
     let result = [];
     db.ref("products")
       .orderByChild("productName")
@@ -28,18 +30,17 @@ export default class extends Component {
       this.props.recieveSearchWord(value)
   };
   render() {
-    const { result } = this.state;
-    const children = result.map(name => {
-      return <Option key={name}>{name}</Option>;
-    });
+   
     return (
       <div className="search">
         <AutoComplete
+        dataSource={this.state.result}
           style={{ width: "100%" }}
           onSearch={this.handleSearch}
           placeholder="Search"
+          
         >
-          {children}
+        <Input value={this.state.value} onPressEnter={this.props.onClickSearchButton}></Input>
         </AutoComplete>
       </div>
     );

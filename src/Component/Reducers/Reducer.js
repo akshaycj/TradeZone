@@ -7,7 +7,7 @@ import {
 } from "../ActionCreators/ActionCreators";
 
 const initialState = {
-  
+  urls:[],
 };
 export default function Reducer(state = initialState, action) {
   switch (action.type) {

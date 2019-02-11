@@ -80,7 +80,7 @@ class Product extends React.Component {
 			});
 
 			db.ref('users').child(oath.val().seller + '').child("details").on('value', function(data) {
-				that.setState({ sellerName: data.val().name,sellerLocation:data.val().location, spin: false });
+				that.setState({ sellerName: data.val().companyName,sellerLocation:data.val().location, spin: false });
 			});
 		});
 		

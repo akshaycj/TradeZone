@@ -69,7 +69,7 @@ import {connect } from 'react-redux';
             that.setState({spin:false,name:common.name,email:common.email,phone:common.phone,
            companyName : common.companyName,
            yearofEstab : common.yearofEstab,
-           liscenceNo : common.liscenceNo,
+           licenseNo : common.liscenceNo,
            staffNo : common.staffNo,
            vatNo : common.vatNo,
            companyAddr:common.companyAddr,
