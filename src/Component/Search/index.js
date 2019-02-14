@@ -11,15 +11,16 @@ export default class extends Component {
   };
 
   handleSearch = value => {
-      this.setState({value})
+      
     let result = [];
     db.ref("products")
       .orderByChild("productName")
-      .startAt(value)
-      .endAt(value + "\uf8ff")
+      .startAt(value.toUpperCase())
+      .endAt(value.toLowerCase() + "\uf8ff")
       .once(
         "value",
         function(data) {
+          console.log(data.val())
           data.forEach(element => {
             result.push(element.val().productName);
           });
@@ -27,8 +28,11 @@ export default class extends Component {
           this.setState({ result });
         }.bind(this)
       );
-      this.props.recieveSearchWord(value)
   };
+  onSelectingValue = (value) =>{
+    this.props.recieveSearchWord(value)
+    this.setState({value})
+  }
   render() {
    
     return (
@@ -38,7 +42,7 @@ export default class extends Component {
           style={{ width: "100%" }}
           onSearch={this.handleSearch}
           placeholder="Search"
-          
+          onSelect={this.onSelectingValue}
         >
         <Input value={this.state.value} onPressEnter={this.props.onClickSearchButton}></Input>
         </AutoComplete>
