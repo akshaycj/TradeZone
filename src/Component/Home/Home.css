@@ -12,7 +12,6 @@
 }
 .home-category {
   padding: 10px;
-  height: 770px;
   width: 18%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   margin-left: 20px;
@@ -29,6 +28,7 @@
   .slider-home {
     width: 100%;
     margin: auto;
+    margin-bottom: 10%;
   }
   .recent-products {
     width: 100%;

@@ -6,6 +6,7 @@ import Login from './Login/Login.js';
 import Search from './Search';
 import i from './pics/icon1.png';
 import j from './pics/icon2.png';
+import search from './pics/search(1).png';
 import { connect } from 'react-redux';
 
 import { Auth, db } from '../config';
@@ -25,6 +26,7 @@ class Header extends React.Component {
       loggedin: false,
       type: '',
       searchWord:'',
+      showSearch:false
     };
   }
 
@@ -83,6 +85,9 @@ class Header extends React.Component {
 
       this.props.history.push(`/search/${this.state.searchWord}`)
     }
+  }
+  showSearchFun = () =>{
+    this.setState({showSearch:!this.state.showSearch})
   }
   render() {
     const menu = (
@@ -219,7 +224,6 @@ class Header extends React.Component {
         <Menu.Item onClick={this.signUserOut.bind(this)}>SignOut</Menu.Item>
       </Menu>
     );
-    console.log(this.state.type);
     return (
       <div>
         {this.state.showLogin ? (
@@ -232,7 +236,7 @@ class Header extends React.Component {
             showSellerSignUp={this.state.showSellerSignUp}
           />
         ) : null}
-
+        <div className='head-non-resp'>
         <div className="head1 app-primary-dark">
           <Dropdown overlay={menu} style={{ margin: '6px' }}>
             <span>
@@ -242,88 +246,20 @@ class Header extends React.Component {
           Help |
         </div>
         <div className="head2 app-primary">
-          <Dropdown overlay={menuforham}>
-            <div className="hamburger">
-              <span className="hamSpan" />
-              <span className="hamSpan" />
-              <span className="hamSpan" />
-            </div>
-          </Dropdown>
+         
           <div className="head3" style={{ maxHeight: 70 }}>
             <div style={{width:'20%'}}> 
 
             <Link to="/">
               <img
                 src={i}
-                style={{
-                  transform: 'scale(2)',
-                  width: '100%',
-                  margin: 8,
-                  maxWidth: '110px',
-                  minWidth: '50px',
-                }}
+               className='trade-icon'
               />
             </Link>
             </div>
-
+           
             <div className="head22">
-              {/* <Select
-                showSearch
-                showArrow={false}
-                className="select"
-                placeholder={
-                  <span>
-                    <Icon
-                      type="environment"
-                      style={{ fontSize: '12px', color: '#64b5f5' }}
-                    />
-                    <span
-                      style={{
-                        fontSize: '100%',
-                        color: '#64b5f5',
-                        padding: 10,
-                      }}
-                    >
-                      Location
-                    </span>
-                  </span>
-                }
-                optionFilterProp="children"
-                onChange={this.handleChange}
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0}
-              >
-                <Option value="ABC">ABC</Option>
-                <Option value="CDE">CDE</Option>
-                <Option value="EFG">EFG</Option>
-              </Select>
-              <Select
-                showSearch
-                showArrow={false}
-                className="select"
-                placeholder={
-                  <span>
-                    <img src={j} width={16} />
-                    <span style={{ fontSize: '100%', color: '#64b5f5' }}>
-                      {' '}
-                      Category
-                    </span>
-                  </span>
-                }
-                optionFilterProp="children"
-                onChange={this.handleChange}
-                filterOption={(input, option) =>
-                  option.props.children
-                    .toLowerCase()
-                    .indexOf(input.toLowerCase()) >= 0}
-              >
-                <Option value="ABC">ABC</Option>
-                <Option value="CDE">CDE</Option>
-                <Option value="EFG">EFG</Option>
-              </Select> */}
-              <Search className="search" recieveSearchWord={this.recieveSearchWord} onClickSearchButton={this.onClickSearchButton} />
+             <Search className="search" recieveSearchWord={this.recieveSearchWord} onClickSearchButton={this.onClickSearchButton} />
               <div className="search-button" onClick={this.onClickSearchButton}  >
                 <Icon
                   type="arrow-left"
@@ -332,6 +268,7 @@ class Header extends React.Component {
                 />
                 Search
               </div>
+              
               {this.state.loggedin ? 
                   this.state.type === 'seller' ? (
                 <Dropdown overlay={userDropdownMenu}>
@@ -391,6 +328,52 @@ class Header extends React.Component {
             </div>
           </div>
         </div>
+        </div>
+
+         <div className="head-resp">
+                  <div className='resp-top-bar app-primary-dark'>
+          Help |
+                  <Dropdown overlay={menu} style={{ margin: '6px' }}>
+            <span>
+              English <Icon type="down" />
+            </span>
+          </Dropdown>
+                  </div>
+                {this.state.showSearch ? 
+                <div className='resp-search-wrappers app-primary-dark'>
+              <Search recieveSearchWord={this.recieveSearchWord} onClickSearchButton={this.onClickSearchButton} />
+              <div className="search-button-resp" onClick={this.onClickSearchButton}  >
+                <Icon
+                  type="arrow-left"
+                  className="arrow-anim"
+                  style={{ marginRight: 5 }}
+                  
+                />
+                Search
+              </div>
+              <Icon type="close" style={{marign:10}} onClick={this.showSearchFun}/>
+                </div>
+               :  <div className='app-primary header-resp'>
+                  <Dropdown overlay={menuforham}>
+            <div className="hamburger">
+              <span className="hamSpan" />
+              <span className="hamSpan" />
+              <span className="hamSpan" />
+            </div>
+          </Dropdown>
+                  <div style={{width:'20%'}}> 
+                        <Link to="/">
+                          <img
+                            src={i}
+                          className='trade-icon'
+                          />
+                        </Link>
+                        </div>
+                <img src={search} className='resp-search-icon' onClick={this.showSearchFun} />
+           </div>
+                        }
+              
+              </div>
       </div>
     );
   }

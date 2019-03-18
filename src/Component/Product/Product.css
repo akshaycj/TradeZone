@@ -79,6 +79,11 @@
 }
 
 @media only screen and (max-width: 600px) {
+  .card {
+    width: 90%;
+    margin: auto;
+    margin-top: 1%;
+  }
   .productpic {
     width: 100%;
     display: flex;

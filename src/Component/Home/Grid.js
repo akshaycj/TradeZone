@@ -19,15 +19,10 @@ class Grid extends React.Component {
     
     return (
       <div className="sub">
-        
-
         <Featured />
         <br/>
-        <br/>
-       
-        <br/>
-        <br/>
         <LatestOffers/>
+        <br/>
         <br/>
         <FeaturedServices />
 

@@ -75,16 +75,33 @@ export default class extends Component {
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
     };
+    const settingsResp = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      arrows: true,
+      autoplay: true,
+      nextArrow: <SampleNextArrow />,
+      prevArrow: <SamplePrevArrow />
+    };
     
     return (
       <div style={{padding:"10px",margin:'10px'}}>
         <h1>Featured Products</h1>
         {this.state.load ? <Spin/>: 
        <div className="featured-main">
-          <Slider {...settings}>
+          <Slider {...settings} className='not-resp'>
            {this.state.data.map(l =>(
              <div style={{display:'flex',justifyContent:'space-around'}}>
-            
+           <Link to={"/product/"+l.key}> <Block name={l.value.productName} price={l.value.price} pic={l.value.urls[0]} /></Link>
+             </div>
+           ))}
+          </Slider>
+          <Slider {...settingsResp} className='resp'>
+           {this.state.data.map(l =>(
+             <div style={{display:'flex',justifyContent:'space-around'}}>
            <Link to={"/product/"+l.key}> <Block name={l.value.productName} price={l.value.price} pic={l.value.urls[0]} /></Link>
              </div>
            ))}

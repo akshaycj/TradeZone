@@ -49,9 +49,7 @@ return (
     <Slider {...settings} style={{margin:'10px'}}>
       {
           this.state.urls.map(t=>(
-            <div className="cardi">
-        <img className="imagei" src={t} alt="mobile pic 1" style={{width:'100%',height:'100%'}} />
-      </div>
+        <img className="imagei" src={t} alt="mobile pic 1" style={{width:'100%'}} />
           ))
       }
    

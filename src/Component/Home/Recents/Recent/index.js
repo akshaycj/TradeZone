@@ -21,24 +21,18 @@ export default class extends Component {
       <Link to={this.state.link} style={{ color: "white" }}>
         <img src={this.props.value.data.urls[0]} style={{ margin: 5 }} width="90%" height={180} />
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            textAlign: "left",
-            marginLeft: 5,
-            width: "100%"
-          }}
-        >
           <h3
             style={{
+              textAlign: "left",
+            marginLeft: 5,
+            width: "100%",
               fontWeight: 18
             }}
           >
             {this.props.value.data.productName}
           </h3>
 
-        </div>
+       
        
           </Link>
       </div>

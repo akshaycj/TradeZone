@@ -74,13 +74,14 @@
 
 @media screen and (max-width: 600px) {
   .mainDivInF5 {
-    height: 400px;
+    margin-top: 50px;
     flex-direction: column;
     padding: 10px;
+
   }
   .fifth1 {
     width: 100%;
-    height: 10%;
+    height: 100%;
   }
   .textIn5th1 {
     transform: rotate(0deg);
@@ -88,19 +89,17 @@
   }
   .fifth2 {
     width: 100%;
-    height: 50%;
   }
   .fifth3 {
     width: 100%;
-    font-size: 90%;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    text-align: left;
   }
   .imgIn5th3 {
     width: 40%;
 
     margin: auto;
+  }
+  .textIn5th3{
+    margin-bottom: 0px;
   }
 }
