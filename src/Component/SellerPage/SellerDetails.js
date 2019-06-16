@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { db } from '../../config'
 import { Spin } from 'antd'
 export default class SellerDetails extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       email: '',
@@ -20,7 +20,7 @@ export default class SellerDetails extends Component {
       spin: true
     }
   }
-  componentDidMount () {
+  componentDidMount() {
     var that = this
     var item = {}
     var products = []
@@ -47,7 +47,7 @@ export default class SellerDetails extends Component {
         })
       })
   }
-  render () {
+  render() {
     return (
       <div>
         {this.state.spin ? (
@@ -63,49 +63,47 @@ export default class SellerDetails extends Component {
             <Spin />
           </div>
         ) : (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              height: '60vh'
-            }}
-          >
-            <div>
-              <span style={{ fontSize: '18px', fontWeight: '600' }}>Email:</span>
-             <span style={{fontSize:'20px',fontWeight:'500'}}> {this.state.email}</span>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
+                height: '60vh'
+              }}
+            >
+              <div >
+                <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "100px" }}>Email</span>
+                <span style={{ fontSize: '20px', fontWeight: '500', marginRight: "100px" }}>:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500' }}> {this.state.email}</span>
+              </div>
+              <div>
+                <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "100px" }}>CompanyName</span>
+                <span style={{ fontSize: '20px', fontWeight: '500', marginRight: "100px" }}>:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500' }}>{this.state.companyName}</span>
+              </div>
+              <div>
+                <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "100px" }}>Phone:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500', marginRight: "100px" }}>:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500' }}>{this.state.phone}</span>
+              </div>
+              <div>
+                <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "100px" }}>Location:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500', marginRight: "100px" }}>:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500' }}>{this.state.location}</span>
+              </div>
+              <div>
+                <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "100px" }}>Company Address:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500', marginRight: "100px" }}>:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500' }}>{this.state.companyAddr}</span>
+              </div>
+              <div>
+                <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "100px" }}>AboutCompany:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500', marginRight: "100px" }}>:</span>
+                <span style={{ fontSize: '20px', fontWeight: '500' }}>{this.state.aboutCompany}</span>
+              </div>
             </div>
-            <div>
-              <span style={{ fontSize: '18px', fontWeight: '600' }}>
-                CompanyName:
-              </span>
-              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.companyName}</span>
-            </div>
-            <div>
-              <span style={{ fontSize: '18px', fontWeight: '600' }}>Phone:</span>
-              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.phone}</span>
-            </div>
-            <div>
-              <span style={{ fontSize: '18px', fontWeight: '600' }}>
-                Location:
-              </span>
-              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.location}</span>
-            </div>
-            <div>
-              <span style={{ fontSize: '18px', fontWeight: '600' }}>
-                Company Address:
-              </span>
-              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.companyAddr}</span>
-            </div>
-            <div>
-              <span style={{ fontSize: '18px', fontWeight: '600' }}>
-                AboutCompany:
-              </span>
-              <span style={{fontSize:'20px',fontWeight:'500'}}>{this.state.aboutCompany}</span>
-            </div>
-          </div>
-        )}
+          )}
       </div>
     )
   }

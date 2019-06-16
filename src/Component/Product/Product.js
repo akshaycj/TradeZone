@@ -2,7 +2,7 @@ import React from 'react';
 import { Rate, Button, Card, Icon, Spin, message } from 'antd';
 import './Product.css';
 import w from './watch.jpg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthStateAction from '../Actions/AuthSate';
 import { Auth, db } from '../../config';
 import { connect } from 'react-redux';
@@ -19,28 +19,28 @@ class Product extends React.Component {
 			loginStateforContact: false,
 			urls: [],
 			productName: '',
-			description:"",
-			specification:"",
-			address:'',
-			category:"",
-			tags:[],
-			areaofuseage:"",
-			color:"",
-			weight:"",
+			description: "",
+			specification: "",
+			address: '',
+			category: "",
+			tags: [],
+			areaofuseage: "",
+			color: "",
+			weight: "",
 			sellerName: '',
 			spin: true,
-			price:"",
+			price: "",
 			rating: '',
-			sellerLocation:"",
-			expand:false,
-			showLogin:false,
+			sellerLocation: "",
+			expand: false,
+			showLogin: false,
 		};
 	}
 
-	static getDerivedStateFromProps(props,state){
-		if(props.user !== state){
-			return{
-				user:props.user
+	static getDerivedStateFromProps(props, state) {
+		if (props.user !== state) {
+			return {
+				user: props.user
 			}
 		}
 		null
@@ -50,7 +50,7 @@ class Product extends React.Component {
 		this.props.AuthStateAction();
 		var that = this;
 		var sellerid = "/seller/";
-		db.ref('products').child(this.props.match.params.id).on('value', function(oath) {
+		db.ref('products').child(this.props.match.params.id).on('value', function (oath) {
 			const data = oath.val();
 			if (data.ratings) {
 				var rate = 0;
@@ -63,27 +63,28 @@ class Product extends React.Component {
 				calc = rate / num;
 				that.setState({ rating: calc });
 			}
-      var url = sellerid+data.seller
+			var url = sellerid + data.seller
 			that.setState({
 				urls: data.urls,
 				productName: data.productName,
-        		ratings: data.ratings,
-				sellerid:url,
-				price:data.price,
-				description:data.description,
-				specification:data.specififcation,
-				category:data.category,
-				weight:data.weight,
-				color:data.color,
-				areaofuseage:data.areaofusage,
+				ratings: data.ratings,
+				sellerid: url,
+				seller: data.seller,
+				price: data.price,
+				description: data.description,
+				specification: data.specififcation,
+				category: data.category,
+				weight: data.weight,
+				color: data.color,
+				areaofuseage: data.areaofusage,
 
 			});
 
-			db.ref('users').child(oath.val().seller + '').child("details").on('value', function(data) {
-				that.setState({ sellerName: data.val().companyName,sellerLocation:data.val().location, spin: false });
+			db.ref('users').child(oath.val().seller + '').child("details").on('value', function (data) {
+				that.setState({ sellerName: data.val().companyName, sellerLocation: data.val().location, spin: false });
 			});
 		});
-		
+
 	}
 	changeHeart() {
 		this.setState({
@@ -93,15 +94,16 @@ class Product extends React.Component {
 	onGetPhoneNo() {
 		var that = this;
 		var user = this.state.user
-			if (user) {
-				this.setState({ loginState: true });
-				db.ref('users').child(user.uid + '').child("details").on('value', function(data) {
-					that.setState({ phone: data.val().phone });
-				});
-			} else {
-				this.setState({ displayMessage: true,showLogin:true });
-			}
-		
+		var seller = this.state.seller
+		if (user) {
+			this.setState({ loginState: true });
+			db.ref('users').child(seller + '').child("details").on('value', function (data) {
+				that.setState({ phone: data.val().phone });
+			});
+		} else {
+			this.setState({ displayMessage: true, showLogin: true });
+		}
+
 	}
 	onRate = (value) => {
 		this.setState({ ratings: value });
@@ -121,21 +123,22 @@ class Product extends React.Component {
 	onContactClick() {
 		var that = this;
 		var user = this.state.user
-			if (user) {
-				db.ref('users').child(user.uid + '').child("details").on('value', function(data) {
-					that.setState({ email: data.val().email,address:data.val().companyAddr });
-				});
-				this.setState({ loginStateforContact: true });
-			} else {
-				this.setState({ displayMessage: true,showLogin:true });
-			}
-		
+		var seller = this.state.seller
+		if (user) {
+			db.ref('users').child(seller + '').child("details").on('value', function (data) {
+				that.setState({ email: data.val().email, address: data.val().companyAddr });
+			});
+			this.setState({ loginStateforContact: true });
+		} else {
+			this.setState({ displayMessage: true, showLogin: true });
+		}
+
 	}
-	onClickMore = () =>{
-		this.setState({expand:!this.state.expand})
+	onClickMore = () => {
+		this.setState({ expand: !this.state.expand })
 	}
-	closeLogin = () =>{
-		this.setState({showLogin:false})
+	closeLogin = () => {
+		this.setState({ showLogin: false })
 	}
 	render() {
 		return (
@@ -145,154 +148,154 @@ class Product extends React.Component {
 						<Spin style={{ margin: 'auto' }} />
 					</div>
 				) : (
-					<div style={{width:'100%'}}>
-					{this.state.showLogin ? 
-											<Login
-											value={this.closeLogin}
-            								button="user"
-            								showSellerSignUp={false}
-          									/> : null
-											}
-						<Card className="card">
-							<div className="details">
-								<div className="productpic">
-									<div className="bigpic">
-										<img src={this.state.urls[0]} style={{ width: '100%' }} />
+						<div style={{ width: '100%' }}>
+							{this.state.showLogin ?
+								<Login
+									value={this.closeLogin}
+									button="user"
+									showSellerSignUp={false}
+								/> : null
+							}
+							<Card className="card">
+								<div className="details">
+									<div className="productpic">
+										<div className="bigpic">
+											<img src={this.state.urls[0]} style={{ width: '100%' }} />
+										</div>
+										<div className="smallpics">
+											<img src={this.state.urls[1]} style={{ width: '33%' }} />
+											<img src={this.state.urls[2]} style={{ width: '33%' }} />
+											<img src={this.state.urls[3]} style={{ width: '33%' }} />
+										</div>
 									</div>
-									<div className="smallpics">
-										<img src={this.state.urls[1]} style={{ width: '33%' }} />
-										<img src={this.state.urls[2]} style={{ width: '33%' }} />
-										<img src={this.state.urls[3]} style={{ width: '33%' }} />
-									</div>
-								</div>
-								<div className="description">
-									<span className="name">
-										<span style={{ display: 'flex', flexDirection: 'column' }}>
-											<h1 style={{ marginBottom: '0px' }}>{this.state.productName}</h1>
-											<Rate
-												value={this.state.rating}
-												style={{ float: 'left', display: 'inline-block' }}
-												onChange={this.onRate}
-											/>
-										</span>
-										<span>
-											{this.state.heart ? (
-												<Icon
-													type="heart"
-													style={{ fontSize: '25px', color: 'red' }}
-													onClick={this.changeHeart.bind(this)}
+									<div className="description">
+										<span className="name">
+											<span style={{ display: 'flex', flexDirection: 'column' }}>
+												<h1 style={{ marginBottom: '0px' }}>{this.state.productName}</h1>
+												<Rate
+													value={this.state.rating}
+													style={{ float: 'left', display: 'inline-block' }}
+													onChange={this.onRate}
 												/>
-											) : (
-												<Icon
-													type="heart-o"
-													style={{ fontSize: '25px' }}
-													onClick={this.changeHeart.bind(this)}
-												/>
-											)}
-											<Icon type="share-alt" style={{ fontSize: '25px' }} />
+											</span>
+											<span>
+												{this.state.heart ? (
+													<Icon
+														type="heart"
+														style={{ fontSize: '25px', color: 'red' }}
+														onClick={this.changeHeart.bind(this)}
+													/>
+												) : (
+														<Icon
+															type="heart-o"
+															style={{ fontSize: '25px' }}
+															onClick={this.changeHeart.bind(this)}
+														/>
+													)}
+												<Icon type="share-alt" style={{ fontSize: '25px' }} />
+											</span>
 										</span>
-									</span>
-								<div>
+										<div>
 
-								<div><span style={{fontSize:'20px',fontWeight:600}}><Link to={this.state.sellerid}>{this.state.sellerName},</Link></span>{this.state.sellerLocation}</div>
-												
-								</div>
-									<div className="rate">
-										<h3>Price</h3>
-										<h2>{this.state.price}</h2>
-									</div>
-									<div className="textval">
-									<h3>Category:</h3>
-										<p>
-											{this.state.category}
-										</p>
-									</div>
-									<div className="textval">
-									<h3>Color:</h3>
-										<p>
-											{this.state.color}
-										</p>
-									</div>
-									{this.state.expand ? <div>
+											<div><span style={{ fontSize: '20px', fontWeight: 600 }}><Link to={this.state.sellerid}>{this.state.sellerName},</Link></span>{this.state.sellerLocation}</div>
 
-									<div className="textval">
-									<h3>Weight:</h3>
-										<p>
-											{this.state.weight}
-										</p>
-									</div>
-									<div className="textval">
-									<h3>Area Of Usage:</h3>
-										<p>
-											{this.state.areaofuseage}
-										</p>
-									</div>
-									<div className="textval">
-									<h3>Description:</h3>
-										<p>
-											{this.state.description}
-										</p>
-									</div>
-									<div className="textval">
-									<h3>Specification:</h3>
-										<p>
-											{this.state.specification}
-										</p>
-									</div>
+										</div>
+										<div className="rate">
+											<h3>Price</h3>
+											<h2>{this.state.price}</h2>
+										</div>
+										<div className="textval">
+											<h3>Category:</h3>
+											<p>
+												{this.state.category}
+											</p>
+										</div>
+										<div className="textval">
+											<h3>Color:</h3>
+											<p>
+												{this.state.color}
+											</p>
+										</div>
+										{this.state.expand ? <div>
 
-									</div> : null}
-									<div style={{ display: 'flex', marginTop: '3%' }} onClick={this.onClickMore}> {this.state.expand ? <div style={{cursor:'pointer'}}>Less</div> : <div style={{cursor:'pointer'}}>More</div>}</div>
-									<div className="bottomBut">
-										{this.state.loginState ?  (
-											<div className="phoneNo">
-												Phone No:
+											<div className="textval">
+												<h3>Weight:</h3>
+												<p>
+													{this.state.weight}
+												</p>
+											</div>
+											<div className="textval">
+												<h3>Area Of Usage:</h3>
+												<p>
+													{this.state.areaofuseage}
+												</p>
+											</div>
+											<div className="textval">
+												<h3>Description:</h3>
+												<p>
+													{this.state.description}
+												</p>
+											</div>
+											<div className="textval">
+												<h3>Specification:</h3>
+												<p>
+													{this.state.specification}
+												</p>
+											</div>
+
+										</div> : null}
+										<div style={{ display: 'flex', marginTop: '3%' }} onClick={this.onClickMore}> {this.state.expand ? <div style={{ cursor: 'pointer' }}>Less</div> : <div style={{ cursor: 'pointer' }}>More</div>}</div>
+										<div className="bottomBut">
+											{this.state.loginState ? (
+												<div className="phoneNo">
+													Phone No:
 												<b>{this.state.phone}</b>
-											</div>
-										) : (
-											<div>
-											
-											<Button
-												type="primary"
-												ghost
-												style={{ margin: '10px' }}
-												onClick={this.onGetPhoneNo.bind(this)}
-											>
-												View Phone No
+												</div>
+											) : (
+													<div>
+
+														<Button
+															type="primary"
+															ghost
+															style={{ margin: '10px' }}
+															onClick={this.onGetPhoneNo.bind(this)}
+														>
+															View Phone No
 											</Button>
-											</div>
-										)}
-										{this.state.loginStateforContact ? (
-											<div className="phoneNo" style={{width:'50%'}}>
-												Email:
+													</div>
+												)}
+											{this.state.loginStateforContact ? (
+												<div className="phoneNo" style={{ width: '50%' }}>
+													Email:
 												<b>{this.state.email}</b>
-												<br/>
-												Address:
+													<br />
+													Address:
 												<b>{this.state.address}</b>
-											</div>
-										) : (
-											<div>
-											
-											<Button
-												type="danger"
-												ghost
-												style={{ margin: '10px' }}
-												onClick={this.onContactClick.bind(this)}
-											>
-												Contact seller
+												</div>
+											) : (
+													<div>
+
+														<Button
+															type="danger"
+															ghost
+															style={{ margin: '10px' }}
+															onClick={this.onContactClick.bind(this)}
+														>
+															Contact seller
 											</Button>
-											</div>
-										)}
+													</div>
+												)}
+										</div>
 									</div>
 								</div>
-							</div>
-						</Card>
-					</div>
-				)}
+							</Card>
+						</div>
+					)}
 			</div>
 		);
 	}
 }
-const mapStateToProps = (state) => (console.log(state),{
+const mapStateToProps = (state) => (console.log(state), {
 	user: state.user,
 	authenticated: state.authenticated
 });
