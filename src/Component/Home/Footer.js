@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Card, Icon } from "antd";
+import { Icon } from "antd";
 import "./Footer.css";
 
 class Footer extends Component {

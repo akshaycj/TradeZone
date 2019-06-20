@@ -1,4 +1,4 @@
-import { Upload, Icon, Modal,Button } from "antd";
+import { Upload, Icon, Button } from "antd";
 import React from "react";
 class PicturesWall extends React.Component {
   constructor(props) {
@@ -7,31 +7,31 @@ class PicturesWall extends React.Component {
       previewVisible: false,
       previewImage: "",
       file: {},
-      fileList:[],
+      fileList: [],
     };
   }
 
 
 
-  handleChange({ fileList,file }) {
-    this.setState({ file: file,fileList});
+  handleChange({ fileList, file }) {
+    this.setState({ file: file, fileList });
     this.props.value(this.state.file);
   }
 
   render() {
-    
+
     return (
       <div className="clearfix">
         <Upload
           //action="//jsonplaceholder.typicode.com/posts/"
           fileList={this.state.fileList}
           onChange={this.handleChange.bind(this)}
-        > 
-         <Button>
-      <Icon type="upload" /> Upload Logo
+        >
+          <Button>
+            <Icon type="upload" /> Upload Logo
     </Button>
         </Upload>
-        
+
       </div>
     );
   }

@@ -22,8 +22,6 @@ export default class SellerDetails extends Component {
   }
   componentDidMount() {
     var that = this
-    var item = {}
-    var products = []
     db.ref('users')
       .child(this.props.match.params.id)
       .child('details')

@@ -1,0 +1,15 @@
+.signupSellerMainDiv{
+    width: 100% ;
+    height: auto ;
+    display: flex ;
+    flex-direction: column ;
+    align-items: center ;
+}
+
+.rowInSignupseller{
+    width: 40% ;
+    display: flex ;
+    flex-direction: row ;
+    justify-content: space-between ;
+    align-items: center ;
+}

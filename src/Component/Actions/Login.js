@@ -1,6 +1,5 @@
 import { LOGIN ,SIGN_OUT} from "../ActionCreators/ActionCreators";
 import { Auth } from "../../config";
-import AuthStateAction from './AuthSate';
 const value = {
   authenticated: false,
   err:null

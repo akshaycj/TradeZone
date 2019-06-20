@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
-import  {db } from '../../../../config';
 export default class extends Component {
   constructor(props){
     super(props);
@@ -17,7 +15,7 @@ export default class extends Component {
   render() {
     return (
       <div className="recent-card">
-        <img src={this.props.data.urls[0]} style={{ margin: 5 }} width="90%" height={180} />
+        <img src={this.props.data.urls[0]} alt="" style={{ margin: 5 }} width="90%" height={180} />
 
         <div
           style={{

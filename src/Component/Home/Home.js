@@ -12,7 +12,6 @@ import "./Home.css";
 import Category from "./Category";
 import Recents from "./Recents";
 import {connect} from 'react-redux';
-import featuredProducts from './Featured';
 import  AuthStateAction from '../Actions/AuthSate';
 class Home extends Component {
   constructor(props){

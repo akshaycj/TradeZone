@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Input, Select,Spin, Upload, Icon, Modal, Button, Tag, Tooltip } from "antd";
+import { Input, Select, Spin, Icon, Tag, Tooltip } from "antd";
 import "./Addproduct.css";
-import {db} from '../../../../config';
-import PicturesWall from "./Upload";
+import { db } from '../../../../config';
 import AuthStateAction from '../../../Actions/AuthSate';
 import { connect } from "react-redux";
 import AddProductAction from "../../../Actions/AddProduct";
@@ -19,77 +18,78 @@ class AddProduct extends Component {
       tags: [],
       inputVisible: false,
       inputValue: "",
-      price:"",
-      color:"",
-      areaofusage:"",
-      weight:"",
-      specififcation:"",
-      urls:[],
-      listUrl:[],
-      categoryList:[],
-      load:true,
-      seller:''
+      price: "",
+      color: "",
+      areaofusage: "",
+      weight: "",
+      specififcation: "",
+      urls: [],
+      listUrl: [],
+      categoryList: [],
+      load: true,
+      seller: ''
     };
   }
- 
-componentDidMount(){
+
+  componentDidMount() {
 
 
-  this.setState({load:true})
-  var that = this
-  db.ref('products').child(this.props.val).on('value',function(data){
-    var product = {}
-    const {productName ,category,description,tags,specififcation,urls,seller,price,weight,color,areaofusage} = data.val()
-    typeof tags === 'undefined' ? [] : tags
-    that.setState({productName:typeof productName === 'undefined' ? "" : productName,
-    tags:typeof tags === 'undefined' ? [] : tags,
-    category:typeof category === 'undefined' ? "" : category,description:typeof description === 'undefined' ? "" : description,
-    specififcation:typeof specififcation === 'undefined' ? "" : specififcation,
-      listUrl:typeof urls === 'undefined' ? [] : urls,
-      seller:typeof seller === 'undefined' ? "" : seller,
-      price:typeof price === 'undefined' ? "" : price,weight:typeof weight === 'undefined' ? "" : weight,
-      color:typeof color === 'undefined' ? "" : color,areaofusage:typeof areaofusage === 'undefined' ? "" : areaofusage,
-      load:false
+    this.setState({ load: true })
+    var that = this
+    db.ref('products').child(this.props.val).on('value', function (data) {
+      const { productName, category, description, tags, specififcation, urls, seller, price, weight, color, areaofusage } = data.val()
+      typeof tags === 'undefined' ? [] : tags
+      that.setState({
+        productName: typeof productName === 'undefined' ? "" : productName,
+        tags: typeof tags === 'undefined' ? [] : tags,
+        category: typeof category === 'undefined' ? "" : category, description: typeof description === 'undefined' ? "" : description,
+        specififcation: typeof specififcation === 'undefined' ? "" : specififcation,
+        listUrl: typeof urls === 'undefined' ? [] : urls,
+        seller: typeof seller === 'undefined' ? "" : seller,
+        price: typeof price === 'undefined' ? "" : price, weight: typeof weight === 'undefined' ? "" : weight,
+        color: typeof color === 'undefined' ? "" : color, areaofusage: typeof areaofusage === 'undefined' ? "" : areaofusage,
+        load: false
+      })
     })
-  })
 
-  this.props.AuthStateAction();
-  var that = this
-  
-  db.ref("category").on("value",function(data){
-    var list = []
-    data.forEach(i=>{
-     list.push(i.val())
+    this.props.AuthStateAction();
+    var that = this
+
+    db.ref("category").on("value", function (data) {
+      var list = []
+      data.forEach(i => {
+        list.push(i.val())
+      })
+      that.setState({ load: false, categoryList: list })
     })
-    that.setState({load:false,categoryList:list})
-  })
-}
+  }
 
-  componentDidUpdate(prevProps,prevState) {
-    if(prevProps.val !== this.props.val){
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.val !== this.props.val) {
 
-      this.setState({load:true})
+      this.setState({ load: true })
       var that = this
-      db.ref('products').child(this.props.val).on('value',function(data){
+      db.ref('products').child(this.props.val).on('value', function (data) {
         var product = {}
-        const {productName ,category,description,tags,specififcation,urls,seller,price,weight,color,areaofusage} = data.val()
+        const { productName, category, description, tags, specififcation, urls, seller, price, weight, color, areaofusage } = data.val()
         typeof tags === 'undefined' ? [] : tags
-        that.setState({productName:typeof productName === 'undefined' ? "" : productName,
-        tags:typeof tags === 'undefined' ? [] : tags,
-        category:typeof category === 'undefined' ? "" : category,description:typeof description === 'undefined' ? "" : description,
-        specififcation:typeof specififcation === 'undefined' ? "" : specififcation,
-          listUrl:typeof urls === 'undefined' ? [] : urls,
-          seller:typeof seller === 'undefined' ? "" : seller,
-          price:typeof price === 'undefined' ? "" : price,weight:typeof weight === 'undefined' ? "" : weight,
-          color:typeof color === 'undefined' ? "" : color,areaofusage:typeof areaofusage === 'undefined' ? "" : areaofusage,
-          load:false
+        that.setState({
+          productName: typeof productName === 'undefined' ? "" : productName,
+          tags: typeof tags === 'undefined' ? [] : tags,
+          category: typeof category === 'undefined' ? "" : category, description: typeof description === 'undefined' ? "" : description,
+          specififcation: typeof specififcation === 'undefined' ? "" : specififcation,
+          listUrl: typeof urls === 'undefined' ? [] : urls,
+          seller: typeof seller === 'undefined' ? "" : seller,
+          price: typeof price === 'undefined' ? "" : price, weight: typeof weight === 'undefined' ? "" : weight,
+          color: typeof color === 'undefined' ? "" : color, areaofusage: typeof areaofusage === 'undefined' ? "" : areaofusage,
+          load: false
         })
       })
     }
-  
+
   }
-  
-  
+
+
   handleClose = removedTag => {
     const tags = this.state.tags.filter(tag => tag !== removedTag);
     this.setState({ tags });
@@ -134,24 +134,24 @@ componentDidMount(){
       areaofusage,
       specififcation,
       weight,
-      seller} = this.state
+      seller } = this.state
     db.ref("products").child(this.props.val).set({
-      
-        productName,
-        urls:this.state.listUrl,
-        category,
-        tags,
-        description,
-        price,
-        color,
-        areaofusage,
-        specififcation,
-        weight,
-        seller      
-    }).then(()=>{
+
+      productName,
+      urls: this.state.listUrl,
+      category,
+      tags,
+      description,
+      price,
+      color,
+      areaofusage,
+      specififcation,
+      weight,
+      seller
+    }).then(() => {
       db.ref('users').child(this.state.seller).child('products').child(this.props.val).set({
         productName,
-        urls:this.state.listUrl,
+        urls: this.state.listUrl,
         category,
         tags,
         description,
@@ -160,142 +160,143 @@ componentDidMount(){
         areaofusage,
         specififcation,
         weight,
-        seller  })
-    }).then(()=>{
+        seller
+      })
+    }).then(() => {
       alert('Prodct updated successfully')
     })
   }
 
   render() {
-    
+
     const { tags, inputVisible, inputValue } = this.state;
     return (
       <div>
 
-      {this.state.load === true  ? <Spin></Spin>:
-        <div>
-        <h1 className='heading-add'>Update Product</h1>
-        <div className="add-main">
-          <Input
-            placeholder="Product Name"
-            onChange={e => {
-              this.setState({ productName: e.target.value });
-            }}
-            value={this.state.productName}
-            style={{ margin: 10 }}
-          />
-          <Select
-            placeholder="Select Category"
-            value={this.state.category}
-            onChange={value => {
-              this.setState({ category: value });
-            }}
-            style={{ width: "100%", margin: 10 }}
-          >
-            {this.state.categoryList.map(o=>(
-              <Option key={o}>{o}</Option>
-            ))}
-          </Select>
-          <Input.TextArea
-            style={{ margin: 10 }}
-            placeholder="Product description"
-            value={this.state.description}
-            onChange={a => {
-              this.setState({ description: a.target.value });
-            }}
-          />
-          <Input placeholder="Price" style={{ margin: "10px" }}   onChange={e => {
-              this.setState({ price: e.target.value });
-              
-            }}
-            value={this.state.price}
-            />
-          <Input placeholder="Product Weight" style={{ margin: 10 }}   onChange={e => {
-              this.setState({ weight: e.target.value });
-
-            }} 
-              value={this.state.weight}
-            />
-          <Input placeholder="Colour" style={{ margin: "10px" }} value={this.state.color}    onChange={e => {
-              this.setState({ color: e.target.value });
-            }}/>
-          <Input.TextArea
-            value={this.state.specififcation}
-            placeholder="Add Specification Details"
-            style={{ margin: 10 }}
-            autosize={{ minRows: 2, maxRows: 5 }}
-            onChange={e => {
-              this.setState({ specififcation: e.target.value });
-            }}
-          />
-          <Input placeholder="Area Of Usage" style={{ margin: "10px" }}   onChange={e => {
-              this.setState({ areaofusage: e.target.value });
-            }}
-            value={this.state.areaofusage} />
-          <div
-            style={{
-              display: "flex",
-              marginRight: "auto",
-              marginTop: 10,
-              flexWrap: "wrap",
-              padding: 5
-            }}
-          >
-            <span style={{ marginRight: 5 }}>Tags:</span>
-            {tags.map((tag, index) => {
-              const isLongTag = tag.length > 20;
-              const tagElem = (
-                <Tag
-                  style={{ marginBottom: 5 }}
-                  color="#2db7f5"
-                  key={tag}
-                  closable={true}
-                  afterClose={() => this.handleClose(tag)}
-                >
-                  {isLongTag ? `${tag.slice(0, 20)}...` : tag}
-                </Tag>
-              );
-              return isLongTag ? (
-                <Tooltip title={tag} key={tag}>
-                  {tagElem}
-                </Tooltip>
-              ) : (
-                tagElem
-              );
-            })}
-            {inputVisible && (
+        {this.state.load === true ? <Spin></Spin> :
+          <div>
+            <h1 className='heading-add'>Update Product</h1>
+            <div className="add-main">
               <Input
-                ref={this.saveInputRef}
-                type="text"
-                size="small"
-                style={{ width: 78 }}
-                value={inputValue}
-                onChange={this.handleInputChange}
-                onBlur={this.handleInputConfirm}
-                onPressEnter={this.handleInputConfirm}
+                placeholder="Product Name"
+                onChange={e => {
+                  this.setState({ productName: e.target.value });
+                }}
+                value={this.state.productName}
+                style={{ margin: 10 }}
               />
-            )}
-            {!inputVisible && (
-              <Tag
-                onClick={this.showInput}
-                style={{ background: "#fff", borderStyle: "dashed" }}
+              <Select
+                placeholder="Select Category"
+                value={this.state.category}
+                onChange={value => {
+                  this.setState({ category: value });
+                }}
+                style={{ width: "100%", margin: 10 }}
               >
-                <Icon type="plus" /> New Tag
-              </Tag>
-            )}
-          </div>
-          
+                {this.state.categoryList.map(o => (
+                  <Option key={o}>{o}</Option>
+                ))}
+              </Select>
+              <Input.TextArea
+                style={{ margin: 10 }}
+                placeholder="Product description"
+                value={this.state.description}
+                onChange={a => {
+                  this.setState({ description: a.target.value });
+                }}
+              />
+              <Input placeholder="Price" style={{ margin: "10px" }} onChange={e => {
+                this.setState({ price: e.target.value });
 
-          <div
-            className="common-button app-accent"
-            style={{ marginTop: "auto" }}
-            onClick={this.onSubmit.bind(this)}
-          >
-            Update
+              }}
+                value={this.state.price}
+              />
+              <Input placeholder="Product Weight" style={{ margin: 10 }} onChange={e => {
+                this.setState({ weight: e.target.value });
+
+              }}
+                value={this.state.weight}
+              />
+              <Input placeholder="Colour" style={{ margin: "10px" }} value={this.state.color} onChange={e => {
+                this.setState({ color: e.target.value });
+              }} />
+              <Input.TextArea
+                value={this.state.specififcation}
+                placeholder="Add Specification Details"
+                style={{ margin: 10 }}
+                autosize={{ minRows: 2, maxRows: 5 }}
+                onChange={e => {
+                  this.setState({ specififcation: e.target.value });
+                }}
+              />
+              <Input placeholder="Area Of Usage" style={{ margin: "10px" }} onChange={e => {
+                this.setState({ areaofusage: e.target.value });
+              }}
+                value={this.state.areaofusage} />
+              <div
+                style={{
+                  display: "flex",
+                  marginRight: "auto",
+                  marginTop: 10,
+                  flexWrap: "wrap",
+                  padding: 5
+                }}
+              >
+                <span style={{ marginRight: 5 }}>Tags:</span>
+                {tags.map((tag, index) => {
+                  const isLongTag = tag.length > 20;
+                  const tagElem = (
+                    <Tag
+                      style={{ marginBottom: 5 }}
+                      color="#2db7f5"
+                      key={tag}
+                      closable={true}
+                      afterClose={() => this.handleClose(tag)}
+                    >
+                      {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+                    </Tag>
+                  );
+                  return isLongTag ? (
+                    <Tooltip title={tag} key={tag}>
+                      {tagElem}
+                    </Tooltip>
+                  ) : (
+                      tagElem
+                    );
+                })}
+                {inputVisible && (
+                  <Input
+                    ref={this.saveInputRef}
+                    type="text"
+                    size="small"
+                    style={{ width: 78 }}
+                    value={inputValue}
+                    onChange={this.handleInputChange}
+                    onBlur={this.handleInputConfirm}
+                    onPressEnter={this.handleInputConfirm}
+                  />
+                )}
+                {!inputVisible && (
+                  <Tag
+                    onClick={this.showInput}
+                    style={{ background: "#fff", borderStyle: "dashed" }}
+                  >
+                    <Icon type="plus" /> New Tag
+              </Tag>
+                )}
+              </div>
+
+
+              <div
+                className="common-button app-accent"
+                style={{ marginTop: "auto" }}
+                onClick={this.onSubmit.bind(this)}
+              >
+                Update
           </div>
-        </div>
-      </div>
-  }
+            </div>
+          </div>
+        }
       </div>
     );
   }
@@ -303,12 +304,12 @@ componentDidMount(){
 const mapActionToProps = {
   AddProductAction: AddProductAction,
   AuthStateAction: AuthStateAction,
-  
+
 };
 const mapSateToProps = state => ({
   urls: state.urls,
   user: state.user,
-  
+
 });
 export default connect(
   mapSateToProps,

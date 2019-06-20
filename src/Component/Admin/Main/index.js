@@ -1,12 +1,10 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Menu, Icon } from "antd";
+import { Menu } from "antd";
 import { Link, Redirect } from "react-router-dom";
 import { Auth } from "../../../config";
 
 const MenuItem = Menu.Item;
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 export default class extends Component {
   state = {
@@ -29,12 +27,13 @@ export default class extends Component {
   render() {
     return (
       <div className="account-main-container">
-       
+
         <div className="account-profile-container">
           <div className="avatar">
             <img
               src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
               width="100%"
+              alt=""
               height="100%"
             />
           </div>

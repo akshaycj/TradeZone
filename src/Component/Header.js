@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { Link, withRouter } from 'react-router-dom';
-import { Menu, Dropdown, Icon, Select, Input, Button, Avatar } from 'antd';
+import { Menu, Dropdown, Icon, Select } from 'antd';
 import Login from './Login/Login.js';
 import Search from './Search';
 import i from './pics/icon1.png';
@@ -12,9 +12,6 @@ import { connect } from 'react-redux';
 import { Auth, db } from '../config';
 import AuthStateAction from './Actions/AuthSate';
 import { SignOut } from './Actions/Login';
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
-const Option = Select.Option;
 
 class Header extends React.Component {
   constructor(props) {
@@ -61,7 +58,8 @@ class Header extends React.Component {
   }
 
   getSellerLogin() {
-    this.setState({ showSellerSignUp: true });
+    this.props.history.push(`/signup/seller`);
+    //this.setState({ showSellerSignUp: true });
   }
 
   loginVal(data) {
