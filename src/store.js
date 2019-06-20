@@ -4,8 +4,8 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 const allEnhancers = compose(
   applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ &&
-  window.__REDUX_DEVTOOLS_EXTENSION__()
+  //window.__REDUX_DEVTOOLS_EXTENSION__ &&
+  //window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 const initialState = {
   authenticated: false,
