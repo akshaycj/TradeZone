@@ -1,7 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { Link, withRouter } from 'react-router-dom';
-import { Menu, Dropdown, Icon, Select } from 'antd';
+import { Menu, Dropdown, Icon, Select, Drawer } from 'antd';
 import Login from './Login/Login.js';
 import Search from './Search';
 import i from './pics/icon1.png';
@@ -13,6 +13,9 @@ import { Auth, db } from '../config';
 import AuthStateAction from './Actions/AuthSate';
 import { SignOut } from './Actions/Login';
 
+const SubMenu = Menu.SubMenu;
+
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +26,11 @@ class Header extends React.Component {
       loggedin: false,
       type: '',
       searchWord: '',
-      showSearch: false
+      showSearch: false,
+      categoryList: [],
+      List: {},
+      spin: true,
+      drawerVisible: false
     };
   }
 
@@ -45,6 +52,22 @@ class Header extends React.Component {
         that.setState({ loggedin: false });
       }
     });
+
+    db.ref("category").on("value", function (data) {
+      var list = {}
+      var category = []
+      data.forEach(t => {
+        list[t.val()] = []
+        category.push(t.val())
+        db.ref('products').orderByChild("category").equalTo(t.val()).on("value", function (data) {
+          data.forEach(q => {
+            list[t.val()].push({ key: q.key, productName: q.val().productName })
+          })
+          that.setState({ spin: false })
+        })
+      })
+      that.setState({ List: list, categoryList: category })
+    })
   }
   static getDerivedStateFromProps(props, state) {
     if (props.user !== state.user) {
@@ -61,6 +84,18 @@ class Header extends React.Component {
     this.props.history.push(`/signup/seller`);
     //this.setState({ showSellerSignUp: true });
   }
+
+  showDrawer = () => {
+    this.setState({
+      drawerVisible: true,
+    });
+  };
+
+  onClose = () => {
+    this.setState({
+      drawerVisible: false,
+    });
+  };
 
   loginVal(data) {
     this.setState({ showLogin: data });
@@ -300,13 +335,35 @@ class Header extends React.Component {
               <Icon type="close" style={{ marign: 10 }} onClick={this.showSearchFun} />
             </div>
             : <div className='app-primary header-resp'>
-              <Dropdown overlay={this.state.loggedin ? loggedInMenu : notLoggedInMenu}>
-                <div className="hamburger">
-                  <span className="hamSpan" />
-                  <span className="hamSpan" />
-                  <span className="hamSpan" />
-                </div>
-              </Dropdown>
+              <div className="hamburger" onClick={this.showDrawer}>
+                <span className="hamSpan" />
+                <span className="hamSpan" />
+                <span className="hamSpan" />
+              </div>
+              <Drawer
+                title="Top Categories"
+                placement="left"
+                closable={false}
+                onClose={this.onClose}
+                visible={this.state.drawerVisible}
+              >
+                <Menu
+                  mode="inline"
+                  style={{ border: 0, textAlign: "left", height: "600px", overflowY: "auto", position: "relative" }}
+                >{this.state.categoryList.map((op, index) => (
+                  <SubMenu key={index} title={<span><Icon type="setting" /><span>{op}</span></span>}>
+                    {this.state.List[op].map(ty => {
+                      var link = '/product/' + ty.key
+                      return (
+                        <Menu.Item key={ty.key}><Link to={link}>{ty.productName}</Link></Menu.Item>
+                      )
+                    }
+                    )}
+                  </SubMenu>
+                ))
+                  }
+                </Menu>
+              </Drawer>
               <div style={{ width: '20%' }}>
                 <Link to="/">
                   <img
@@ -315,7 +372,12 @@ class Header extends React.Component {
                   />
                 </Link>
               </div>
-              <img src={search} className='resp-search-icon' onClick={this.showSearchFun} />
+              <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
+                <img src={search} className='resp-search-icon' onClick={this.showSearchFun} />
+                <Dropdown overlay={this.state.loggedin ? loggedInMenu : notLoggedInMenu}>
+                  <Icon type="user" style={{ fontSize: "25px", marginLeft: "10px" }} />
+                </Dropdown>
+              </div>
             </div>
           }
 

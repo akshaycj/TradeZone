@@ -128,7 +128,7 @@
     width:100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
   }
   .search {
     align-self: center;
@@ -159,5 +159,8 @@
     margin-top: 10px;
     max-width: 110px;
     min-width: 50px;
+  }
+
+  .ant-menu-submenu{
   }
 }
