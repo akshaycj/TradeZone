@@ -109,6 +109,7 @@ class Header extends React.Component {
     this.props.SignOut();
     this.props.AuthStateAction();
     this.setState({ loggedin: false });
+    this.props.history.push("/")
   }
   recieveSearchWord = (word) => {
     this.setState({ searchWord: word })
