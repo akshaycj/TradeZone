@@ -69,7 +69,6 @@ export default class extends Component {
                     )
                   }
                   )}
-
                 </SubMenu>
               ))
                 }

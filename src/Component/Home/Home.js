@@ -11,25 +11,24 @@ import "./FifthComponent.css";
 import "./Home.css";
 import Category from "./Category";
 import Recents from "./Recents";
-import {connect} from 'react-redux';
-import  AuthStateAction from '../Actions/AuthSate';
+import { connect } from 'react-redux';
+import AuthStateAction from '../Actions/AuthSate';
 class Home extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={}
+    this.state = {}
   }
-  
-  componentDidMount(){
+
+  componentDidMount() {
     this.props.AuthStateAction()
   }
-  
+
   render() {
     return (
       <div className="Home">
         <div className="home-header">
           <div className="home-category">
             <Category />
-           
           </div>
           <div className="home-components">
             <div className="slider-home">
@@ -54,10 +53,10 @@ class Home extends Component {
     );
   }
 }
-const mapStateToProps = state =>({
-user: state.user
+const mapStateToProps = state => ({
+  user: state.user
 })
 const mapActionToProps = {
-AuthStateAction:AuthStateAction
+  AuthStateAction: AuthStateAction
 }
-export default connect(mapStateToProps,mapActionToProps)(Home);
+export default connect(mapStateToProps, mapActionToProps)(Home);

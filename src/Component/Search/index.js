@@ -8,9 +8,17 @@ export default class extends Component {
     value: ''
   };
 
-  handleSearch = value => {
+  componentDidMount = () => {
+    this.setState({
+      result: []
+    })
+  }
 
+  handleSearch = value => {
     let result = [];
+    this.setState({
+      result: result
+    })
     db.ref("products")
       .orderByChild("productName")
       .startAt(value.toUpperCase())
@@ -22,8 +30,8 @@ export default class extends Component {
           data.forEach(element => {
             result.push(element.val().productName);
           });
-
           this.setState({ result });
+          console.log("result", result)
         }.bind(this)
       );
   };
