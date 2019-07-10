@@ -1,35 +1,33 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Menu, Icon,Spin } from "antd";
+import { Menu, Spin } from "antd";
 import { Link, Redirect } from "react-router-dom";
 import { Auth, db } from "../../../config";
 
 const MenuItem = Menu.Item;
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 export default class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       logout: false,
       current: "mail",
-      productUrl:'',
-      img:'',
-      load:true
+      productUrl: '',
+      img: '',
+      load: true
     }
   };
-componentDidMount(){
-  var that = this
-   var product = this.props.url+"/products"
-   var url = ''
-   db.ref('users').child(this.props.param+"").child("details").child('url').on("value",function(data){
-     
-     url = data.val()
-     that.setState({load:false,img:url})
-   })
-   this.setState({productUrl:product})
-}
+  componentDidMount() {
+    var that = this
+    var product = this.props.url + "/products"
+    var url = ''
+    db.ref('users').child(this.props.param + "").child("details").child('url').on("value", function (data) {
+
+      url = data.val()
+      that.setState({ load: false, img: url })
+    })
+    this.setState({ productUrl: product })
+  }
   onLogout = () => {
     Auth.signOut();
     this.setState({ logout: true });
@@ -52,18 +50,19 @@ componentDidMount(){
             <Link to={this.props.url}>Seller Details</Link>
           </div>
           <div className="top-nav-elements">Seller Products</div>
-          
+
         </div>
-        
+
         <div className="account-profile-container">
-          <div className="avatar" style={{alignItems:'center',justifyContent:'center',display:'flex'}}>
-          {this.state.load ? <Spin/> : 
-            <img
-              src={this.state.img}
-              width="100%"
-              height="100%"
-            />
-          }
+          <div className="avatar" style={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
+            {this.state.load ? <Spin /> :
+              <img
+                alt=""
+                src={this.state.img}
+                width="100%"
+                height="100%"
+              />
+            }
           </div>
           <div className="menu" style={{ width: "100%" }}>
             <Menu
@@ -77,7 +76,7 @@ componentDidMount(){
               <MenuItem key="2">
                 <Link to={this.state.productUrl}>Seller Products</Link>
               </MenuItem>
-             
+
             </Menu>
           </div>
           <div

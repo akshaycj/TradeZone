@@ -1,32 +1,30 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Menu, Icon,Spin } from "antd";
+import { Menu, Spin } from "antd";
 import { Link, Redirect } from "react-router-dom";
-import { Auth,db } from "../../../config";
+import { Auth, db } from "../../../config";
 
 const MenuItem = Menu.Item;
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
 
 export default class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state ={
-      url:'',load:true
+    this.state = {
+      url: '', load: true
     }
   }
   state = {
     logout: false,
     current: "mail"
   };
-  componentDidMount(){
+  componentDidMount() {
     var that = this
-    Auth.onAuthStateChanged(function(user){
-      if(user){
-        
-        db.ref('users').child(user.uid).child('details').child('url').on("value",function(data){
+    Auth.onAuthStateChanged(function (user) {
+      if (user) {
+
+        db.ref('users').child(user.uid).child('details').child('url').on("value", function (data) {
           let url = data.val()
-          that.setState({url,load:false})
+          that.setState({ url, load: false })
         })
       }
     })
@@ -71,14 +69,15 @@ export default class extends Component {
           </div>
         </div>
         <div className="account-profile-container">
-          <div className="avatar" style={{alignItems:'center',justifyContent:'center',display:'flex'}}>
-          {this.state.load ? <Spin/> : 
-            <img
-              src={this.state.url}
-              width="100%"
-              height="100%"
-            />
-          }
+          <div className="avatar" style={{ alignItems: 'center', justifyContent: 'center', display: 'flex' }}>
+            {this.state.load ? <Spin /> :
+              <img
+                alt=""
+                src={this.state.url}
+                width="100%"
+                height="100%"
+              />
+            }
           </div>
           <div className="menu" style={{ width: "100%" }}>
             <Menu

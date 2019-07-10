@@ -1,27 +1,25 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
-import  {db } from '../../../../config';
 export default class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      link:""
+    this.state = {
+      link: ""
     }
   }
-  componentDidMount(){
+  componentDidMount() {
   }
   onClickRemove = (a) => {
     this.props.RemoveItem(a)
   }
-  onClickProd =(q) =>{
+  onClickProd = (q) => {
     this.props.clickProd(q)
-    
+
   }
   render() {
     return (
-      <div className="recent-card" onClick={()=>{this.onClickProd(this.props.data)}}>
-         <img src={this.props.data.value.urls[0]} style={{ margin: 5 }} width="90%" height={180} />
+      <div className="recent-card" onClick={() => { this.onClickProd(this.props.data) }}>
+        <img alt="" src={this.props.data.value.urls[0]} style={{ margin: 5 }} width="90%" height={180} />
 
         <div
           style={{
@@ -40,8 +38,8 @@ export default class extends Component {
             {this.props.data.value.productName}
           </h3>
 
-        </div> 
-        
+        </div>
+
       </div>
     );
   }

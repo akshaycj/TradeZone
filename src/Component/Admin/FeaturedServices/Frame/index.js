@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Link } from "react-router-dom";
-import  {db } from '../../../../config';
 export default class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      link:""
+    this.state = {
+      link: ""
     }
   }
-  componentDidMount(){
+  componentDidMount() {
   }
   onClickRemove = (a) => {
     this.props.RemoveItem(a)
@@ -17,7 +15,7 @@ export default class extends Component {
   render() {
     return (
       <div className="recent-card">
-        <img src={this.props.data.urls[0]} style={{ margin: 5 }} width="90%" height={180} />
+        <img alt="" src={this.props.data.urls[0]} style={{ margin: 5 }} width="90%" height={180} />
 
         <div
           style={{
@@ -37,9 +35,9 @@ export default class extends Component {
           </h3>
 
         </div>
-        <div className="common-button app-accent" onClick={()=>{this.onClickRemove(this.props.data.uid)}}>
-         
-            Remove
+        <div className="common-button app-accent" onClick={() => { this.onClickRemove(this.props.data.uid) }}>
+
+          Remove
         </div>
       </div>
     );

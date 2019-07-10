@@ -3,34 +3,34 @@ import "./index.css";
 import Block from "../Block";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import { Icon,Spin } from "antd";
+import { Icon, Spin } from "antd";
 import i from "../pics/watch.jpg";
-import {db} from '../../../config';
+import { db } from '../../../config';
 
 
 export default class extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state={
-      data:[],
-      load:true
+    this.state = {
+      data: [],
+      load: true
 
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     var that = this
-    db.ref("featuredProducts").on("value",function(data){
-        data.forEach(y=>{
-          that.state.data.push({value:y.val(),key:y.key})
-          
-        })
-        that.setState({load:false})
-        
+    db.ref("featuredProducts").on("value", function (data) {
+      data.forEach(y => {
+        that.state.data.push({ value: y.val(), key: y.key })
+
       })
+      that.setState({ load: false })
+
+    })
   }
   render() {
-    
+
     const SampleNextArrow = props => {
       const { className, style, onClick } = props;
       return (
@@ -47,7 +47,7 @@ export default class extends Component {
         />
       );
     };
-    
+
     const SamplePrevArrow = props => {
       const { className, style, onClick } = props;
       return (
@@ -86,29 +86,29 @@ export default class extends Component {
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />
     };
-    
+
     return (
-      <div style={{padding:"10px",margin:'10px'}}>
+      <div style={{ padding: "10px", margin: '10px' }}>
         <h1>Featured Products</h1>
-        {this.state.load ? <Spin/>: 
-       <div className="featured-main">
-          <Slider {...settings} className='not-resp'>
-           {this.state.data.map(l =>(
-             <div style={{display:'flex',justifyContent:'space-around'}}>
-           <Link to={"/product/"+l.key}> <Block name={l.value.productName} price={l.value.price} pic={l.value.urls[0]} /></Link>
-             </div>
-           ))}
-          </Slider>
-          <Slider {...settingsResp} className='resp'>
-           {this.state.data.map(l =>(
-             <div style={{display:'flex',justifyContent:'space-around'}}>
-           <Link to={"/product/"+l.key}> <Block name={l.value.productName} price={l.value.price} pic={l.value.urls[0]} /></Link>
-             </div>
-           ))}
-          </Slider>
-        </div>
-        
-      }
+        {this.state.load ? <Spin /> :
+          <div className="featured-main">
+            <Slider {...settings} className='not-resp'>
+              {this.state.data.map((l, index) => (
+                <div style={{ display: 'flex', justifyContent: 'space-around' }} key={index}>
+                  <Link to={"/product/" + l.key}> <Block name={l.value.productName} price={l.value.price} pic={l.value.urls[0]} /></Link>
+                </div>
+              ))}
+            </Slider>
+            <Slider {...settingsResp} className='resp'>
+              {this.state.data.map((l, index) => (
+                <div style={{ display: 'flex', justifyContent: 'space-around' }} key={index}>
+                  <Link to={"/product/" + l.key}> <Block name={l.value.productName} price={l.value.price} pic={l.value.urls[0]} /></Link>
+                </div>
+              ))}
+            </Slider>
+          </div>
+
+        }
       </div>
     );
   }

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import "./index.css";
-import { Input, Icon, Button, Spin } from "antd";
+import { Input, Icon, Spin } from "antd";
 import connect from "react-redux/lib/connect/connect";
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 import { db, Auth } from "../../../config.js";
 class index extends Component {
   constructor(props) {
@@ -23,7 +22,7 @@ class index extends Component {
         this.setState({ uid: user.uid });
         db.ref("users")
           .child(user.uid + "").child("details")
-          .on("value", function(data) {
+          .on("value", function (data) {
             that.setState({
               name: data.val().name,
               email: data.val().email,
@@ -139,8 +138,8 @@ class index extends Component {
             </div>
           </div>
         ) : (
-          <Spin />
-        )}
+            <Spin />
+          )}
       </div>
     );
   }

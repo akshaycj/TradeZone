@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Block.css';
-import { Link } from 'react-router-dom';
 export default class Block extends Component {
     constructor(props) {
         super(props);
@@ -8,11 +7,7 @@ export default class Block extends Component {
             link: ""
         }
     }
-    componentDidMount() {
 
-
-
-    }
     render() {
         return (
             <div>
