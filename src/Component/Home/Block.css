@@ -27,20 +27,14 @@ h6 {
 .overlay1 h2 {
   color: white;
 }
-.price {
-  align-self: flex-end;
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
 .detail {
   padding: 10px;
   width: 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center ;
 }
 .element:hover .overlay1 {
-  height: 40%;
+  height: 45%;
+  font-size: 11px ;
 }
