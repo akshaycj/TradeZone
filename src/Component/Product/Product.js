@@ -18,6 +18,7 @@ class Product extends React.Component {
 			email: '',
 			loginStateforContact: false,
 			urls: [],
+			urlsForShifting: [],
 			productName: '',
 			description: "",
 			specification: "",
@@ -66,6 +67,7 @@ class Product extends React.Component {
 			var url = sellerid + data.seller
 			that.setState({
 				urls: data.urls,
+				urlsForShifting: data.urls,
 				productName: data.productName,
 				ratings: data.ratings,
 				sellerid: url,
@@ -140,6 +142,18 @@ class Product extends React.Component {
 	closeLogin = () => {
 		this.setState({ showLogin: false })
 	}
+
+	onPicChange = (i) => {
+		var urls = this.state.urls;
+		var urlsForShifting = this.state.urlsForShifting;
+		var temp = urlsForShifting[0];
+		urlsForShifting[0] = urlsForShifting[i];
+		urlsForShifting[i] = temp;
+		this.setState({
+			urlsForShifting: urlsForShifting
+		})
+	}
+
 	render() {
 		return (
 			<div className="product">
@@ -159,13 +173,13 @@ class Product extends React.Component {
 							<Card className="card">
 								<div className="details">
 									<div className="productpic">
-										<div className="bigpic">
-											<img src={this.state.urls[0]} style={{ width: '100%' }} />
+										<div className="bigpic" style={{ paddingBottom: "10px" }}>
+											<div style={{ width: '100%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[0]} style={{ width: "95%" }} onClick={() => { this.onPicChange(0) }} /></div>
 										</div>
 										<div className="smallpics">
-											<img src={this.state.urls[1]} style={{ width: '33%' }} />
-											<img src={this.state.urls[2]} style={{ width: '33%' }} />
-											<img src={this.state.urls[3]} style={{ width: '33%' }} />
+											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[1]} style={{ width: '100%' }} onClick={() => { this.onPicChange(1) }} /></div>
+											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[2]} style={{ width: '100%' }} onClick={() => { this.onPicChange(2) }} /></div>
+											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[3]} style={{ width: '100%' }} onClick={() => { this.onPicChange(3) }} /></div>
 										</div>
 									</div>
 									<div className="description">
