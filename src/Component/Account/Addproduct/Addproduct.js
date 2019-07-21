@@ -135,7 +135,8 @@ class AddProduct extends Component {
               <Input
                 placeholder="Product Name"
                 onChange={e => {
-                  this.setState({ productName: e.target.value });
+                  var name = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+                  this.setState({ productName: name });
                 }}
                 style={{ margin: 10 }}
               />

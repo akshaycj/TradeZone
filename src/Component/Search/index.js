@@ -22,7 +22,7 @@ export default class extends Component {
     db.ref("products")
       .orderByChild("productName")
       .startAt(value.toUpperCase())
-      .endAt(value.toLowerCase() + "\uf8ff")
+      .endAt(value.toUpperCase() + "\uf8ff")
       .once(
         "value",
         function (data) {
