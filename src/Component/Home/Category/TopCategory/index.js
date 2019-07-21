@@ -61,7 +61,10 @@ export default class extends Component {
                 mode="vertical"
                 style={{ backgroundColor: "#f7f7f7", border: 0, textAlign: "left", height: "600px", overflowY: "auto", position: "relative" }}
               >{this.state.categoryList.map((op, index) => (
-                <SubMenu key={index} title={<span><Icon type="setting" /><span>{op}</span></span>}>
+                <SubMenu
+                  style={{ maxHeight: "200px", overflowY: "auto", position: "relative" }}
+                  key={index}
+                  title={<span><Icon type="setting" /><span>{op}</span></span>}>
                   {this.state.List[op].map(ty => {
                     var link = '/product/' + ty.key
                     return (
