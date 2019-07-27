@@ -109,50 +109,50 @@ class Overview extends Component {
 
             </div> :
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: "space-between" }}>
-                <div style={{ width: "80%", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: "space-around", height: '100vh', padding: "10px" }}>
+                <div style={{ width: "90%", display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: "space-around", height: '100vh', padding: "10px" }}>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "30%" }}>Name :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}> {this.state.name}</span>
+                    <div style={{ width: "200px", textAlign: "left", fontSize: '18px', fontWeight: '900' }}>Name</div>
+                    <div style={{ textAlign: "left", fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.name}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "31.5%" }}>Email:</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}> {this.state.email}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>Email</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.email}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "17%" }}>CompanyName :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>{this.state.companyName}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>CompanyName</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.companyName}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "30%" }}>Phone :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>{this.state.phone}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>Phone</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.phone}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "23%" }}>LiscenceNo :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}> {this.state.liscenceNo}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>LiscenceNo</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.liscenceNo}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "25%" }}>No of staff :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}> {this.state.staffNo}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>No of staff</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.staffNo}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "30%" }}>Vat No :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}> {this.state.vatNo}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>Vat No</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.vatNo}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "9%" }}>Year of Establishment :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}> {this.state.yearofEstab}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>Year of Establishment</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.yearofEstab}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "27%" }}>Location :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>{this.state.location}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>Location</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.location}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "13%" }}>Company Address :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>{this.state.companyAddr}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>Company Address</div>
+                    <div style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.companyAddr}</div>
                   </div>
                   <div style={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "flex-start" }}>
-                    <span style={{ fontSize: '18px', fontWeight: '900', marginRight: "17%" }}>AboutCompany :</span>
-                    <span style={{ fontSize: '20px', fontWeight: '500', textAlign: "left" }}>{this.state.aboutCompany}</span>
+                    <div style={{ width: "200px", fontSize: '18px', fontWeight: '900', textAlign: "left" }}>AboutCompany</div>
+                    <div style={{ width: "500px", fontSize: '20px', fontWeight: '500', textAlign: "left" }}>: {this.state.aboutCompany}</div>
                   </div>
                 </div>
                 <div>
