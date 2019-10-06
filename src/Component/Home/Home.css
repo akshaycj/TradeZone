@@ -18,6 +18,10 @@
   margin-right: 20px;
 }
 
+.mobileOnly{
+  display: none ;
+}
+
 @media only screen and (max-width: 600px) {
   .home-category {
     display: none;
@@ -32,5 +36,16 @@
   }
   .recent-products {
     width: 100%;
+  }
+
+  .desktopOnly{
+    display: none ;
+  }
+
+  .mobileOnly{
+    display: flex ;
+    flex-direction: column ;
+    width : 94% ;
+    margin-left: 10px ;
   }
 }

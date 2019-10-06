@@ -13,7 +13,7 @@ export default class FifthComponent extends Component {
           <p className="textIn5th2">See How It Works</p>
         </div>
         <div className="fifth3">
-          <div className="imgIn5th3" ><img src={a} alt="" style={{ width: '100%' }} /></div>
+          <img src={a} alt="" className="imgIn5th3" />
           <p className="textIn5th3">Sell On Tradezone</p>
         </div>
       </div>

@@ -34,18 +34,19 @@ class Home extends Component {
             <div className="slider-home">
               <Slider1 />
             </div>
-            <div className="recent-products">
-              <h3 style={{ textAlign: "left", fontStyle: "bold" }}>
-                Recent Products:
-              </h3>
+            <div className="recent-products desktopOnly">
+              <h3 style={{ textAlign: "left", fontStyle: "bold" }}>Recent Products:</h3>
               <Recents />
             </div>
           </div>
         </div>
-        <br /> <br />
         <br />
         <div>
           <Grid heading={"Top Rated Products"} />
+          <div className="recent-products mobileOnly">
+            <h3 style={{ textAlign: "left", fontStyle: "bold" }}>Recent Products:</h3>
+            <Recents />
+          </div>
           <FourthComponent />
           <FifthComponent />
         </div>

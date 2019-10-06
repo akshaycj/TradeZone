@@ -93,18 +93,50 @@ class Overview extends Component {
         </div> :
           <div>
             {this.state.updateMode ? <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100vh' }}>
-              <Input value={this.state.name} name="name" onChange={this.changeField} />
-              <Input value={this.state.email} name="email" onChange={this.changeField} />
-              <Input value={this.state.companyName} name="companyName" onChange={this.changeField} />
-              <Input value={this.state.phone} name="phone" onChange={this.changeField} />
-              <Input value={this.state.liscenceNo} name="liscenceNo" onChange={this.changeField} />
-              <Input value={this.state.staffNo} name="staffNo" onChange={this.changeField} />
-              <Input value={this.state.vatNo} name="vatNo" onChange={this.changeField} />
-              <Input value={this.state.yearofEstab} name="yearofEstab" onChange={this.changeField} />
-              <Input value={this.state.location} name="location" onChange={this.changeField} />
-              <Input value={this.state.companyAddr} name="companyAddr" onChange={this.changeField} />
-              <Input value={this.state.aboutCompany} name="aboutCompany" onChange={this.changeField} />
-
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Name :</div>
+                <Input value={this.state.name} name="name" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Email :</div>
+                <Input value={this.state.email} name="email" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>CompanyName :</div>
+                <Input value={this.state.companyName} name="companyName" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Mobile :</div>
+                <Input value={this.state.phone} name="phone" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Liscence No :</div>
+                <Input value={this.state.liscenceNo} name="liscenceNo" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Staff No :</div>
+                <Input value={this.state.staffNo} name="staffNo" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Vat No :</div>
+                <Input value={this.state.vatNo} name="vatNo" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Year Of Estb :</div>
+                <Input value={this.state.yearofEstab} name="yearofEstab" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Location :</div>
+                <Input value={this.state.location} name="location" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>Company Address :</div>
+                <Input value={this.state.companyAddr} name="companyAddr" onChange={this.changeField} />
+              </div>
+              <div className="inputAndTextInUpdate">
+                <div style={{ width: "15%" }}>About Company :</div>
+                <Input value={this.state.aboutCompany} name="aboutCompany" onChange={this.changeField} />
+              </div>
               <Button type='primary' onClick={this.updateValue} style={{ width: '30%' }}>Update value</Button>
 
             </div> :

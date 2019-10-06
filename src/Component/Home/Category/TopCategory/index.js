@@ -59,7 +59,7 @@ export default class extends Component {
               </div>
               <Menu
                 mode="vertical"
-                style={{ backgroundColor: "#f7f7f7", border: 0, textAlign: "left", height: "600px", overflowY: "auto", position: "relative" }}
+                style={{ backgroundColor: "#f7f7f7", border: 0, textAlign: "left", height: "100%", overflowY: "auto", position: "relative" }}
               >{this.state.categoryList.map((op, index) => (
                 <SubMenu
                   style={{ maxHeight: "200px", overflowY: "auto", position: "relative" }}

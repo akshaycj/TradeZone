@@ -56,14 +56,13 @@
 }
 
 .imgIn5th3 {
-  width: 40%;
-
+  width: 45%;
+  max-height: 90% ;
   margin: auto;
 }
 
 .textIn5th3 {
-  width: 40%;
-
+  width: 55%;
   font-weight: 700;
   display: flex;
   justify-content: center;

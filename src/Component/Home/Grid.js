@@ -7,16 +7,15 @@ import FeaturedServices from "./FeaturedServices";
 
 class Grid extends React.Component {
   render() {
-    
+
     return (
       <div className="sub">
         <Featured />
-        <br/>
-        <LatestOffers/>
-        <br/>
-        <br/>
+        <br />
+        <LatestOffers />
+        <br />
+        <br />
         <FeaturedServices />
-
       </div>
     );
   }

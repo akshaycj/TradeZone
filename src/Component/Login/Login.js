@@ -166,6 +166,13 @@ class Login extends Component {
     this.setState({ file: e.originFileObj })
   }
 
+  enterPressed = (event) => {
+    var code = event.keyCode || event.which;
+    if (code === 13) {
+      this.onLogin();
+    }
+  }
+
   render() {
     return (
       <div>
@@ -315,6 +322,7 @@ class Login extends Component {
                       placeholder="Password"
                       style={{ width: "90%", margin: "auto", borderRadius: 15 }}
                       onChange={this.onPassword}
+                      onKeyPress={this.enterPressed}
                     />
                   </div>
                   {this.state.showErr === true ? <div>{this.state.err}</div> : null}
