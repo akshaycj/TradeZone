@@ -116,7 +116,6 @@ class Header extends React.Component {
   }
   onClickSearchButton = () => {
     if (this.state.searchWord.length != 0) {
-
       this.props.history.push(`/search/${this.state.searchWord}`)
     }
   }

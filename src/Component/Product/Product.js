@@ -177,9 +177,9 @@ class Product extends React.Component {
 											<div style={{ width: '100%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[0]} style={{ width: "95%" }} onClick={() => { this.onPicChange(0) }} /></div>
 										</div>
 										<div className="smallpics">
-											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[1]} style={{ width: '100%' }} onClick={() => { this.onPicChange(1) }} /></div>
-											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[2]} style={{ width: '100%' }} onClick={() => { this.onPicChange(2) }} /></div>
-											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px" }}><img src={this.state.urlsForShifting[3]} style={{ width: '100%' }} onClick={() => { this.onPicChange(3) }} /></div>
+											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px", minHeight: "70px", height: "min-content" }}><img src={this.state.urlsForShifting[1]} style={{ width: '100%' }} onClick={() => { this.onPicChange(1) }} /></div>
+											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px", minHeight: "70px", height: "min-content" }}><img src={this.state.urlsForShifting[2]} style={{ width: '100%' }} onClick={() => { this.onPicChange(2) }} /></div>
+											<div style={{ width: '33%', borderWidth: "2px", borderColor: "black", borderStyle: "solid", padding: "5px", minHeight: "70px", height: "min-content" }}><img src={this.state.urlsForShifting[3]} style={{ width: '100%' }} onClick={() => { this.onPicChange(3) }} /></div>
 										</div>
 									</div>
 									<div className="description">

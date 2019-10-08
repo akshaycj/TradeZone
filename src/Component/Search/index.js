@@ -19,10 +19,11 @@ export default class extends Component {
     this.setState({
       result: result
     })
+    console.log("vvv", value);
     db.ref("products")
-      .orderByChild("productName")
-      .startAt(value.toUpperCase())
-      .endAt(value.toUpperCase() + "\uf8ff")
+      .orderByChild("searchName") // searchName toLoweCase of ProductNAme. 
+      .startAt(value)
+      .endAt(value + "\uf8ff")
       .once(
         "value",
         function (data) {

@@ -17,6 +17,7 @@ export default function AddProductAction(
   areaofusage,
   specififcation,
   weight,
+  searchName
 ) {
   var length = 0;
   const path = db
@@ -30,13 +31,13 @@ export default function AddProductAction(
         .child(productName + "/")
         .child(a.originFileObj.name)
         .put(a.originFileObj)
-        .then(function(data) {
+        .then(function (data) {
           data.ref
             .getDownloadURL()
-            .then(function(downloadURL) {
+            .then(function (downloadURL) {
               value.urls.push(downloadURL);
             })
-            .then(function(data) {
+            .then(function (data) {
               length = length + 1
               db.ref("users")
                 .child(uid).child("products")
@@ -51,8 +52,8 @@ export default function AddProductAction(
                   color,
                   areaofusage,
                   specififcation,
-                  weight
-                  
+                  weight,
+                  searchName: productName.toLowerCase()
                 });
               db.ref("products")
                 .child(path)
@@ -67,12 +68,13 @@ export default function AddProductAction(
                   areaofusage,
                   specififcation,
                   weight,
-                  seller:uid
+                  searchName: productName.toLowerCase(),
+                  seller: uid
                 });
             });
         });
     });
-    if(length !== pics.length){
+    if (length !== pics.length) {
 
       dispatch({
         type: ADDPRODUCT,

@@ -24,6 +24,7 @@ class AddProduct extends Component {
     this.state = {
       dat: [],
       productName: "",
+      searchName: "",
       category: "",
       description: "",
       tags: [],
@@ -32,12 +33,12 @@ class AddProduct extends Component {
       users: [],
       spin: true,
       uid: "",
-      price:"",
-      color:"",
-      areaofusage:"",
-      weight:"",
-      specififcation:"",
-      categoryList:[]
+      price: "",
+      color: "",
+      areaofusage: "",
+      weight: "",
+      specififcation: "",
+      categoryList: []
     };
   }
   componentWillReceiveProps(props) {
@@ -47,28 +48,28 @@ class AddProduct extends Component {
   componentDidMount() {
     var that = this;
 
-    db.ref("AdminAdded").on("value", function(owl) {
+    db.ref("AdminAdded").on("value", function (owl) {
 
-      owl.forEach(p=>{
-        db.ref("users").child(p.val()+'').child("details").on('value',function(data){
-            var it = data.val();
-            it["uid"] = p.val();
-            that.state.users.push(it)
-            
-            that.setState({ spin: false });
+      owl.forEach(p => {
+        db.ref("users").child(p.val() + '').child("details").on('value', function (data) {
+          var it = data.val();
+          it["uid"] = p.val();
+          that.state.users.push(it)
+
+          that.setState({ spin: false });
         })
       })
-     db.ref("category").on("value",function(dat){
-       var list = []
-       dat.forEach(y=>{
-         list.push(y.val())
-       })
-       that.setState({categoryList:list})
+      db.ref("category").on("value", function (dat) {
+        var list = []
+        dat.forEach(y => {
+          list.push(y.val())
+        })
+        that.setState({ categoryList: list })
 
-     })
-      
+      })
 
-      
+
+
     });
   }
   handleClose = removedTag => {
@@ -111,12 +112,12 @@ class AddProduct extends Component {
       this.state.uid,
       this.state.category,
       this.state.tags,
-      this.state.description,  
+      this.state.description,
       this.state.price,
       this.state.color,
       this.state.areaofusage,
       this.state.specififcation,
-      this.state.weight
+      this.state.weight,
     );
   }
   userSelect = e => {
@@ -129,129 +130,129 @@ class AddProduct extends Component {
         {this.state.spin == true ? (
           <Spin />
         ) : (
-          <div>
-            <h1>Add Product</h1>
-            <div className="add-main">
-              <Select
-                placeholder="select User"
-                onChange={this.userSelect}
-                style={{ width: "100%", margin: 10 }}
-              >
-                {this.state.users.map(t => (
-                  <Option value={t.uid}>{t.email}</Option>
-                ))}
-              </Select>
-              <Input
-                placeholder="Product Name"
-                onChange={e => {
-                  this.setState({ productName: e.target.value });
-                }}
-                style={{ margin: 10 }}
-              />
-              <Select
-                placeholder="Select Category"
-                onChange={value => {
-                  this.setState({ category: value });
-                }}
-                style={{ width: "100%", margin: 10 }}
-              >
-              {this.state.categoryList.map(p =>(
-                <Option key={p}>{p}</Option>
-              ))}
-              </Select>
-              <Input.TextArea
-                style={{ margin: 10 }}
-                placeholder="Product description"
-                onChange={a => {
-                  this.setState({ description: a.target.value });
-                }}
-              />
-             <Input placeholder="Price" style={{ margin: "10px" }}   onChange={e => {
-              this.setState({ price: e.target.value });
-            }}/>
-          <Input placeholder="Product Weight" style={{ margin: 10 }}   onChange={e => {
-              this.setState({ weight: e.target.value });
-            }} />
-          <Input placeholder="Colour" style={{ margin: "10px" }}    onChange={e => {
-              this.setState({ color: e.target.value });
-            }}/>
-          <Input.TextArea
-            placeholder="Add Specification Details"
-            style={{ margin: 10 }}
-            autosize={{ minRows: 2, maxRows: 5 }}
-            onChange={e => {
-              this.setState({ specififcation: e.target.value });
-            }}
-          />
-          <Input placeholder="Area Of Usage" style={{ margin: "10px" }}   onChange={e => {
-              this.setState({ areaofusage: e.target.value });
-            }} />
-              <div
-                style={{
-                  display: "flex",
-                  marginRight: "auto",
-                  marginTop: 10,
-                  flexWrap: "wrap",
-                  padding: 5
-                }}
-              >
-                <span style={{ marginRight: 5 }}>Tags:</span>
-                {tags.map((tag, index) => {
-                  const isLongTag = tag.length > 20;
-                  const tagElem = (
+            <div>
+              <h1>Add Product</h1>
+              <div className="add-main">
+                <Select
+                  placeholder="select User"
+                  onChange={this.userSelect}
+                  style={{ width: "100%", margin: 10 }}
+                >
+                  {this.state.users.map(t => (
+                    <Option value={t.uid}>{t.email}</Option>
+                  ))}
+                </Select>
+                <Input
+                  placeholder="Product Name"
+                  onChange={e => {
+                    this.setState({ productName: e.target.value });
+                  }}
+                  style={{ margin: 10 }}
+                />
+                <Select
+                  placeholder="Select Category"
+                  onChange={value => {
+                    this.setState({ category: value });
+                  }}
+                  style={{ width: "100%", margin: 10 }}
+                >
+                  {this.state.categoryList.map(p => (
+                    <Option key={p}>{p}</Option>
+                  ))}
+                </Select>
+                <Input.TextArea
+                  style={{ margin: 10 }}
+                  placeholder="Product description"
+                  onChange={a => {
+                    this.setState({ description: a.target.value });
+                  }}
+                />
+                <Input placeholder="Price" style={{ margin: "10px" }} onChange={e => {
+                  this.setState({ price: e.target.value });
+                }} />
+                <Input placeholder="Product Weight" style={{ margin: 10 }} onChange={e => {
+                  this.setState({ weight: e.target.value });
+                }} />
+                <Input placeholder="Colour" style={{ margin: "10px" }} onChange={e => {
+                  this.setState({ color: e.target.value });
+                }} />
+                <Input.TextArea
+                  placeholder="Add Specification Details"
+                  style={{ margin: 10 }}
+                  autosize={{ minRows: 2, maxRows: 5 }}
+                  onChange={e => {
+                    this.setState({ specififcation: e.target.value });
+                  }}
+                />
+                <Input placeholder="Area Of Usage" style={{ margin: "10px" }} onChange={e => {
+                  this.setState({ areaofusage: e.target.value });
+                }} />
+                <div
+                  style={{
+                    display: "flex",
+                    marginRight: "auto",
+                    marginTop: 10,
+                    flexWrap: "wrap",
+                    padding: 5
+                  }}
+                >
+                  <span style={{ marginRight: 5 }}>Tags:</span>
+                  {tags.map((tag, index) => {
+                    const isLongTag = tag.length > 20;
+                    const tagElem = (
+                      <Tag
+                        style={{ marginBottom: 5 }}
+                        color="#2db7f5"
+                        key={tag}
+                        closable={true}
+                        afterClose={() => this.handleClose(tag)}
+                      >
+                        {isLongTag ? `${tag.slice(0, 20)}...` : tag}
+                      </Tag>
+                    );
+                    return isLongTag ? (
+                      <Tooltip title={tag} key={tag}>
+                        {tagElem}
+                      </Tooltip>
+                    ) : (
+                        tagElem
+                      );
+                  })}
+                  {inputVisible && (
+                    <Input
+                      ref={this.saveInputRef}
+                      type="text"
+                      size="small"
+                      style={{ width: 78 }}
+                      value={inputValue}
+                      onChange={this.handleInputChange}
+                      onBlur={this.handleInputConfirm}
+                      onPressEnter={this.handleInputConfirm}
+                    />
+                  )}
+                  {!inputVisible && (
                     <Tag
-                      style={{ marginBottom: 5 }}
-                      color="#2db7f5"
-                      key={tag}
-                      closable={true}
-                      afterClose={() => this.handleClose(tag)}
+                      onClick={this.showInput}
+                      style={{ background: "#fff", borderStyle: "dashed" }}
                     >
-                      {isLongTag ? `${tag.slice(0, 20)}...` : tag}
-                    </Tag>
-                  );
-                  return isLongTag ? (
-                    <Tooltip title={tag} key={tag}>
-                      {tagElem}
-                    </Tooltip>
-                  ) : (
-                    tagElem
-                  );
-                })}
-                {inputVisible && (
-                  <Input
-                    ref={this.saveInputRef}
-                    type="text"
-                    size="small"
-                    style={{ width: 78 }}
-                    value={inputValue}
-                    onChange={this.handleInputChange}
-                    onBlur={this.handleInputConfirm}
-                    onPressEnter={this.handleInputConfirm}
-                  />
-                )}
-                {!inputVisible && (
-                  <Tag
-                    onClick={this.showInput}
-                    style={{ background: "#fff", borderStyle: "dashed" }}
-                  >
-                    <Icon type="plus" /> New Tag
+                      <Icon type="plus" /> New Tag
                   </Tag>
-                )}
-              </div>
-              <div style={{ marginTop: 10 }}>
-                <PicturesWall value={this.getdata.bind(this)} />
-              </div>
+                  )}
+                </div>
+                <div style={{ marginTop: 10 }}>
+                  <PicturesWall value={this.getdata.bind(this)} />
+                </div>
 
-              <div
-                className="common-button app-accent"
-                style={{ marginTop: "auto" }}
-                onClick={this.onSubmit.bind(this)}
-              >
-                + Add
+                <div
+                  className="common-button app-accent"
+                  style={{ marginTop: "auto" }}
+                  onClick={this.onSubmit.bind(this)}
+                >
+                  + Add
+              </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
